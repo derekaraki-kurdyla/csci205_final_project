@@ -1,0 +1,18 @@
+Game rules in original Sorry board game:
+
+Purpose of game:
+get all pawns from start circle to end circle
+
+Set up:
+2-4 players required
+4 pawns of same color for each player and place in respective start circle
+shuffled deck of cards (randomized) in center of board
+once game is set, also need a discard pile
+
+Order of play:
+On each turn, the player draws a card and uses it if possible. Then discards it in discard pile
+
+Game mechanics:
+If a pawn hops to a slide of a different color, it slides down and knocks all other pieces back to start
+A pawn cannot reach the end circle unless it is the exact correct amount of steps
+
