@@ -18,5 +18,68 @@
  */
 package org.Team6.SorryModel;
 
-public class Pawn {
+/**
+ * enums used to assign a color to a pawn since there are only four possible options
+ */
+enum Color {
+    RED,
+    GREEN,
+    BLUE,
+    YELLOW;
+}
+
+
+
+
+public class Pawn{
+    /** Color of the pawn */
+    private final Color color;
+
+    /** The pawn is initialized as not onBoard */
+    private boolean onBoard = false;
+
+    /** the pawn is initialized as not isHome */
+    private boolean isHome = false;
+
+    /** Constructor that lets us set the color of the pawn */
+    public Pawn(Color color)
+    {
+        this.color = color;
+    }
+
+    /**
+     * Method to return the color of the pawn
+     * @return Color: Color enum of pawn
+     */
+    public Color getColor()
+    {
+        return this.color;
+    }
+
+    /**
+     * Method to move a pawn forward
+     * @param numSpaces: the number of spaces the pawn will move forward
+     */
+    public void moveForward(int numSpaces)
+    {
+
+    }
+
+    /**
+     * Method to move a pawn backward
+     * @param numSpaces: the number of spaces the pawn will move backward
+     */
+    public void moveBackward(int numSpaces)
+    {
+
+    }
+
+    /**
+     * Method to move the pawn from the start area
+     */
+    public void moveFromStart()
+    {
+        this.onBoard = true;
+    }
+
 }
