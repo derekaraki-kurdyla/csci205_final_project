@@ -19,9 +19,9 @@
 package org.Team6.SorryModel;
 
 /**
- * enums used to assign a color to a pawn since there are only four possible options
+ * enums used to assign a color to a {@link Pawn} since there are only four possible colors
  */
-enum Color {
+enum PawnColor {
     RED,
     GREEN,
     BLUE,
@@ -29,11 +29,9 @@ enum Color {
 }
 
 
-
-
 public class Pawn{
     /** Color of the pawn */
-    private final Color color;
+    private final PawnColor color;
 
     /** The pawn is initialized as not onBoard */
     private boolean onBoard = false;
@@ -42,18 +40,9 @@ public class Pawn{
     private boolean isHome = false;
 
     /** Constructor that lets us set the color of the pawn */
-    public Pawn(Color color)
+    public Pawn(PawnColor color)
     {
         this.color = color;
-    }
-
-    /**
-     * Method to return the color of the pawn
-     * @return Color: Color enum of pawn
-     */
-    public Color getColor()
-    {
-        return this.color;
     }
 
     /**
@@ -80,6 +69,15 @@ public class Pawn{
     public void moveFromStart()
     {
         this.onBoard = true;
+    }
+
+    /**
+     * Method to return the color of the pawn
+     * @return Color: Color enum of pawn
+     */
+    public PawnColor getColor()
+    {
+        return this.color;
     }
 
 }

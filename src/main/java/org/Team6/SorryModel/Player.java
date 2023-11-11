@@ -19,4 +19,17 @@
 package org.Team6.SorryModel;
 
 public class Player {
+
+    /** color of {@link Pawn} for specific instance of player */
+    private String pawnColor;
+
+    /** constructor for {@link Player} object that initializes {@link} */
+    public Player(String pawnColor){
+        this.pawnColor = pawnColor;
+    }
+
+    public String getPawnColor(){
+        return this.pawnColor;
+    }
+
 }
