@@ -18,16 +18,19 @@
  */
 package org.Team6.SorryModel;
 
+import java.awt.image.AreaAveragingScaleFilter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
 
     /** {@link Board} object for each Sorry game */
-    private Board gameBoard = new Board();
+    private Board gameBoard;
 
     /** {@link Deck} object for each Sorry game */
-    private Deck gameDeck = new Deck();
+    private Deck gameDeck;
 
     /** {@link ArrayList} object for storing {@link Player} objects*/
     private ArrayList<Player> playerArrayList = new ArrayList<>();
@@ -35,12 +38,26 @@ public class GameManager {
     /** number of players in this instance of Sorry boardgame */
     private int numPlayers;
 
+    /** {@link ArrayList} for storing turn order */
+    private ArrayList<String> turnOrder;
+
     /** constructor for {@link GameManager} class */
     public GameManager(){
         this.displayWelcome();
-        this.getNumPlayers();
-        this.getColorPawns();
+        this.getNumPlayers(); //need to update this.numPlayers first
+        this.getColorPawns(); //need to update this.playerArrayList first
+        this.gameDeck = new Deck();
+        this.gameBoard = new Board(this.playerArrayList);
+    }
 
+    /**
+     * Method that runs the entire game logic
+     */
+    private void playGame(){
+        boolean gameWon = false;
+        while(!gameWon){
+
+        }
     }
 
     /**
@@ -83,11 +100,12 @@ public class GameManager {
      * will use for their {@link Pawn} objects
      */
     private void getColorPawns(){
-        ArrayList<String> pawnColors = new ArrayList<>();
-        pawnColors.add("red");
-        pawnColors.add("blue");
-        pawnColors.add("yellow");
-        pawnColors.add("green");
+        ArrayList<String> availablePawnColors = new ArrayList<>();
+        ArrayList<String> chosenPawnColors = new ArrayList<>();
+        availablePawnColors.add("red");
+        availablePawnColors.add("blue");
+        availablePawnColors.add("yellow");
+        availablePawnColors.add("green");
         for(int i = 1; i <= this.numPlayers; i++){
             System.out.println("What color does player " + i + " want to be? [red, blue, yellow, green]");
             Scanner scan = new Scanner(System.in);
@@ -97,16 +115,20 @@ public class GameManager {
                 // Check if the input is a String
                 if (scan.hasNext()) {
                     userInput = scan.next();
-
-                    // Check if the String is one of the
-                    if (pawnColors.contains(userInput)) {
-                        System.out.println("Valid input: " + userInput);
-                        validInput = true; // Set the flag to exit the loop
-                    } else {
-                        System.out.println("Invalid input. Please enter a color [red, blue, yellow, green]");
+                    if(!chosenPawnColors.contains(userInput)) {
+                        if (availablePawnColors.contains(userInput)) {
+                            System.out.println("Valid input: " + userInput);
+                            chosenPawnColors.add(userInput); //remove this color from possible pawn colors
+                            validInput = true; // Set the flag to exit the loop
+                        } else {
+                            System.out.println("TRY AGAIN. Invalid input. Please enter a color [red, blue, yellow, green]");
+                        }
+                    }
+                    else{
+                        System.out.println("TRY AGAIN. This color has already been chosen.");
                     }
                 } else {
-                    System.out.println("Invalid input. Please enter a string.");
+                    System.out.println("TRY AGAIN. Invalid input. Please enter a string.");
                     scan.next(); // Consume the invalid input to avoid an infinite loop
                 }
             }

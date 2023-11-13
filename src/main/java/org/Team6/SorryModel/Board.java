@@ -42,8 +42,41 @@ public class Board {
     /** {@link Map} of {@link Pawn} objects and their corresponding position on the board*/
     private Map<Pawn, Integer> mapOfBoard = new HashMap<>();
 
-    /** constructor for {@link Board} class */
-    public Board(){
 
+    /** constructor for {@link Board} class */
+    public Board(ArrayList<Player> listOfPlayers){
+        this.initBoard(listOfPlayers);
+
+    }
+
+    /**
+     * updates 2-4 out of {@link #redPawns}, {@link #bluePawns}, {@link #greenPawns} and {@link #yellowPawns}
+     * @param listOfPlayers Arraylist of players in this instance of Sorry game
+     */
+    private void initBoard(ArrayList<Player> listOfPlayers) {
+        for (Player player : listOfPlayers) {
+            String pawnColor = player.getPawnColor().toLowerCase();
+
+            switch (pawnColor) {
+                case "red" -> {
+                    for(int i = 0; i < 4; i++) {
+                        this.redPawns.add(new Pawn(PawnColor.RED));
+                    }
+                }
+                case "blue" -> {
+                    for(int i = 0; i < 4; i++) {
+                        this.bluePawns.add(new Pawn(PawnColor.BLUE));
+                    }
+                }case "yellow" -> {
+                    for(int i = 0; i < 4; i++) {
+                        this.yellowPawns.add(new Pawn(PawnColor.YELLOW));
+                    }
+                }case "green" -> {
+                    for(int i = 0; i < 4; i++) {
+                        this.greenPawns.add(new Pawn(PawnColor.GREEN));
+                    }
+                }
+            }
+        }
     }
 }
