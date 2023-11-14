@@ -6,10 +6,9 @@ import org.Team6.SorryModel.Player;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-        GameManager me = new GameManager();
-        for(Player player: me.getPlayerArrayList()){
-            System.out.println(player.getPawnColor());
-        }
+        GameManager gameManager = new GameManager();
+
+        //use java FX for this function to run only if button to play game has been pressed
+        gameManager.playGame();
     }
 }

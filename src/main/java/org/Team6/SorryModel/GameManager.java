@@ -51,12 +51,45 @@ public class GameManager {
     }
 
     /**
-     * Method that runs the entire game logic
+     * Method that runs the entire game logic until game is won or quit
      */
-    private void playGame(){
-        boolean gameWon = false;
-        while(!gameWon){
+    public void playGame(){
+        boolean gameOver = false;
+        int currPlayerIndex = 0;
 
+        while(!gameOver){
+            if(currPlayerIndex == this.playerArrayList.size()){
+                currPlayerIndex = 0;
+            }
+            System.out.println("It is " + this.playerArrayList.get(currPlayerIndex).getPawnColor() + "'s turn.");
+
+            //use java FX for this function to run only if button to draw has been pressed
+            Card drawnCard = this.gameDeck.drawCard();
+
+            playerTurn(drawnCard);
+
+            currPlayerIndex ++; //set up for next player's turn
+
+        }
+    }
+
+    /**
+     * carries out the {@link Player} turn depending on their drawn card
+     * @param drawnCard the card drawn by the player on their turn
+     */
+    private static void playerTurn(Card drawnCard) {
+        switch (drawnCard.getCardValue()) {
+            case ONE -> {}
+            case TWO -> {}
+            case THREE -> {}
+            case FOUR -> {}
+            case FIVE -> {}
+            case SEVEN -> {}
+            case EIGHT -> {}
+            case TEN -> {}
+            case ELEVEN -> {}
+            case TWELVE-> {}
+            case SORRY -> {}
         }
     }
 
