@@ -41,6 +41,10 @@ public class GameManager {
     /** {@link ArrayList} for storing turn order */
     private ArrayList<String> turnOrder;
 
+    /** {@link Player} object whose turn it currently is */
+    private Player currPlayer;
+
+
     /** constructor for {@link GameManager} class */
     public GameManager(){
         this.displayWelcome();
@@ -61,35 +65,19 @@ public class GameManager {
             if(currPlayerIndex == this.playerArrayList.size()){
                 currPlayerIndex = 0;
             }
-            System.out.println("It is " + this.playerArrayList.get(currPlayerIndex).getPawnColor() + "'s turn.");
+
+            this.currPlayer = this.playerArrayList.get(currPlayerIndex);
+
+            //use java fx to print this to screen
+            System.out.println("It is " + this.currPlayer.getPawnColor() + "'s turn.");
 
             //use java FX for this function to run only if button to draw has been pressed
             Card drawnCard = this.gameDeck.drawCard();
 
-            playerTurn(drawnCard);
+            this.currPlayer.takeTurn(drawnCard, this.gameBoard.);
 
             currPlayerIndex ++; //set up for next player's turn
 
-        }
-    }
-
-    /**
-     * carries out the {@link Player} turn depending on their drawn card
-     * @param drawnCard the card drawn by the player on their turn
-     */
-    private static void playerTurn(Card drawnCard) {
-        switch (drawnCard.getCardValue()) {
-            case ONE -> {}
-            case TWO -> {}
-            case THREE -> {}
-            case FOUR -> {}
-            case FIVE -> {}
-            case SEVEN -> {}
-            case EIGHT -> {}
-            case TEN -> {}
-            case ELEVEN -> {}
-            case TWELVE-> {}
-            case SORRY -> {}
         }
     }
 
