@@ -28,6 +28,28 @@ public class Player {
         this.pawnColor = pawnColor;
     }
 
+    /**
+     * carries out the {@link Player} turn depending on their drawn card
+     * @param drawnCard the card drawn by the player on their turn
+     */
+    public static void takeTurn(Card drawnCard) {
+        switch (drawnCard.getCardValue()) {
+            case ONE -> {}
+            case TWO -> {}
+            case THREE -> {
+
+            }
+            case FOUR -> {}
+            case FIVE -> {}
+            case SEVEN -> {}
+            case EIGHT -> {}
+            case TEN -> {}
+            case ELEVEN -> {}
+            case TWELVE-> {}
+            case SORRY -> {}
+        }
+    }
+
     public String getPawnColor(){
         return this.pawnColor;
     }

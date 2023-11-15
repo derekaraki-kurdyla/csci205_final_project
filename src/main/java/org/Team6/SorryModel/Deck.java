@@ -61,7 +61,7 @@ public class Deck {
     /**
      * Simple method to simulate the drawing of a card from the Sorry deck {@link #gameDeck}
      */
-    public void drawCard(){
+    public Card drawCard(){
         Random random = new Random();
         int drawIndex = random.nextInt(this.gameDeck.size());
         Card drawnCard = this.gameDeck.get(drawIndex);
@@ -83,6 +83,7 @@ public class Deck {
                 iterator.remove(); // Safe removal using iterator's remove() method
             }
         }
+        return drawnCard;
     }
 
     /**

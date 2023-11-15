@@ -34,15 +34,21 @@ public class Pawn{
     private final PawnColor color;
 
     /** The pawn is initialized as not onBoard */
-    private boolean onBoard = false;
+    private boolean onBoard;
 
     /** the pawn is initialized as not isHome */
-    private boolean isHome = false;
+    private boolean atStart;
+
+    /** the pawn is initialized as not in the end circle */
+    private boolean atEnd;
 
     /** Constructor that lets us set the color of the pawn */
     public Pawn(PawnColor color)
     {
         this.color = color;
+        this.atStart = true;
+        this.onBoard = false;
+        this.atEnd = false;
     }
 
     /**
@@ -64,20 +70,29 @@ public class Pawn{
     }
 
     /**
-     * Method to move the pawn from the start area
+     * Method to move the pawn from the start area and update variables {@link #atStart} and {@link #onBoard}
      */
     public void moveFromStart()
     {
+        this.atStart = false;
         this.onBoard = true;
     }
 
-    /**
-     * Method to return the color of the pawn
-     * @return Color: Color enum of pawn
-     */
     public PawnColor getColor()
     {
         return this.color;
+    }
+
+    public boolean isAtStart(){
+        return this.atStart;
+    }
+
+    public boolean isAtEnd(){
+        return this.atEnd;
+    }
+
+    public boolean isOnBoard(){
+        return this.onBoard;
     }
 
 }
