@@ -1,7 +1,7 @@
 Game rules in original Sorry board game:
 
 Purpose of game:
-get all pawns from start circle to end circle
+get all pawns from start circle (start array) to end circle (home array)
 
 Set up:
 2-4 players required
@@ -10,9 +10,36 @@ shuffled deck of cards (randomized) in center of board
 once game is set, also need a discard pile
 
 Order of play:
-On each turn, the player draws a card and uses it if possible. Then discards it in discard pile
+On each turn, the player draws a card and uses it if possible. The player will be offered various options depending on the card drawn. Then discards it in discard pile
 
 Game mechanics:
+
+A player can only move a pawn off of the start space if they draw a 1, 2, or sorry card
+If you move a pawn to the entry circle and it is occupied by an opposing color, bump it back to their start space
+Can't move a pawn to the start space if it is occupied by a pawn of your color
 If a pawn hops to a slide of a different color, it slides down and knocks all other pieces back to start
+If a pawn hops to a slide of the same color, it does not move
 A pawn cannot reach the end circle unless it is the exact correct amount of steps
+Only your pawns can go in your safety zones
+A pawn may jump over your own or another pawn that is in your way, counting it as one space.
+If you land on a space that is already occupied by an opponent's pawn, bump that pawn back to its own start circle.
+If you move a pawn atleast two spaces backwards past the start circle, you can move it into the safety zone on a subsequent turn without having to go all the way around
+
+
+1: Either start a pawn out or move one pawn one space forward
+2: Either start a pawn out or move one pawn two spaces forward, draw another card
+3: Move one pawn forward three spaces
+4: Move one pawn backward four spaces
+5: Move one pawn forward 5 spaces
+7: Either move one pawn forward 7 spaces or split the move between any two pawns
+8: Move one pawn forward 8 spaces
+10: Either move one pawn forward 10 spaces or move one pawn back one space
+11: Move one pawn forward 11 spaces or switch any of your pawns with one of any opponents, you may forfeit your move if you can't move 11 spaces and you don't want to switch. Can't switch a pawn that is in the start, home, or in safety zones
+12: Move one pawn forward 12 spaces
+SORRY!: Take one pawn from your start and place it on any space that is occuped by any opponent, and bump that opponent's pawn back to their start, if there is no pawn on your start or no opponent's pawn on any space you can move to, forfeit your move
+
+Game ends when all four pawns are in home space.
+
+
+
 
