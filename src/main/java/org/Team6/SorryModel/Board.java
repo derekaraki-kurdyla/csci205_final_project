@@ -50,13 +50,13 @@ public class Board {
 
     public ArrayList<Pawn> greenStart = new ArrayList<>();
 
-    public ArrayList<Pawn> redHome = new ArrayList<>();
+    public ArrayList<Space> redHome = new ArrayList<>();
 
-    public ArrayList<Pawn> blueHome = new ArrayList<>();
+    public ArrayList<Space> blueHome = new ArrayList<>();
 
-    public ArrayList<Pawn> yellowHome = new ArrayList<>();
+    public ArrayList<Space> yellowHome = new ArrayList<>();
 
-    public ArrayList<Pawn> greenHome = new ArrayList<>();
+    public ArrayList<Space> greenHome = new ArrayList<>();
 
 
 
