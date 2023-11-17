@@ -42,6 +42,25 @@ public class Board {
     /** {@link Map} of {@link Pawn} objects and their corresponding position on the board*/
     private Map<Pawn, Integer> mapOfBoard = new HashMap<>();
 
+    public ArrayList<Pawn> redStart = new ArrayList<>();
+
+    public ArrayList<Pawn> blueStart = new ArrayList<>();
+
+    public ArrayList<Pawn> yellowStart = new ArrayList<>();
+
+    public ArrayList<Pawn> greenStart = new ArrayList<>();
+
+    public ArrayList<Spaces> redHome = new ArrayList<>();
+
+    public ArrayList<Spaces> blueHome = new ArrayList<>();
+
+    public ArrayList<Spaces> yellowHome = new ArrayList<>();
+
+    public ArrayList<Spaces> greenHome = new ArrayList<>();
+
+
+
+
 
     /** constructor for {@link Board} class */
     public Board(ArrayList<Player> listOfPlayers){
@@ -62,21 +81,35 @@ public class Board {
                     for(int i = 0; i < 4; i++) {
                         this.redPawns.add(new Pawn(PawnColor.RED));
                     }
+                    for(int i = 0; i < 4; i++) {
+                        this.redStart.add(new Pawn(PawnColor.RED));
+                    }
+
                 }
                 case "blue" -> {
                     for(int i = 0; i < 4; i++) {
                         this.bluePawns.add(new Pawn(PawnColor.BLUE));
                     }
+                    for(int i = 0; i < 4; i++) {
+                        this.blueStart.add(new Pawn(PawnColor.BLUE));
+                    }
                 }case "yellow" -> {
                     for(int i = 0; i < 4; i++) {
                         this.yellowPawns.add(new Pawn(PawnColor.YELLOW));
+                    }
+                    for(int i = 0; i < 4; i++) {
+                        this.yellowStart.add(new Pawn(PawnColor.YELLOW));
                     }
                 }case "green" -> {
                     for(int i = 0; i < 4; i++) {
                         this.greenPawns.add(new Pawn(PawnColor.GREEN));
                     }
+                    for(int i = 0; i < 4; i++) {
+                        this.greenStart.add(new Pawn(PawnColor.GREEN));
+                    }
                 }
             }
         }
     }
+
 }
