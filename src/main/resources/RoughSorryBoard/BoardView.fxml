@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="608.0" prefWidth="608.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.Team6.SceneBuilderBoard.BoardController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="38.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="152.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="190.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="266.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="304.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="380.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="418.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="456.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="38.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="76.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="114.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="152.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="190.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="228.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="266.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="304.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="342.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="380.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="418.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="456.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="532.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="570.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="114.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="266.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="342.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutY="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="114.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="266.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="304.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="342.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="570.0" layoutY="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Text layoutX="251.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorry!">
+         <font>
+            <Font name="Comic Sans MS" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="266.0" layoutY="327.0" stroke="BLACK" strokeType="INSIDE" width="75.0">
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="266.0" layoutY="219.0" stroke="BLACK" strokeType="INSIDE" width="75.0">
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect></Rectangle>
+      <Label layoutX="277.0" layoutY="341.0" text="Discard">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="286.0" layoutY="233.0" text="Draw">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="38.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="76.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="114.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="152.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="38.0" layoutX="190.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" layoutY="114.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#edff1f" height="38.0" layoutX="76.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="532.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="494.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="456.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="418.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#26ff00" height="38.0" layoutX="380.0" layoutY="76.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="532.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="494.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="456.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
+      <Circle fill="DODGERBLUE" layoutX="277.0" layoutY="513.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="86.0" layoutY="437.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#edff1f" layoutX="171.0" layoutY="86.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#26ff00" layoutX="523.0" layoutY="171.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff1f1f" layoutX="437.0" layoutY="523.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#ff1f1f" layoutX="513.0" layoutY="331.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#26ff00" layoutX="331.0" layoutY="95.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="#edff1f" layoutX="95.0" layoutY="276.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label layoutX="493.0" layoutY="320.0" text="Home">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="257.0" layoutY="502.0" prefHeight="22.0" prefWidth="39.0" text="Home">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="417.0" layoutY="512.0" text="Start">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="66.0" layoutY="426.0" text="Start">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="503.0" layoutY="160.0" text="Start">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="151.0" layoutY="75.0" text="Start">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="75.0" layoutY="265.0" prefHeight="22.0" prefWidth="39.0" text="Home">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="311.0" layoutY="86.0" prefHeight="22.0" prefWidth="39.0" text="Home">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+      </Label>
+      <Circle fx:id="bluePawn3" fill="DODGERBLUE" layoutX="66.0" layoutY="456.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="bluePawn4" fill="DODGERBLUE" layoutX="106.0" layoutY="456.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="bluePawn2" fill="DODGERBLUE" layoutX="106.0" layoutY="418.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="bluePawn1" fill="DODGERBLUE" layoutX="66.0" layoutY="418.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="yellowPawn3" fill="#edff1f" layoutX="151.0" layoutY="108.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="yellowPawn4" fill="#edff1f" layoutX="191.0" layoutY="108.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="yellowPawn2" fill="#edff1f" layoutX="190.0" layoutY="72.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="yellowPawn1" fill="#edff1f" layoutX="152.0" layoutY="72.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="greenPawn4" fill="#26ff00" layoutX="543.0" layoutY="190.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="greenPawn3" fill="#26ff00" layoutX="503.0" layoutY="190.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="greenPawn1" fill="#26ff00" layoutX="503.0" layoutY="152.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="greenPawn2" fill="#26ff00" layoutX="543.0" layoutY="152.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="redPawn4" fill="#ff1f1f" layoutX="456.0" layoutY="539.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="redPawn3" fill="#ff1f1f" layoutX="418.0" layoutY="539.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="redPawn1" fill="#ff1f1f" layoutX="417.0" layoutY="502.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+      <Circle fx:id="redPawn2" fill="#ff1f1f" layoutX="457.0" layoutY="502.0" radius="15.0" stroke="BLACK" strokeType="INSIDE">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Circle>
+   </children>
+</AnchorPane>
