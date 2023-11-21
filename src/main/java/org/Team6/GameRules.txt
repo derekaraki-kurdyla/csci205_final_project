@@ -23,7 +23,8 @@ A pawn cannot reach the end circle unless it is the exact correct amount of step
 Only your pawns can go in your safety zones
 A pawn may jump over your own or another pawn that is in your way, counting it as one space.
 If you land on a space that is already occupied by an opponent's pawn, bump that pawn back to its own start circle.
-If you move a pawn atleast two spaces backwards past the start circle, you can move it into the safety zone on a subsequent turn without having to go all the way around
+If moving a pawn would end up in a space already occupied by your own piece, you cannot move that pawn
+If you move a pawn at least two spaces backwards past the start circle, you can move it into the safety zone on a subsequent turn without having to go all the way around
 
 
 1: Either start a pawn out or move one pawn one space forward

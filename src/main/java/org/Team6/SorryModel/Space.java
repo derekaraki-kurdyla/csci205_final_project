@@ -24,14 +24,14 @@ package org.Team6.SorryModel;
 
 enum SpaceType {
     OCCUPIED, //This will be if the space already has a pawn on the space
-    UNOCCUPIED, //If the space does not already have a pawn on it
+    UNOCCUPIED,
     SLIDERANGE, //This is the range that is contained by slide
-    STARTSLIDE, //This is the location that you need to land on in order to slide
-    START, //This is the location tht all pawns will begin at, and if they get reset it will be to here
-    HOME, //This is the base where the pawns are trying to get to
+    START_SHORT_SLIDE_DIFFERENT, //Start of location for short slide of different color
+    START_LONG_SLIDE_DIFFERENT, //Start of location for long slide of different color
+    END, //This is the base where the pawns are trying to get to
     SAFEZONE //This is the distance leading up to home that will not allow you to be bumped back to the start
 }
-public class Spaces {
+public class Space {
 
     /**
      * An enumerator that will contain the different type of spaces that we will have.
@@ -40,15 +40,15 @@ public class Spaces {
 
 
     //THis is the variable I will be using to create the space
-    private SpaceType spacetype;
+    private SpaceType spaceType;
 
 
     /**
      * This is how you will create a new space
      * @param
      */
-    public Spaces(SpaceType SpaceType){
-        this.spacetype = SpaceType;
+    public Space(SpaceType spaceType){
+        this.spaceType = spaceType;
     }
 
 
@@ -56,7 +56,11 @@ public class Spaces {
     /**
      * Create a method that will allow you to set the space to whatever you would like
      */
-    public void setSpace(SpaceType SpaceType){
-        this.spacetype = SpaceType;
+    public void setSpace(SpaceType spaceType){
+        this.spaceType = spaceType;
+    }
+
+    public SpaceType getSpaceType(){
+        return this.spaceType;
     }
 }

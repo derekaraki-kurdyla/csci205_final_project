@@ -30,6 +30,10 @@ enum PawnColor {
 
 
 public class Pawn{
+
+    /** Max index for each Pawn i.e. index of end circle */
+    public final static int MAX_INDEX = 66;
+
     /** Color of the pawn */
     private final PawnColor color;
 
@@ -51,14 +55,6 @@ public class Pawn{
         this.atEnd = false;
     }
 
-    /**
-     * Method to move a pawn forward
-     * @param numSpaces: the number of spaces the pawn will move forward
-     */
-    public void moveForward(int numSpaces)
-    {
-
-    }
 
     /**
      * Method to move a pawn backward
@@ -93,6 +89,16 @@ public class Pawn{
 
     public boolean isOnBoard(){
         return this.onBoard;
+    }
+
+    public void sendHome(){
+        this.atStart = true;
+        this.onBoard = false;
+    }
+
+    public void reachedEnd(){
+        this.onBoard = false;
+        this.atEnd = true;
     }
 
 }
