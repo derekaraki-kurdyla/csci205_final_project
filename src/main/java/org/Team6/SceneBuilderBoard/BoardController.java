@@ -20,7 +20,10 @@ package org.Team6.SceneBuilderBoard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class BoardController {
@@ -99,6 +102,11 @@ public class BoardController {
         assert yellowPawn4 != null : "fx:id=\"yellowPawn4\" was not injected: check your FXML file 'BoardView.fxml'.";
 
         initBindings();
+        initEventHandlers();
+    }
+
+    private void initEventHandlers() {
+        
     }
 
     private void initBindings() {
