@@ -21,6 +21,7 @@ package org.Team6.SorryModel;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,20 +39,27 @@ public class GameManager {
     /** number of players in this instance of Sorry boardgame */
     private int numPlayers;
 
-    /** {@link ArrayList} for storing turn order */
-    private ArrayList<String> turnOrder;
-
     /** {@link Player} object whose turn it currently is */
     private Player currPlayer;
+
+    /** Colors chosen by players */
+    private ArrayList<String> pawnColors = new ArrayList<>();
 
 
     /** constructor for {@link GameManager} class */
     public GameManager(){
         this.displayWelcome();
         this.getNumPlayers(); //need to update this.numPlayers first
-        this.getColorPawns(); //need to update this.playerArrayList first
+
+        this.getColorPawns(); //need to update this.pawnColors first to initialize this.gameBoard
+
+        this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
+
+        for(String pawnColor: this.pawnColors){
+            this.playerArrayList.add(new Player(pawnColor, this.gameBoard));
+        }
+
         this.gameDeck = new Deck();
-        this.gameBoard = new Board(this.playerArrayList);
     }
 
     /**
@@ -68,13 +76,15 @@ public class GameManager {
 
             this.currPlayer = this.playerArrayList.get(currPlayerIndex);
 
+            this.gameBoard.initSpacesOnBoard(this.currPlayer); //do this for every turn because spaces on turn depend on color of pawn currently going
+
             //use java fx to print this to screen
             System.out.println("It is " + this.currPlayer.getPawnColor() + "'s turn.");
 
             //use java FX for this function to run only if button to draw has been pressed
             Card drawnCard = this.gameDeck.drawCard();
 
-            this.currPlayer.takeTurn(drawnCard, this.gameBoard.);
+            this.currPlayer.takeTurn(drawnCard);
 
             currPlayerIndex ++; //set up for next player's turn
 
@@ -121,12 +131,9 @@ public class GameManager {
      * will use for their {@link Pawn} objects
      */
     private void getColorPawns(){
-        ArrayList<String> availablePawnColors = new ArrayList<>();
         ArrayList<String> chosenPawnColors = new ArrayList<>();
-        availablePawnColors.add("red");
-        availablePawnColors.add("blue");
-        availablePawnColors.add("yellow");
-        availablePawnColors.add("green");
+        ArrayList<String> availablePawnColors = new ArrayList<>(Arrays.asList("red", "blue", "yellow", "green"));
+
         for(int i = 1; i <= this.numPlayers; i++){
             System.out.println("What color does player " + i + " want to be? [red, blue, yellow, green]");
             Scanner scan = new Scanner(System.in);
@@ -153,7 +160,7 @@ public class GameManager {
                     scan.next(); // Consume the invalid input to avoid an infinite loop
                 }
             }
-            this.playerArrayList.add(new Player(userInput));
+            this.pawnColors.add(userInput);
         }
     }
 
