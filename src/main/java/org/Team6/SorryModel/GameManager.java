@@ -69,6 +69,7 @@ public class GameManager {
     public void playGame(){
         boolean gameOver = false;
         int currPlayerIndex = 0;
+        int countTurns = 0;
 
         while(!gameOver){
             if(currPlayerIndex == this.playerArrayList.size()){
@@ -88,6 +89,11 @@ public class GameManager {
             this.currPlayer.takeTurn(drawnCard);
 
             currPlayerIndex ++; //set up for next player's turn
+            countTurns ++;
+
+            if(countTurns == 10){
+                gameOver = true;
+            }
 
         }
     }

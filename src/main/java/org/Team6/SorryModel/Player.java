@@ -156,6 +156,7 @@ public class Player {
         else{
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
             this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
+            pawnToMove.moveFromStart();
         }
 
     }
@@ -333,18 +334,22 @@ public class Player {
     }
 
     private Pawn getPawnToMove(ArrayList<Pawn> possiblePawnMoves) {
+        int possibleIndex;
 
         if (!possiblePawnMoves.isEmpty()) {
 
             ArrayList<Integer> possiblePawnIndices = new ArrayList<>();
             for (Pawn pawn : possiblePawnMoves) {
                 //Java Fx application, print this to screen and ask highlight pawns on board that they can move
-                System.out.println("You can move a pawn at index " + this.gameBoard.getMapOfBoard().get(pawn));
-                if (pawn.isOnBoard())
-                    possiblePawnIndices.add(this.gameBoard.getMapOfBoard().get(pawn));
-                else { //this means that it is at start
-                    possiblePawnIndices.add(0); //for start index, although not an index
+                if (pawn.isOnBoard()) {
+                    possibleIndex = this.gameBoard.getMapOfBoard().get(pawn);
+                    possiblePawnIndices.add(possibleIndex);
                 }
+                else { //this means that it is at start
+                    possibleIndex = 0;
+                    possiblePawnIndices.add(possibleIndex); //for start index, although not an index
+                }
+                System.out.println("You can move a pawn at index " + possibleIndex);
             }
 
             Scanner scan = new Scanner(System.in);
@@ -352,19 +357,22 @@ public class Player {
             int index = scan.nextInt();
 
             if (possiblePawnIndices.contains(index)) {
-                System.out.println("Valid index");
-                return this.findPawnFromBoardIndex(index);
 
-            }
-            else if (index == 0) { //this is the case for if they pick a pawn at start (handled by index 0), it will just return the first pawn at start
-                for (Pawn pawn : possiblePawnMoves) {
-                    if (pawn.isAtStart()) {
-                        return pawn;
+                //could be zero, and no pawn at index 0
+                if(index == 0){
+                    System.out.println("Valid index (0)");
+                    for(Pawn pawn: possiblePawnMoves){
+                        if (pawn.isAtStart()) {
+                            return pawn;
+                        }
                     }
-                    else{
-                        return null;
-                    }
+                    return null;
                 }
+                else{
+                    System.out.println("Valid index");
+                    return this.findPawnFromBoardIndex(index);
+                }
+
             }
             else {
                 System.out.println("Invalid index");
@@ -375,7 +383,6 @@ public class Player {
             System.out.println("There are no possible moves!");
             return null;
         }
-        return null;
     }
 
     public Pawn findPawnFromBoardIndex(int index){
