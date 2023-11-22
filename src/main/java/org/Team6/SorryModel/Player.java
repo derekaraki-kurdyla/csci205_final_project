@@ -70,7 +70,7 @@ public class Player {
 
                 if(pawnToMove != null){
                     if(pawnToMove.isOnBoard()){
-                        this.moveForward(pawnToMove,3);
+                        this.moveForward(pawnToMove,1);
                     }
                     else if(pawnToMove.isAtStart()){
                         System.out.println("this happens! line 76");
@@ -80,7 +80,6 @@ public class Player {
                         System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
                     }
                 }
-
             }
             case TWO -> {
 
