@@ -77,7 +77,7 @@ public class GameManager {
 
             this.currPlayer = this.playerArrayList.get(currPlayerIndex);
 
-            this.gameBoard.initSpacesOnBoard(this.currPlayer); //do this for every turn because spaces on turn depend on color of pawn currently going
+            this.gameBoard.initSlideSpacesOnBoard(this.currPlayer); //do this for every turn because spaces on turn depend on color of pawn currently going
 
             //use java fx to print this to screen
             System.out.println("It is " + this.currPlayer.getPawnColor() + "'s turn.");

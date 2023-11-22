@@ -73,6 +73,7 @@ public class Player {
                         this.moveForward(pawnToMove,3);
                     }
                     else if(pawnToMove.isAtStart()){
+                        System.out.println("this happens! line 76");
                         this.moveFromStart(pawnToMove);
                     }
                     else{
@@ -147,11 +148,17 @@ public class Player {
         //check if index is occupied
         int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
         if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) { //means different color
-            System.out.println("hello");
+            Pawn pawnToRemove = this.findPawnFromBoardIndex(indexAfterStartCircle);
+            this.gameBoard.getMapOfBoard().remove(pawnToRemove);
+            this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
+            pawnToMove.moveFromStart();
+        }
+        else{
+            this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
+            this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
         }
 
     }
-
 
     /**
      * Method to move a pawn forward but only if certain conditions are met:
@@ -316,6 +323,9 @@ public class Player {
                     if(!(this.findPawnFromBoardIndex(indexAfterStartCircle).getColor().equals(this.pawnColor))) {
                         possiblePawnMoves.add(pawn);
                     }
+                }
+                else{
+                    possiblePawnMoves.add(pawn);
                 }
             }
         }
