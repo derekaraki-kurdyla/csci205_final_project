@@ -179,7 +179,7 @@ public class Player {
             this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
             this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
             this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
-            pawnToRemove.sendHome();//update pawn itself, so now it is back at start
+            pawnToRemove.sendStart();//update pawn itself, so now it is back at start
             this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
 
             // don't have to update spaces, because the space is still occupied just by a different pawn.
@@ -199,14 +199,14 @@ public class Player {
             //check if there is a pawn on start of slide (would only be pawn of that color slide)
             if(pawnToRemoveAtStartSlide != null){
                 this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
-                pawnToRemoveAtStartSlide.sendHome(); //update pawn itself
+                pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
                 //don't update space type because still a SLIDE_START
             }
             for(int index = landingBoardIndex + 1; index < landingBoardIndex + 4; index++){ //for all pawns on slide other than the START_SLIDE
                 if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
                     Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
                     this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
-                    pawnToRemoveOnSlide.sendHome(); //update removed pawn(s) themselves
+                    pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
                     this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
                 }
             }
@@ -222,14 +222,14 @@ public class Player {
             //check if there is a pawn on start of slide (would only be pawn of that color slide)
             if(pawnToRemoveAtStartSlide != null){
                 this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
-                pawnToRemoveAtStartSlide.sendHome(); //update pawn itself
+                pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
                 //don't update space type because still a SLIDE_START
             }
             for(int index = landingBoardIndex + 1; index < landingBoardIndex + 5; index++){ //for all pawns on slide other than the START_SLIDE
                 if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
                     Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
                     this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
-                    pawnToRemoveOnSlide.sendHome(); //update removed pawn(s) themselves
+                    pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
                     this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
                 }
             }

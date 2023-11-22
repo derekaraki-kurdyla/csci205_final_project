@@ -82,7 +82,7 @@ public class Pawn{
         return this.onBoard;
     }
 
-    public void sendHome(){
+    public void sendStart(){
         this.atStart = true;
         this.onBoard = false;
     }
