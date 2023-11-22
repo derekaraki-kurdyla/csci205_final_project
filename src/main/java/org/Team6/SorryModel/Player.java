@@ -354,10 +354,9 @@ public class Player {
                     }
                 }
             }
-            else {
-                System.out.println("Invalid index");
-                return null;
-            }
+
+            System.out.println("Invalid index");
+            return null;
         }
 
         else{
