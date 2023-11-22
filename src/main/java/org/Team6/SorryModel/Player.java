@@ -324,15 +324,15 @@ public class Player {
 
     private Pawn getPawnToMove(ArrayList<Pawn> possiblePawnMoves) {
 
-        if (!possiblePawnMoves.isEmpty()){
+        if (!possiblePawnMoves.isEmpty()) {
 
             ArrayList<Integer> possiblePawnIndices = new ArrayList<>();
-            for(Pawn pawn: possiblePawnMoves) {
+            for (Pawn pawn : possiblePawnMoves) {
                 //Java Fx application, print this to screen and ask highlight pawns on board that they can move
                 System.out.println("You can move a pawn at index " + this.gameBoard.getMapOfBoard().get(pawn));
-                if(pawn.isOnBoard())
+                if (pawn.isOnBoard())
                     possiblePawnIndices.add(this.gameBoard.getMapOfBoard().get(pawn));
-                else{ //this means that it is at start
+                else { //this means that it is at start
                     possiblePawnIndices.add(0); //for start index, although not an index
                 }
             }
@@ -341,28 +341,31 @@ public class Player {
             System.out.println("What index pawn do you pick?");
             int index = scan.nextInt();
 
-            if(possiblePawnIndices.contains(index)){
-
+            if (possiblePawnIndices.contains(index)) {
                 System.out.println("Valid index");
-
                 return this.findPawnFromBoardIndex(index);
+
             }
-            else if(index == 0){ //this is the case for if they pick a pawn at start (handled by index 0), it will just return the first pawn at start
-                for(Pawn pawn: possiblePawnMoves) {
-                    if(pawn.isAtStart()){
+            else if (index == 0) { //this is the case for if they pick a pawn at start (handled by index 0), it will just return the first pawn at start
+                for (Pawn pawn : possiblePawnMoves) {
+                    if (pawn.isAtStart()) {
                         return pawn;
+                    }
+                    else{
+                        return null;
                     }
                 }
             }
-
-            System.out.println("Invalid index");
-            return null;
+            else {
+                System.out.println("Invalid index");
+                return null;
+            }
         }
-
         else{
             System.out.println("There are no possible moves!");
             return null;
         }
+        return null;
     }
 
     public Pawn findPawnFromBoardIndex(int index){
