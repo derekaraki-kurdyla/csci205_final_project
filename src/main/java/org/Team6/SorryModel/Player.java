@@ -73,7 +73,7 @@ public class Player {
                         this.moveForward(pawnToMove,3);
                     }
                     else if(pawnToMove.isAtStart()){
-                        this.moveFromStart();
+                        this.moveFromStart(pawnToMove);
                     }
                     else{
                         System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
@@ -142,12 +142,12 @@ public class Player {
         }
     }
 
-    private void moveFromStart() {
+    private void moveFromStart(Pawn pawnToMove) {
 
         //check if index is occupied
         int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
         if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) { //means different color
-
+            System.out.println("hello");
         }
 
     }
@@ -330,7 +330,11 @@ public class Player {
             for(Pawn pawn: possiblePawnMoves) {
                 //Java Fx application, print this to screen and ask highlight pawns on board that they can move
                 System.out.println("You can move a pawn at index " + this.gameBoard.getMapOfBoard().get(pawn));
-                possiblePawnIndices.add(this.gameBoard.getMapOfBoard().get(pawn));
+                if(pawn.isOnBoard())
+                    possiblePawnIndices.add(this.gameBoard.getMapOfBoard().get(pawn));
+                else{ //this means that it is at start
+                    possiblePawnIndices.add(0); //for start index, although not an index
+                }
             }
 
             Scanner scan = new Scanner(System.in);
@@ -342,6 +346,13 @@ public class Player {
                 System.out.println("Valid index");
 
                 return this.findPawnFromBoardIndex(index);
+            }
+            else if(index == 0){ //this is the case for if they pick a pawn at start (handled by index 0), it will just return the first pawn at start
+                for(Pawn pawn: possiblePawnMoves) {
+                    if(pawn.isAtStart()){
+                        return pawn;
+                    }
+                }
             }
             else {
                 System.out.println("Invalid index");
