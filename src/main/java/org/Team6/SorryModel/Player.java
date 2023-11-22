@@ -172,10 +172,19 @@ public class Player {
      */
     private void moveForward(Pawn pawnToMove, int numSpaces) {
         int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
+        System.out.println("currBoardIndex: " + currBoardIndex);
+
         int currBoardColorIndex = this.converter.convertToColorIndex(currBoardIndex);
+        System.out.println("currBoardColorIndex: " + currBoardColorIndex);
+
         int landingBoardColorIndex = currBoardColorIndex + numSpaces;
+        System.out.println("landingBoardColorIndex: " + landingBoardColorIndex);
+
         int landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+        System.out.println("landingBoardIndex: " + landingBoardIndex);
+
         SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
+        System.out.println("landingIndexSpaceType: " + landingIndexSpaceType);
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
