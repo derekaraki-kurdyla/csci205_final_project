@@ -65,15 +65,6 @@ public class Pawn{
 
     }
 
-    /**
-     * Method to move the pawn from the start area and update variables {@link #atStart} and {@link #onBoard}
-     */
-    public void moveFromStart()
-    {
-        this.atStart = false;
-        this.onBoard = true;
-    }
-
     public PawnColor getColor()
     {
         return this.color;
@@ -83,7 +74,7 @@ public class Pawn{
         return this.atStart;
     }
 
-    public boolean isAtEnd(){
+    public boolean isAtEnd(){ //this can be used for jUnit tests when game is over
         return this.atEnd;
     }
 
@@ -100,5 +91,15 @@ public class Pawn{
         this.onBoard = false;
         this.atEnd = true;
     }
+
+    /**
+     * Method to move the pawn from the start area and update variables {@link #atStart} and {@link #onBoard}
+     */
+    public void moveFromStart()
+    {
+        this.atStart = false;
+        this.onBoard = true;
+    }
+
 
 }

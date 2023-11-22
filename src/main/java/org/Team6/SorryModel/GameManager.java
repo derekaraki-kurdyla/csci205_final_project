@@ -49,6 +49,7 @@ public class GameManager {
     /** constructor for {@link GameManager} class */
     public GameManager(){
         this.displayWelcome();
+
         this.getNumPlayers(); //need to update this.numPlayers first
 
         this.getColorPawns(); //need to update this.pawnColors first to initialize this.gameBoard
@@ -56,7 +57,7 @@ public class GameManager {
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
 
         for(String pawnColor: this.pawnColors){
-            this.playerArrayList.add(new Player(pawnColor, this.gameBoard));
+            this.playerArrayList.add(new Player(pawnColor, this.gameBoard)); //this is just so that GameManager can access turnorder
         }
 
         this.gameDeck = new Deck();

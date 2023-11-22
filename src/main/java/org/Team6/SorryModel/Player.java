@@ -55,11 +55,30 @@ public class Player {
      */
     public void takeTurn(Card drawnCard) {
 
-        ArrayList<Pawn> possiblePawnMoves;
+        ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
         ArrayList<Pawn> colorPawnsToIterateThrough = determineColorPawnsToIterateThrough();
 
         switch (drawnCard.getCardValue()) {
             case ONE -> {
+                ArrayList<Pawn> possiblePawnMovesOnBoard = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 1);
+                ArrayList<Pawn> possiblePawnMovesAtStart = this.findPossiblePawnMovesAtStart(colorPawnsToIterateThrough);
+
+                possiblePawnMoves.addAll(possiblePawnMovesOnBoard);
+                possiblePawnMoves.addAll(possiblePawnMovesAtStart);
+
+                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
+
+                if(pawnToMove != null){
+                    if(pawnToMove.isOnBoard()){
+                        this.moveForward(pawnToMove,3);
+                    }
+                    else if(pawnToMove.isAtStart()){
+                        this.moveFromStart();
+                    }
+                    else{
+                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
+                    }
+                }
 
             }
             case TWO -> {
@@ -67,7 +86,7 @@ public class Player {
             }
             case THREE -> {
 
-                possiblePawnMoves = this.findPossiblePawnMoves(colorPawnsToIterateThrough, 3);
+                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 3);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -80,7 +99,7 @@ public class Player {
             }
             case FIVE -> {
 
-                possiblePawnMoves = this.findPossiblePawnMoves(colorPawnsToIterateThrough, 5);
+                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 5);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -93,7 +112,7 @@ public class Player {
             }
             case EIGHT -> {
 
-                possiblePawnMoves = this.findPossiblePawnMoves(colorPawnsToIterateThrough, 8);
+                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 8);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -109,7 +128,7 @@ public class Player {
             }
             case TWELVE-> {
 
-                possiblePawnMoves = this.findPossiblePawnMoves(colorPawnsToIterateThrough, 12);
+                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 12);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -121,6 +140,16 @@ public class Player {
 
             }
         }
+    }
+
+    private void moveFromStart() {
+
+        //check if index is occupied
+        int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
+        if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) { //means different color
+
+        }
+
     }
 
 
@@ -139,7 +168,6 @@ public class Player {
         int landingBoardColorIndex = currBoardColorIndex + numSpaces;
         int landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
         SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
-
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
@@ -246,20 +274,20 @@ public class Player {
         };
     }
 
-    private ArrayList<Pawn> findPossiblePawnMoves(ArrayList<Pawn> arr, int numSpaces) {
+    private ArrayList<Pawn> findPossiblePawnMovesOnBoard(ArrayList<Pawn> arr, int numSpaces) {
         ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
 
         for (Pawn pawn: arr) {
 
             //check if pawn is not at start and less than three from end circle and your own pawn does not occupy that space
             if (pawn.isOnBoard()){
-                Integer pawnIndexColor = this.convertToColorIndex(this.converter, this.gameBoard.getMapOfBoard().get(pawn));
+                int pawnIndexColor = this.converter.convertToColorIndex(this.gameBoard.getMapOfBoard().get(pawn));
 
                 if(pawnIndexColor <= (Pawn.MAX_INDEX - numSpaces)){
                     //check if pawn index + numspaces is occupied by same piece
 
-                    //we have pawn color index. check if (pawn color index + 3) converted to a space on the board index map is occupied
-                    Integer landingBoardIndex = this.convertToBoardIndex(this.converter, pawnIndexColor + numSpaces);
+                    //we have pawn color index. check if (pawn color index + numspaces) converted to a space on the board index map is occupied
+                    int landingBoardIndex = this.converter.convertToBoardIndex(pawnIndexColor + numSpaces);
 
                     //if space is occupied by some pawn (don't know the color yet)
                     if ((this.gameBoard.getMapOfSpaces().get(landingBoardIndex).equals(SpaceType.OCCUPIED))){
@@ -269,6 +297,21 @@ public class Player {
                         }
                     }
                     else{
+                        possiblePawnMoves.add(pawn);
+                    }
+                }
+            }
+        }
+        return possiblePawnMoves;
+    }
+
+    private ArrayList<Pawn> findPossiblePawnMovesAtStart(ArrayList<Pawn> colorPawnsToIterateThrough) {
+        ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
+        for(Pawn pawn: colorPawnsToIterateThrough){
+            if(pawn.isAtStart()){
+                int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
+                if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) {
+                    if(!(this.findPawnFromBoardIndex(indexAfterStartCircle).getColor().equals(this.pawnColor))) {
                         possiblePawnMoves.add(pawn);
                     }
                 }
@@ -317,14 +360,6 @@ public class Player {
             }
         }
         return null;
-    }
-
-    public int convertToColorIndex(BoardPawnIndexConverter converter, int index){
-        return converter.convertToColorIndex(index);
-    }
-
-    public int convertToBoardIndex(BoardPawnIndexConverter converter, int index){
-        return converter.convertToBoardIndex(index);
     }
 
     public PawnColor getPawnColor(){
