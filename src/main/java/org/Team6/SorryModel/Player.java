@@ -179,7 +179,9 @@ public class Player {
             this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
             this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
             this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
-            pawnToRemove.sendHome(); //update pawn itself, so now it is back at start
+            pawnToRemove.sendHome();//update pawn itself, so now it is back at start
+            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
+
             // don't have to update spaces, because the space is still occupied just by a different pawn.
             // the takeTurn() method determines if the pawn is of the same type of not
         }
