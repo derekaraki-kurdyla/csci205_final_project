@@ -73,11 +73,10 @@ public class Player {
                         this.moveForward(pawnToMove,1);
                     }
                     else if(pawnToMove.isAtStart()){
-                        System.out.println("this happens! line 76");
                         this.moveFromStart(pawnToMove);
                     }
                     else{
-                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
+                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 80");
                     }
                 }
             }
@@ -96,11 +95,10 @@ public class Player {
                         this.moveForward(pawnToMove,2);
                     }
                     else if(pawnToMove.isAtStart()){
-                        System.out.println("this happens! line 99");
                         this.moveFromStart(pawnToMove);
                     }
                     else{
-                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
+                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 103");
                     }
                 }
 
@@ -177,7 +175,7 @@ public class Player {
                     else{
                         //java fx part
                         int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
-                        System.out.println("Pawn at index" + currBoardIndex + " cannot move " + userInput);
+                        System.out.println("Pawn at index " + currBoardIndex + " cannot move " + userInput);
                     }
                 }
             }
@@ -209,6 +207,7 @@ public class Player {
             this.gameBoard.getMapOfBoard().remove(pawnToRemove);
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
             pawnToMove.moveFromStart();
+            pawnToRemove.sendStart();
         }
         else{
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
@@ -253,23 +252,19 @@ public class Player {
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
-            System.out.println("check 1");
             moveForwardOccupied(pawnToMove, landingBoardIndex, currBoardIndex);
         }
 
         // Check 2
         else if(landingIndexSpaceType.equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
-            System.out.println("check 2");
             moveForwardShortSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
         else if(landingIndexSpaceType.equals(SpaceType.START_LONG_SLIDE_DIFFERENT)){
-            System.out.println("check 2");
             moveForwardLongSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
         // Check 3
         else{
-            System.out.println("check 4");
             moveForwardBaseCase(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
@@ -293,29 +288,24 @@ public class Player {
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
-            System.out.println("check 1");
             moveForwardOccupied(pawnToMove, landingBoardIndex, currBoardIndex);
         }
 
         // Check 2
         else if(landingIndexSpaceType.equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
-            System.out.println("check 2");
             moveForwardShortSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
         else if(landingIndexSpaceType.equals(SpaceType.START_LONG_SLIDE_DIFFERENT)){
-            System.out.println("check 2");
             moveForwardLongSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
         // Check 3
         else if(landingBoardColorIndex == Pawn.MAX_INDEX){
-            System.out.println("check 3");
             moveForwardReachedEnd(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
         // Check 4
         else{
-            System.out.println("check 4");
             moveForwardBaseCase(pawnToMove, currBoardIndex, landingBoardIndex);
         }
     }
@@ -323,7 +313,7 @@ public class Player {
     private void moveForwardOccupied(Pawn pawnToMove, int landingBoardIndex, int currBoardIndex) {
         Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
         if(pawnToRemove == null){
-            System.out.println("THIS SHOULD NEVER HAPPEN");
+            System.out.println("line 316 THIS SHOULD NEVER HAPPEN");
         }
         this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
         this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
@@ -508,9 +498,6 @@ public class Player {
         int possibleIndex;
 
         if (!possiblePawnMoves.isEmpty()) {
-
-            System.out.println("possible pawn moves length: " + possiblePawnMoves.size());
-
             ArrayList<Integer> possiblePawnIndices = new ArrayList<>();
             for (Pawn pawn : possiblePawnMoves) {
                 //Java Fx application, print this to screen and ask highlight pawns on board that they can move
@@ -522,6 +509,7 @@ public class Player {
                     possibleIndex = 0;
                     possiblePawnIndices.add(possibleIndex); //for start index, although not an index
                 }
+                //Java FX
                 System.out.println("You can move a pawn at index " + possibleIndex);
             }
 

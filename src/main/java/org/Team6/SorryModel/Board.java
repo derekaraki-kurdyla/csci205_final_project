@@ -53,23 +53,29 @@ public class Board {
     /** constructor for {@link Board} class */
     public Board(ArrayList<String> pawnColors){
         this.initPawnsOnBoard(pawnColors);
-        this.initSpacesOnBoard(); //just initializes all to unoccupied
-    }
-
-    private void initSpacesOnBoard(){
-        for(int i = 1; i <= 84; i++){
-            this.mapOfSpaces.put(i, SpaceType.UNOCCUPIED);
-        }
+        this.initSpacesOnBoard();
     }
 
     /**
      * method that initializes {@link #mapOfSpaces}
      * to their starting space enumerations {@link SpaceType}
      */
+    private void initSpacesOnBoard(){
+        for(int i = 1; i <= 84; i++){ //have to do this to clear all slide indices
+            this.mapOfSpaces.put(i, SpaceType.UNOCCUPIED);
+        }
+    }
+
     public void initSlideSpacesOnBoard(Player player){
         // make sure when setting a spacetype as occupied by different, that only holds true if it is also not the start of the slide
         // reason for this is because can only be one type, so it needs to be start of slide so that the pawn will slide.
         // (this will automatically knock off all other pawns on the slide anyway)
+
+        for(int i = 1; i <= 84; i++){ //have to do this to clear all slide indices
+            if(this.mapOfSpaces.get(i).equals(SpaceType.START_LONG_SLIDE_DIFFERENT) || this.mapOfSpaces.get(i).equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
+                this.mapOfSpaces.put(i, SpaceType.UNOCCUPIED);
+            }
+        }
 
         switch(player.getPawnColor()){
             case RED -> {
