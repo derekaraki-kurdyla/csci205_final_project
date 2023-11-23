@@ -88,6 +88,17 @@ public class GameManager {
 
             this.currPlayer.takeTurn(drawnCard);
 
+
+            while(drawnCard.getCardValue().equals(CardValue.TWO)){
+                //java fx to print this to screen
+                System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
+
+                drawnCard = this.gameDeck.drawCard();
+
+                this.currPlayer.takeTurn(drawnCard);
+            }
+
+
             currPlayerIndex ++; //set up for next player's turn
             countTurns ++;
 

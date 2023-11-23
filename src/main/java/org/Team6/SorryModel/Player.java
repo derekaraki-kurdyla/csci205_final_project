@@ -60,7 +60,7 @@ public class Player {
 
         switch (drawnCard.getCardValue()) {
             case ONE -> {
-                ArrayList<Pawn> possiblePawnMovesOnBoard = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 1);
+                ArrayList<Pawn> possiblePawnMovesOnBoard = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 1);
                 ArrayList<Pawn> possiblePawnMovesAtStart = this.findPossiblePawnMovesAtStart(colorPawnsToIterateThrough);
 
                 possiblePawnMoves.addAll(possiblePawnMovesOnBoard);
@@ -83,10 +83,31 @@ public class Player {
             }
             case TWO -> {
 
+                ArrayList<Pawn> possiblePawnMovesOnBoard = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 2);
+                ArrayList<Pawn> possiblePawnMovesAtStart = this.findPossiblePawnMovesAtStart(colorPawnsToIterateThrough);
+
+                possiblePawnMoves.addAll(possiblePawnMovesOnBoard);
+                possiblePawnMoves.addAll(possiblePawnMovesAtStart);
+
+                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
+
+                if(pawnToMove != null){
+                    if(pawnToMove.isOnBoard()){
+                        this.moveForward(pawnToMove,2);
+                    }
+                    else if(pawnToMove.isAtStart()){
+                        System.out.println("this happens! line 99");
+                        this.moveFromStart(pawnToMove);
+                    }
+                    else{
+                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
+                    }
+                }
+
             }
             case THREE -> {
 
-                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 3);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 3);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -98,10 +119,15 @@ public class Player {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 4);
 
+                Pawn pawnToMove = getPawnToMove(possiblePawnMoves);
+
+                if(pawnToMove != null){
+                    this.moveBackward(pawnToMove, 4);
+                }
             }
             case FIVE -> {
 
-                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 5);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 5);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -114,7 +140,7 @@ public class Player {
             }
             case EIGHT -> {
 
-                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 8);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 8);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -124,13 +150,43 @@ public class Player {
             }
             case TEN -> {
 
+                ArrayList<Pawn> possiblePawnMovesForForwards = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
+                ArrayList<Pawn> possiblePawnMovesForBackwards = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 1);
+
+                possiblePawnMoves.addAll(possiblePawnMovesForForwards);
+                for(Pawn pawn: possiblePawnMovesForBackwards){
+                    if(!possiblePawnMoves.contains(pawn)) { //if pawn is already in possiblePawnMoves
+                        possiblePawnMoves.add(pawn);
+                    }
+                }
+
+                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
+
+                if(pawnToMove != null){
+                    Scanner scan = new Scanner(System.in);
+                    // Java FX part
+                    System.out.println("Would you like to move backwards or forwards? [backwards][forwards]");
+                    String userInput = scan.next();
+                    if(userInput.equalsIgnoreCase("backwards") && possiblePawnMovesForBackwards.contains(pawnToMove)){
+                        //need second part of if statement because it could only be contained in possiblePawnMovesForForwards
+                        this.moveBackward(pawnToMove, 1);
+                    }
+                    else if(userInput.equalsIgnoreCase("forwards") && possiblePawnMovesForForwards.contains(pawnToMove)){
+                        this.moveForward(pawnToMove, 10);
+                    }
+                    else{
+                        //java fx part
+                        int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
+                        System.out.println("Pawn at index" + currBoardIndex + " cannot move " + userInput);
+                    }
+                }
             }
             case ELEVEN -> {
 
             }
             case TWELVE-> {
 
-                possiblePawnMoves = this.findPossiblePawnMovesOnBoard(colorPawnsToIterateThrough, 12);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 12);
 
                 Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 
@@ -161,6 +217,64 @@ public class Player {
         }
     }
 
+    private void moveBackward(Pawn pawnToMove, int numSpaces){
+        int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
+        int currBoardColorIndex = this.converter.convertToColorIndex(currBoardIndex);
+        int landingBoardColorIndex = 100000; //just to initialize it
+        int landingBoardIndex = 100000; //just to initialize it
+
+
+        if(currBoardColorIndex > 4) {
+            landingBoardColorIndex = currBoardColorIndex - numSpaces;
+            landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex); //put in -4 for this
+        }
+        else{ //this means pawnIndexColor is from 1 to 4
+            switch(currBoardColorIndex){
+                case 1 -> {
+                    landingBoardColorIndex = 57;
+                    landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+                }
+                case 2 -> {
+                    landingBoardColorIndex = 58;
+                    landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+                }
+                case 3 -> {
+                    landingBoardColorIndex = 59;
+                    landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+                }
+                case 4 -> {
+                    landingBoardColorIndex = 60;
+                    landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+                }
+            }
+        }
+
+        SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
+
+        // Check 1
+        if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
+            System.out.println("check 1");
+            moveForwardOccupied(pawnToMove, landingBoardIndex, currBoardIndex);
+        }
+
+        // Check 2
+        else if(landingIndexSpaceType.equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
+            System.out.println("check 2");
+            moveForwardShortSlide(pawnToMove, currBoardIndex, landingBoardIndex);
+        }
+        else if(landingIndexSpaceType.equals(SpaceType.START_LONG_SLIDE_DIFFERENT)){
+            System.out.println("check 2");
+            moveForwardLongSlide(pawnToMove, currBoardIndex, landingBoardIndex);
+        }
+
+        // Check 3
+        else{
+            System.out.println("check 4");
+            moveForwardBaseCase(pawnToMove, currBoardIndex, landingBoardIndex);
+        }
+
+    }
+
     /**
      * Method to move a pawn forward but only if certain conditions are met:
      * 1. check if different color occupies space, and if it does, move it back to start, and don't have to update space because already occupied
@@ -172,117 +286,114 @@ public class Player {
      */
     private void moveForward(Pawn pawnToMove, int numSpaces) {
         int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
-        System.out.println("currBoardIndex: " + currBoardIndex);
-
         int currBoardColorIndex = this.converter.convertToColorIndex(currBoardIndex);
-        System.out.println("currBoardColorIndex: " + currBoardColorIndex);
-
         int landingBoardColorIndex = currBoardColorIndex + numSpaces;
-        System.out.println("landingBoardColorIndex: " + landingBoardColorIndex);
-
         int landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
-        System.out.println("landingBoardIndex: " + landingBoardIndex);
-
         SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
-        System.out.println("landingIndexSpaceType: " + landingIndexSpaceType);
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
             System.out.println("check 1");
-            //also means that this cannot be the end circle index, because it is occupied
-            Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
-            if(pawnToRemove == null){
-                System.out.println("THIS SHOULD NEVER HAPPEN");
-            }
-            this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
-            this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
-            this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
-            pawnToRemove.sendStart();//update pawn itself, so now it is back at start
-            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
-
-            // don't have to update spaces, because the space is still occupied just by a different pawn.
-            // the takeTurn() method determines if the pawn is of the same type of not
+            moveForwardOccupied(pawnToMove, landingBoardIndex, currBoardIndex);
         }
 
         // Check 2
-        // a start slide could be occupied by a pawn of that same color, how to deal with this
-        // even if occupied, this space type will be initialized to START_SLIDE, not OCCUPIED, because spaces are
-        // initialized before each turn
-        // in other words, the pawn still on the start slide, if there, will not have been removed by check 1
-        //
         else if(landingIndexSpaceType.equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
-
-            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
-
             System.out.println("check 2");
-            //also means that this cannot be end circle index
-
-            Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
-            //check if there is a pawn on start of slide (would only be pawn of that color slide)
-            if(pawnToRemoveAtStartSlide != null){
-                this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
-                pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
-                //don't update space type because still a SLIDE_START
-            }
-            for(int index = landingBoardIndex + 1; index < landingBoardIndex + 4; index++){ //for all pawns on slide other than the START_SLIDE
-                if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
-                    Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
-                    this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
-                    pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
-                    this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
-                }
-            }
-            //still have to remove new pawn from original place, and put it down to new location
-            this.gameBoard.getMapOfBoard().remove(pawnToMove);
-            this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 3);
+            moveForwardShortSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
-
         else if(landingIndexSpaceType.equals(SpaceType.START_LONG_SLIDE_DIFFERENT)){
-
-            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
-
             System.out.println("check 2");
-            //also means that this cannot be end circle index
-
-            Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
-            //check if there is a pawn on start of slide (would only be pawn of that color slide)
-            if(pawnToRemoveAtStartSlide != null){
-                this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
-                pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
-                //don't update space type because still a SLIDE_START
-            }
-            for(int index = landingBoardIndex + 1; index < landingBoardIndex + 5; index++){ //for all pawns on slide other than the START_SLIDE
-                if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
-                    Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
-                    this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
-                    pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
-                    this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
-                }
-            }
-            //still have to remove new pawn from original place, and put it down to new location
-            this.gameBoard.getMapOfBoard().remove(pawnToMove);
-            this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 4);
+            moveForwardLongSlide(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
         // Check 3
-
         else if(landingBoardColorIndex == Pawn.MAX_INDEX){
             System.out.println("check 3");
-            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space to unoccupied
-            this.gameBoard.getMapOfBoard().remove(pawnToMove);
-            this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex);
-            pawnToMove.reachedEnd();
+            moveForwardReachedEnd(pawnToMove, currBoardIndex, landingBoardIndex);
         }
 
         // Check 4
         else{
-
             System.out.println("check 4");
-            this.gameBoard.getMapOfBoard().remove(pawnToMove); //remove pawn from old spot
-            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //mark old position as unoccupied
-            this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //put pawn in new spot
-            this.gameBoard.getMapOfSpaces().put(landingBoardIndex, SpaceType.OCCUPIED); //mark new spot as occupied
+            moveForwardBaseCase(pawnToMove, currBoardIndex, landingBoardIndex);
         }
+    }
+
+    private void moveForwardOccupied(Pawn pawnToMove, int landingBoardIndex, int currBoardIndex) {
+        Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
+        if(pawnToRemove == null){
+            System.out.println("THIS SHOULD NEVER HAPPEN");
+        }
+        this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
+        this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
+        this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
+        pawnToRemove.sendStart();//update pawn itself, so now it is back at start
+        this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
+    }
+
+    private void moveForwardShortSlide(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
+        this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
+
+        //also means that this cannot be end circle index
+
+        Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
+        //check if there is a pawn on start of slide (would only be pawn of that color slide)
+        if(pawnToRemoveAtStartSlide != null){
+            this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
+            pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
+            //don't update space type because still a SLIDE_START
+        }
+        for(int index = landingBoardIndex + 1; index < landingBoardIndex + 4; index++){ //for all pawns on slide other than the START_SLIDE
+            if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
+                Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
+                this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
+                pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
+                this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
+            }
+        }
+        //still have to remove new pawn from original place, and put it down to new location
+        this.gameBoard.getMapOfBoard().remove(pawnToMove);
+        this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 3);
+    }
+
+    private void moveForwardLongSlide(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
+        this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
+
+        //also means that this cannot be end circle index
+
+        Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
+        //check if there is a pawn on start of slide (would only be pawn of that color slide)
+        if(pawnToRemoveAtStartSlide != null){
+            this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
+            pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
+            //don't update space type because still a SLIDE_START
+        }
+        for(int index = landingBoardIndex + 1; index < landingBoardIndex + 5; index++){ //for all pawns on slide other than the START_SLIDE
+            if(this.gameBoard.getMapOfSpaces().get(index).equals(SpaceType.OCCUPIED)){
+                Pawn pawnToRemoveOnSlide = this.findPawnFromBoardIndex(index);
+                this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
+                pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
+                this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
+            }
+        }
+        //still have to remove new pawn from original place, and put it down to new location
+        this.gameBoard.getMapOfBoard().remove(pawnToMove);
+        this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 4);
+    }
+
+    private void moveForwardReachedEnd(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
+        this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space to unoccupied
+        this.gameBoard.getMapOfBoard().remove(pawnToMove);
+        this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex);
+        pawnToMove.reachedEnd();
+    }
+
+    private void moveForwardBaseCase(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
+        this.gameBoard.getMapOfBoard().remove(pawnToMove); //remove pawn from old spot
+        this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //mark old position as unoccupied
+        this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //put pawn in new spot
+        this.gameBoard.getMapOfSpaces().put(landingBoardIndex, SpaceType.OCCUPIED); //mark new spot as occupied
     }
 
     private ArrayList<Pawn> determineColorPawnsToIterateThrough() {
@@ -306,7 +417,7 @@ public class Player {
         };
     }
 
-    private ArrayList<Pawn> findPossiblePawnMovesOnBoard(ArrayList<Pawn> arr, int numSpaces) {
+    private ArrayList<Pawn> findPossiblePawnMovesForForwards(ArrayList<Pawn> arr, int numSpaces) {
         ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
 
         for (Pawn pawn: arr) {
@@ -423,6 +534,7 @@ public class Player {
                 //could be zero, and no pawn at index 0
                 if(index == 0){
                     System.out.println("Valid index (0)");
+                    //need a for loop because unlike other indices, there could be multiple pawns at index 0
                     for(Pawn pawn: possiblePawnMoves){
                         if (pawn.isAtStart()) {
                             return pawn;
