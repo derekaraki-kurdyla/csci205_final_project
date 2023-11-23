@@ -355,9 +355,9 @@ public class BoardController {
         double y = space20.getBoundsInParent().getCenterY();
         //double x = space20.getLayoutX();
         //double y = space20.getLayoutY();
-        System.out.println(x + ", " + y);
-        bluePawn1.setCenterX(x);
-        bluePawn1.setCenterY(y);
+        //System.out.println(x + ", " + y);
+        //bluePawn1.setCenterX(x);
+        //bluePawn1.setCenterY(y);
 
     }
 
