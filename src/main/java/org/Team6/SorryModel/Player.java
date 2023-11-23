@@ -96,44 +96,7 @@ public class Player {
 
             case FOUR -> {
 
-                //getting possible pawn moves
-                for(Pawn pawn: colorPawnsToIterateThrough){
-
-
-                    if (pawn.isOnBoard()){
-                        int pawnIndexColor = this.converter.convertToColorIndex(this.gameBoard.getMapOfBoard().get(pawn));
-
-                        //if(pawnIndexColor <= (Pawn.MAX_INDEX - numSpaces)){
-                            //check if pawn index + numspaces is occupied by same piece
-
-                        int landingBoardIndex = -10000000; //just to initialize
-
-                            //we have pawn color index. check if (pawn color index + numspaces) converted to a space on the board index map is occupied
-                        if(pawnIndexColor > 4) {
-                            landingBoardIndex = this.converter.convertToBoardIndex(pawnIndexColor + numSpaces); //put in -4 for this
-                        }
-                        else{ //this means pawnIndexColor is from 1 to 4
-                            switch(pawnIndexColor){
-                                case 1 -> landingBoardIndex = this.converter.convertToBoardIndex(57);
-                                case 2 -> landingBoardIndex = this.converter.convertToBoardIndex(58);
-                                case 3 -> landingBoardIndex = this.converter.convertToBoardIndex(59);
-                                case 4 -> landingBoardIndex = this.converter.convertToBoardIndex(60);
-                            }
-                        }
-                            //if space is occupied by some pawn (don't know the color yet)
-                        if ((this.gameBoard.getMapOfSpaces().get(landingBoardIndex).equals(SpaceType.OCCUPIED))){
-                            //if space is not occupied by same color pawn
-                            if(!(this.findPawnFromBoardIndex(landingBoardIndex).getColor().equals(this.pawnColor))) {
-                                possiblePawnMoves.add(pawn);
-                            }
-                        }
-                        else{
-                            possiblePawnMoves.add(pawn);
-                        }
-                        //}
-                    }
-
-                }
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 4);
 
             }
             case FIVE -> {
@@ -196,7 +159,6 @@ public class Player {
             this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
             pawnToMove.moveFromStart();
         }
-
     }
 
     /**
@@ -382,6 +344,44 @@ public class Player {
                 int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
                 if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) {
                     if(!(this.findPawnFromBoardIndex(indexAfterStartCircle).getColor().equals(this.pawnColor))) {
+                        possiblePawnMoves.add(pawn);
+                    }
+                }
+                else{
+                    possiblePawnMoves.add(pawn);
+                }
+            }
+        }
+        return possiblePawnMoves;
+    }
+
+    private ArrayList<Pawn> findPossiblePawnMovesForBackwards(ArrayList<Pawn> colorPawnsToIterateThrough, int numSpaces) {
+
+        ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
+
+        for(Pawn pawn: colorPawnsToIterateThrough){
+
+
+            if (pawn.isOnBoard()){
+                int pawnIndexColor = this.converter.convertToColorIndex(this.gameBoard.getMapOfBoard().get(pawn));
+
+                int landingBoardIndex = -10000000; //just to initialize
+
+                if(pawnIndexColor > 4) {
+                    landingBoardIndex = this.converter.convertToBoardIndex(pawnIndexColor - numSpaces); //put in -4 for this
+                }
+                else{ //this means pawnIndexColor is from 1 to 4
+                    switch(pawnIndexColor){
+                        case 1 -> landingBoardIndex = this.converter.convertToBoardIndex(57);
+                        case 2 -> landingBoardIndex = this.converter.convertToBoardIndex(58);
+                        case 3 -> landingBoardIndex = this.converter.convertToBoardIndex(59);
+                        case 4 -> landingBoardIndex = this.converter.convertToBoardIndex(60);
+                    }
+                }
+                //if space is occupied by some pawn (don't know the color yet)
+                if ((this.gameBoard.getMapOfSpaces().get(landingBoardIndex).equals(SpaceType.OCCUPIED))){
+                    //if space is not occupied by same color pawn
+                    if(!(this.findPawnFromBoardIndex(landingBoardIndex).getColor().equals(this.pawnColor))) {
                         possiblePawnMoves.add(pawn);
                     }
                 }
