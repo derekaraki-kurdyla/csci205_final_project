@@ -91,7 +91,7 @@ public class GameManager {
             currPlayerIndex ++; //set up for next player's turn
             countTurns ++;
 
-            if(countTurns == 10){
+            if(countTurns == 5000){
                 gameOver = true;
             }
 

@@ -70,7 +70,7 @@ public class Player {
 
                 if(pawnToMove != null){
                     if(pawnToMove.isOnBoard()){
-                        this.moveForward(pawnToMove,3);
+                        this.moveForward(pawnToMove,1);
                     }
                     else if(pawnToMove.isAtStart()){
                         System.out.println("this happens! line 76");
@@ -80,7 +80,6 @@ public class Player {
                         System.out.println("THIS SHOULD NEVER HAPPEN LINE 89");
                     }
                 }
-
             }
             case TWO -> {
 
@@ -96,6 +95,8 @@ public class Player {
             }
 
             case FOUR -> {
+
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 4);
 
             }
             case FIVE -> {
@@ -158,7 +159,6 @@ public class Player {
             this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
             pawnToMove.moveFromStart();
         }
-
     }
 
     /**
@@ -172,13 +172,23 @@ public class Player {
      */
     private void moveForward(Pawn pawnToMove, int numSpaces) {
         int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
+        System.out.println("currBoardIndex: " + currBoardIndex);
+
         int currBoardColorIndex = this.converter.convertToColorIndex(currBoardIndex);
+        System.out.println("currBoardColorIndex: " + currBoardColorIndex);
+
         int landingBoardColorIndex = currBoardColorIndex + numSpaces;
+        System.out.println("landingBoardColorIndex: " + landingBoardColorIndex);
+
         int landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex);
+        System.out.println("landingBoardIndex: " + landingBoardIndex);
+
         SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
+        System.out.println("landingIndexSpaceType: " + landingIndexSpaceType);
 
         // Check 1
         if(landingIndexSpaceType.equals(SpaceType.OCCUPIED)){ //means there is a pawn here of different type, because already checked or pawn of same type
+            System.out.println("check 1");
             //also means that this cannot be the end circle index, because it is occupied
             Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
             if(pawnToRemove == null){
@@ -201,6 +211,10 @@ public class Player {
         // in other words, the pawn still on the start slide, if there, will not have been removed by check 1
         //
         else if(landingIndexSpaceType.equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
+
+            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
+
+            System.out.println("check 2");
             //also means that this cannot be end circle index
 
             Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
@@ -224,6 +238,10 @@ public class Player {
         }
 
         else if(landingIndexSpaceType.equals(SpaceType.START_LONG_SLIDE_DIFFERENT)){
+
+            this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
+
+            System.out.println("check 2");
             //also means that this cannot be end circle index
 
             Pawn pawnToRemoveAtStartSlide = this.findPawnFromBoardIndex(landingBoardIndex);
@@ -247,7 +265,9 @@ public class Player {
         }
 
         // Check 3
+
         else if(landingBoardColorIndex == Pawn.MAX_INDEX){
+            System.out.println("check 3");
             this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space to unoccupied
             this.gameBoard.getMapOfBoard().remove(pawnToMove);
             this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex);
@@ -256,6 +276,8 @@ public class Player {
 
         // Check 4
         else{
+
+            System.out.println("check 4");
             this.gameBoard.getMapOfBoard().remove(pawnToMove); //remove pawn from old spot
             this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //mark old position as unoccupied
             this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //put pawn in new spot
@@ -333,10 +355,50 @@ public class Player {
         return possiblePawnMoves;
     }
 
+    private ArrayList<Pawn> findPossiblePawnMovesForBackwards(ArrayList<Pawn> colorPawnsToIterateThrough, int numSpaces) {
+
+        ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
+
+        for(Pawn pawn: colorPawnsToIterateThrough){
+
+
+            if (pawn.isOnBoard()){
+                int pawnIndexColor = this.converter.convertToColorIndex(this.gameBoard.getMapOfBoard().get(pawn));
+
+                int landingBoardIndex = -10000000; //just to initialize
+
+                if(pawnIndexColor > 4) {
+                    landingBoardIndex = this.converter.convertToBoardIndex(pawnIndexColor - numSpaces); //put in -4 for this
+                }
+                else{ //this means pawnIndexColor is from 1 to 4
+                    switch(pawnIndexColor){
+                        case 1 -> landingBoardIndex = this.converter.convertToBoardIndex(57);
+                        case 2 -> landingBoardIndex = this.converter.convertToBoardIndex(58);
+                        case 3 -> landingBoardIndex = this.converter.convertToBoardIndex(59);
+                        case 4 -> landingBoardIndex = this.converter.convertToBoardIndex(60);
+                    }
+                }
+                //if space is occupied by some pawn (don't know the color yet)
+                if ((this.gameBoard.getMapOfSpaces().get(landingBoardIndex).equals(SpaceType.OCCUPIED))){
+                    //if space is not occupied by same color pawn
+                    if(!(this.findPawnFromBoardIndex(landingBoardIndex).getColor().equals(this.pawnColor))) {
+                        possiblePawnMoves.add(pawn);
+                    }
+                }
+                else{
+                    possiblePawnMoves.add(pawn);
+                }
+            }
+        }
+        return possiblePawnMoves;
+    }
+
     private Pawn getPawnToMove(ArrayList<Pawn> possiblePawnMoves) {
         int possibleIndex;
 
         if (!possiblePawnMoves.isEmpty()) {
+
+            System.out.println("possible pawn moves length: " + possiblePawnMoves.size());
 
             ArrayList<Integer> possiblePawnIndices = new ArrayList<>();
             for (Pawn pawn : possiblePawnMoves) {
