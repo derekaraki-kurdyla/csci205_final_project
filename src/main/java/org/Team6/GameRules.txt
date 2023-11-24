@@ -37,7 +37,7 @@ If you move a pawn at least two spaces backwards past the start circle, you can 
 10: Either move one pawn forward 10 spaces or move one pawn back one space
 11: Move one pawn forward 11 spaces or switch any of your pawns with one of any opponents, you may forfeit your move if you can't move 11 spaces and you don't want to switch. Can't switch a pawn that is in the start, home, or in safety zones
 12: Move one pawn forward 12 spaces
-SORRY!: Take one pawn from your start and place it on any space that is occuped by any opponent, and bump that opponent's pawn back to their start, if there is no pawn on your start or no opponent's pawn on any space you can move to, forfeit your move
+SORRY!: Take one pawn from your start and place it on any space that is occupied by any opponent, and bump that opponent's pawn back to their start, if there is no pawn on your start or no opponent's pawn on any space you can move to, forfeit your move
 
 Game ends when all four pawns are in home space.
 

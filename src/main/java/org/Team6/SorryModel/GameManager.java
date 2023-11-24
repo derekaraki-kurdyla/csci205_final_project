@@ -88,14 +88,47 @@ public class GameManager {
 
             this.currPlayer.takeTurn(drawnCard);
 
+
+            while(drawnCard.getCardValue().equals(CardValue.TWO)){
+                //java fx to print this to screen
+                System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
+
+                drawnCard = this.gameDeck.drawCard();
+
+                this.currPlayer.takeTurn(drawnCard);
+            }
+
             currPlayerIndex ++; //set up for next player's turn
             countTurns ++;
 
-            if(countTurns == 5000){
-                gameOver = true;
-            }
-
+            gameOver = this.isGameOver();
         }
+    }
+
+    private boolean isGameOver(){
+        int countRed = 0;
+        int countBlue = 0;
+        int countYellow = 0;
+        int countGreen = 0;
+
+        for(Pawn pawn: this.gameBoard.getRedPawns()){
+            if(pawn.isAtEnd())
+                countRed ++;
+        }
+        for(Pawn pawn: this.gameBoard.getBluePawns()){
+            if(pawn.isAtEnd())
+                countBlue ++;
+        }
+        for(Pawn pawn: this.gameBoard.getYellowPawns()){
+            if(pawn.isAtEnd())
+                countYellow ++;
+        }
+        for(Pawn pawn: this.gameBoard.getGreenPawns()){
+            if(pawn.isAtEnd())
+                countGreen ++;
+        }
+
+        return (countRed == 4 || countBlue == 4 || countYellow == 4 || countGreen == 4);
     }
 
     /**
