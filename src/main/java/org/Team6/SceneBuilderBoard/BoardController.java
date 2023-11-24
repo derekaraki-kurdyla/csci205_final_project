@@ -34,200 +34,286 @@ public class BoardController {
 
     @FXML
     private Circle bluePawn1;
+
     @FXML
     private Circle bluePawn2;
+
     @FXML
     private Circle bluePawn3;
+
     @FXML
     private Circle bluePawn4;
 
     @FXML
     private Circle greenPawn1;
+
     @FXML
     private Circle greenPawn2;
+
     @FXML
     private Circle greenPawn3;
+
     @FXML
     private Circle greenPawn4;
 
     @FXML
     private Circle redPawn1;
+
     @FXML
     private Circle redPawn2;
+
     @FXML
     private Circle redPawn3;
+
     @FXML
     private Circle redPawn4;
 
     @FXML
     private Rectangle space1;
+
     @FXML
     private Rectangle space10;
+
     @FXML
     private Rectangle space11;
+
     @FXML
     private Rectangle space12;
+
     @FXML
     private Rectangle space13;
+
     @FXML
     private Rectangle space14;
+
     @FXML
     private Rectangle space15;
+
     @FXML
     private Rectangle space16;
+
     @FXML
     private Rectangle space17;
+
     @FXML
     private Rectangle space18;
+
     @FXML
     private Rectangle space19;
 
     @FXML
     private Rectangle space2;
+
     @FXML
     private Rectangle space20;
+
     @FXML
     private Rectangle space21;
+
     @FXML
     private Rectangle space22;
+
     @FXML
     private Rectangle space23;
+
     @FXML
     private Rectangle space24;
+
     @FXML
     private Rectangle space25;
+
     @FXML
     private Rectangle space26;
+
     @FXML
     private Rectangle space27;
+
     @FXML
     private Rectangle space28;
+
     @FXML
     private Rectangle space29;
-    
+
     @FXML
     private Rectangle space3;
+
     @FXML
     private Rectangle space30;
+
     @FXML
     private Rectangle space31;
+
     @FXML
     private Rectangle space32;
+
     @FXML
     private Rectangle space33;
+
     @FXML
     private Rectangle space34;
+
     @FXML
     private Rectangle space35;
+
     @FXML
     private Rectangle space36;
+
     @FXML
     private Rectangle space37;
+
     @FXML
     private Rectangle space38;
+
     @FXML
     private Rectangle space39;
 
     @FXML
     private Rectangle space4;
+
     @FXML
     private Rectangle space40;
+
     @FXML
     private Rectangle space41;
+
     @FXML
     private Rectangle space42;
+
     @FXML
     private Rectangle space43;
+
     @FXML
     private Rectangle space44;
+
     @FXML
     private Rectangle space45;
+
     @FXML
     private Rectangle space46;
+
     @FXML
     private Rectangle space47;
+
     @FXML
     private Rectangle space48;
+
     @FXML
     private Rectangle space49;
 
     @FXML
     private Rectangle space5;
+
     @FXML
     private Rectangle space50;
+
     @FXML
     private Rectangle space51;
+
     @FXML
     private Rectangle space52;
+
     @FXML
     private Rectangle space53;
+
     @FXML
     private Rectangle space54;
+
     @FXML
     private Rectangle space55;
+
     @FXML
     private Rectangle space56;
+
     @FXML
     private Rectangle space57;
+
     @FXML
     private Rectangle space58;
+
     @FXML
     private Rectangle space59;
 
     @FXML
     private Rectangle space6;
+
     @FXML
     private Rectangle space60;
+
     @FXML
     private Rectangle space61;
+
     @FXML
     private Rectangle space62;
+
     @FXML
     private Rectangle space63;
+
     @FXML
     private Rectangle space64;
+
     @FXML
     private Rectangle space65;
+
     @FXML
     private Circle space66;
+
     @FXML
     private Rectangle space67;
+
     @FXML
     private Rectangle space68;
+
     @FXML
     private Rectangle space69;
 
     @FXML
     private Rectangle space7;
+
     @FXML
     private Rectangle space70;
+
     @FXML
     private Rectangle space71;
+
     @FXML
     private Circle space72;
+
+    @FXML
+    private Rectangle space73;
+
     @FXML
     private Rectangle space74;
+
     @FXML
     private Rectangle space75;
+
     @FXML
     private Rectangle space76;
+
     @FXML
     private Rectangle space77;
+
     @FXML
     private Circle space78;
+
     @FXML
     private Rectangle space79;
 
     @FXML
     private Rectangle space8;
+
     @FXML
     private Rectangle space80;
+
     @FXML
     private Rectangle space81;
+
     @FXML
     private Rectangle space82;
+
     @FXML
     private Rectangle space83;
+
     @FXML
     private Circle space84;
 
@@ -236,10 +322,13 @@ public class BoardController {
 
     @FXML
     private Circle yellowPawn1;
+
     @FXML
     private Circle yellowPawn2;
+
     @FXML
     private Circle yellowPawn3;
+
     @FXML
     private Circle yellowPawn4;
 
@@ -327,6 +416,7 @@ public class BoardController {
         assert space70 != null : "fx:id=\"space70\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert space71 != null : "fx:id=\"space71\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert space72 != null : "fx:id=\"space72\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert space73 != null : "fx:id=\"space73\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert space74 != null : "fx:id=\"space74\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert space75 != null : "fx:id=\"space75\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert space76 != null : "fx:id=\"space76\" was not injected: check your FXML file 'BoardView.fxml'.";
@@ -345,23 +435,37 @@ public class BoardController {
         assert yellowPawn3 != null : "fx:id=\"yellowPawn3\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowPawn4 != null : "fx:id=\"yellowPawn4\" was not injected: check your FXML file 'BoardView.fxml'.";
 
-        
-        initBindings();
         initEventHandlers();
+        initBindings();
     }
 
     private void initEventHandlers() {
+        // MOVE BLUE PAWN FROM START
+        //Get X and Y coords for both the space and the pawn
         double x = space20.getBoundsInParent().getCenterX();
         double y = space20.getBoundsInParent().getCenterY();
-        //double x = space20.getLayoutX();
-        //double y = space20.getLayoutY();
-        //System.out.println(x + ", " + y);
-        //bluePawn1.setCenterX(x);
-        //bluePawn1.setCenterY(y);
+        double x2 = bluePawn1.getLayoutX();
+        double y2 = bluePawn1.getLayoutY();
+
+        // Calculate the difference and set the center
+        double x3 = x - x2;
+        double y3 = y - y2;
+        bluePawn1.setCenterX(x3);
+        bluePawn1.setCenterY(y3);
+
+        // Move 3 spaces
+        double x4 = space21.getBoundsInParent().getCenterX();
+        double y4 = space21.getBoundsInParent().getCenterY();
+        double x5 = bluePawn1.getLayoutX();
+        double y5 = bluePawn1.getLayoutY();
+        double x6 = x4 - x5;
+        double y6 = y4 - y5;
+        bluePawn1.setCenterX(x6);
+        bluePawn1.setCenterY(y6);
 
     }
 
     private void initBindings() {
     }
-
 }
+
