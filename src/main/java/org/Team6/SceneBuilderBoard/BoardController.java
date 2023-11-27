@@ -19,10 +19,13 @@
 package org.Team6.SceneBuilderBoard;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Formattable;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.Team6.SorryModel.Pawn;
 
 public class BoardController {
 
@@ -332,6 +335,9 @@ public class BoardController {
     @FXML
     private Circle yellowPawn4;
 
+    private ArrayList<Circle> pawnList;
+    private ArrayList<Rectangle> spacesList;
+    private ArrayList<Circle> homeList;
     @FXML
     void initialize() {
         assert bluePawn1 != null : "fx:id=\"bluePawn1\" was not injected: check your FXML file 'BoardView.fxml'.";
@@ -435,37 +441,65 @@ public class BoardController {
         assert yellowPawn3 != null : "fx:id=\"yellowPawn3\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowPawn4 != null : "fx:id=\"yellowPawn4\" was not injected: check your FXML file 'BoardView.fxml'.";
 
-        initEventHandlers();
-        initBindings();
+        move(bluePawn1, space25);
+        move(bluePawn2, space72);
+        move(redPawn1, space7);
     }
 
+
     private void initEventHandlers() {
-        // MOVE BLUE PAWN FROM START
-        //Get X and Y coords for both the space and the pawn
-        double x = space20.getBoundsInParent().getCenterX();
-        double y = space20.getBoundsInParent().getCenterY();
-        double x2 = bluePawn1.getLayoutX();
-        double y2 = bluePawn1.getLayoutY();
 
-        // Calculate the difference and set the center
-        double x3 = x - x2;
-        double y3 = y - y2;
-        bluePawn1.setCenterX(x3);
-        bluePawn1.setCenterY(y3);
-
-        // Move 3 spaces
-        double x4 = space21.getBoundsInParent().getCenterX();
-        double y4 = space21.getBoundsInParent().getCenterY();
-        double x5 = bluePawn1.getLayoutX();
-        double y5 = bluePawn1.getLayoutY();
-        double x6 = x4 - x5;
-        double y6 = y4 - y5;
-        bluePawn1.setCenterX(x6);
-        bluePawn1.setCenterY(y6);
 
     }
 
     private void initBindings() {
+    }
+
+    /**
+     * Moves a pawn to a regular space
+     * @param pawn - pawn to move
+     * @param space - space to move to
+     */
+    public static void move(Circle pawn, Rectangle space){
+
+        // Get position of the space
+        double xSpace = space.getBoundsInParent().getCenterX();
+        double ySpace = space.getBoundsInParent().getCenterY();
+
+        // Get position of the pawn
+        double xPawn = pawn.getLayoutX();
+        double yPawn = pawn.getLayoutY();
+
+        // Find the difference between them
+        double xDiff = xSpace - xPawn;
+        double yDiff = ySpace - yPawn;
+
+        // Set the pawn to move the difference
+        pawn.setCenterX(xDiff);
+        pawn.setCenterY(yDiff);
+    }
+
+    /**
+     * Move a pawn to home
+     * @param pawn - pawn to move
+     * @param home - home space
+     */
+    public static void move(Circle pawn, Circle home){
+        // Get position of the space
+        double xHome = home.getBoundsInParent().getCenterX();
+        double yHome = home.getBoundsInParent().getCenterY();
+
+        // Get position of the pawn
+        double xPawn = pawn.getLayoutX();
+        double yPawn = pawn.getLayoutY();
+
+        // Find the difference between them
+        double xDiff = xHome - xPawn;
+        double yDiff = yHome - yPawn;
+
+        // Set the pawn to move the difference
+        pawn.setCenterX(xDiff);
+        pawn.setCenterY(yDiff);
     }
 }
 
