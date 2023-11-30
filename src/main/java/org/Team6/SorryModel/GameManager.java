@@ -62,11 +62,26 @@ public class GameManager {
      * constructor for {@link GameManager} class
      */
     public GameManager() {
-        this.displayWelcome();
+        //this.displayWelcome();
 
-        this.getNumPlayers(); //need to update this.numPlayers first
+        //this.getNumPlayers(); //need to update this.numPlayers first
 
-        this.getColorPawns(); //need to update this.pawnColors first to initialize this.gameBoard
+        //this.getColorPawns(); //need to update this.pawnColors first to initialize this.gameBoard
+
+        //this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
+
+        //for (String pawnColor : this.pawnColors) {
+        //    this.playerArrayList.add(new Player(pawnColor, this.gameBoard)); //this is just so that GameManager can access turnorder
+        //}
+
+        //this.gameDeck = new Deck();
+        //System.out.println("hello");
+    }
+
+    /**
+     * Method that runs the entire game logic until game is won or quit
+     */
+    public void playGame() {
 
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
 
@@ -76,12 +91,8 @@ public class GameManager {
 
         this.gameDeck = new Deck();
         System.out.println("hello");
-    }
 
-    /**
-     * Method that runs the entire game logic until game is won or quit
-     */
-    public void playGame() {
+
         boolean gameOver = false;
         int currPlayerIndex = 0;
         int countTurns = 0;
@@ -220,5 +231,17 @@ public class GameManager {
 
     public ArrayList<Player> getPlayerArrayList() {
         return playerArrayList;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public ArrayList<String> getPawnColors() {
+        return pawnColors;
+    }
+
+    public void setPawnColors(ArrayList<String> pawnColors) {
+        this.pawnColors = pawnColors;
     }
 }

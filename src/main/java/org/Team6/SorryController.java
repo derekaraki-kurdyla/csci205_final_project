@@ -499,10 +499,10 @@ public class SorryController {
         assert yellowRadioButton != null : "fx:id=\"yellowRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
 
 
-        this.isSetForRed = new SimpleBooleanProperty(true);
-        this.isSetForBlue = new SimpleBooleanProperty(true);
-        this.isSetForGreen = new SimpleBooleanProperty(true);
-        this.isSetForYellow = new SimpleBooleanProperty(true);
+        this.isSetForRed = new SimpleBooleanProperty(false);
+        this.isSetForBlue = new SimpleBooleanProperty(false);
+        this.isSetForGreen = new SimpleBooleanProperty(false);
+        this.isSetForYellow = new SimpleBooleanProperty(false);
 
         initPawnList();
         //initBindings();
@@ -537,6 +537,29 @@ public class SorryController {
     private void initEventHandlers() {
 
         startButton.setOnMouseClicked(event -> {
+            int playerCount = 0;
+            if (isIsSetForRed()){
+                playerCount++;
+                this.theModel.getPawnColors().add("red");
+
+            }
+
+            if (isIsSetForBlue()){
+                playerCount++;
+                this.theModel.getPawnColors().add("blue");
+            }
+
+            if (isIsSetForGreen()){
+                playerCount++;
+                this.theModel.getPawnColors().add("green");
+            }
+
+            if (isIsSetForYellow()){
+                playerCount++;
+                this.theModel.getPawnColors().add("yellow");
+            }
+
+            this.theModel.setNumPlayers(playerCount);
             this.theModel.playGame();
         });
 
@@ -582,72 +605,73 @@ public class SorryController {
         }
 
         redRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForRed()){
+            if (!isIsSetForRed()){
                 redPawn1.setFill(Color.PINK);
                 redPawn2.setFill(Color.PINK);
                 redPawn3.setFill(Color.PINK);
                 redPawn4.setFill(Color.PINK);
-                isSetForRed.setValue(false);
+                isSetForRed.setValue(true);
             }
-            else if (!isIsSetForRed()){
+            else if (isIsSetForRed()){
                 redPawn1.setFill(Color.web("#ff1f1f"));
                 redPawn2.setFill(Color.web("#ff1f1f"));
                 redPawn3.setFill(Color.web("#ff1f1f"));
                 redPawn4.setFill(Color.web("#ff1f1f"));
-                isSetForRed.setValue(true);
+                isSetForRed.setValue(false);
             }
         });
 
         blueRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForBlue()){
+            if (!isIsSetForBlue()){
                 bluePawn1.setFill(Color.AQUA);
                 bluePawn2.setFill(Color.AQUA);
                 bluePawn3.setFill(Color.AQUA);
                 bluePawn4.setFill(Color.AQUA);
-                isSetForBlue.setValue(false);
+                isSetForBlue.setValue(true);
             }
-            else if (!isIsSetForBlue()){
+            else if (isIsSetForBlue()){
                 bluePawn1.setFill(Color.DODGERBLUE);
                 bluePawn2.setFill(Color.DODGERBLUE);
                 bluePawn3.setFill(Color.DODGERBLUE);
                 bluePawn4.setFill(Color.DODGERBLUE);
-                isSetForBlue.setValue(true);
+                isSetForBlue.setValue(false);
             }
         });
 
         greenRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForGreen()){
+            if (!isIsSetForGreen()){
                 greenPawn1.setFill(Color.GREENYELLOW);
                 greenPawn2.setFill(Color.GREENYELLOW);
                 greenPawn3.setFill(Color.GREENYELLOW);
                 greenPawn4.setFill(Color.GREENYELLOW);
-                isSetForGreen.setValue(false);
+                isSetForGreen.setValue(true);
             }
-            else if (!isIsSetForGreen()){
+            else if (isIsSetForGreen()){
                 greenPawn1.setFill(Color.web("#26ff00"));
                 greenPawn2.setFill(Color.web("#26ff00"));
                 greenPawn3.setFill(Color.web("#26ff00"));
                 greenPawn4.setFill(Color.web("#26ff00"));
-                isSetForGreen.setValue(true);
+                isSetForGreen.setValue(false);
             }
         });
 
         yellowRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForYellow()){
+            if (!isIsSetForYellow()){
                 yellowPawn1.setFill(Color.LIGHTYELLOW);
                 yellowPawn2.setFill(Color.LIGHTYELLOW);
                 yellowPawn3.setFill(Color.LIGHTYELLOW);
                 yellowPawn4.setFill(Color.LIGHTYELLOW);
-                isSetForYellow.setValue(false);
+                isSetForYellow.setValue(true);
             }
-            else if (!isIsSetForYellow()){
+            else if (isIsSetForYellow()){
                 yellowPawn1.setFill(Color.web("#edff1f"));
                 yellowPawn2.setFill(Color.web("#edff1f"));
                 yellowPawn3.setFill(Color.web("#edff1f"));
                 yellowPawn4.setFill(Color.web("#edff1f"));
-                isSetForYellow.setValue(true);
+                isSetForYellow.setValue(false);
             }
         });
+
 
     }
 
