@@ -3,37 +3,54 @@
  * Fall 2023
  * Instructor: Prof. Brian King / Prof. Joshua Stough
  *
- * Name: Nathan Stamford
- * Section: 02 - 10am
- * Date: 11/17/2023
- * Time: 10:13 AM
+ * Name: Derek Araki-Kurdyla
+ * Section: 9am-10am
+ * Date: 11/29/23
+ * Time: 5:50 PM
  *
  * Project: csci205_final_project
- * Package: org.Team6.SceneBuilderBoard
- * Class: BoardController
+ * Package: org.Team6
+ * Class: SorryController
  *
  * Description:
  *
  * ****************************************
  */
-package org.Team6.SceneBuilderBoard;
+package org.Team6;
+
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Formattable;
 import java.util.ResourceBundle;
+
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Button;
+import org.Team6.SorryModel.Board;
+import org.Team6.SorryModel.GameManager;
 import org.Team6.SorryModel.Pawn;
 
-public class BoardController {
+public class SorryController {
+
+    private GameManager theModel;
+
+    private SorryView theView;
+
 
     @FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
+
+    /**
+     * These are all the spaces and pawns we use
+     */
 
     @FXML
     private Circle bluePawn1;
@@ -335,9 +352,44 @@ public class BoardController {
     @FXML
     private Circle yellowPawn4;
 
-    private ArrayList<Circle> pawnList;
-    private ArrayList<Rectangle> spacesList;
-    private ArrayList<Circle> homeList;
+
+    @FXML
+    private Button startButton;
+    @FXML
+    private RadioButton blueRadioButton;
+    @FXML
+    private RadioButton greenRadioButton;
+    @FXML
+    private RadioButton redRadioButton;
+    @FXML
+    private RadioButton yellowRadioButton;
+
+    private SimpleBooleanProperty isSetForRed;
+    private SimpleBooleanProperty isSetForBlue;
+    private SimpleBooleanProperty isSetForGreen;
+    private SimpleBooleanProperty isSetForYellow;
+
+    //These are used???
+    private ArrayList<Circle> pawnList = new ArrayList<>();
+    private ArrayList<Rectangle> spacesList = new ArrayList<>();
+    private ArrayList<Circle> homeList = new ArrayList<>();
+    private GameManager gm;
+
+
+
+    public SorryController(GameManager model, SorryView view) {
+        this.theModel = model;
+        this.theView = view;
+        System.out.println("constructor correct!");
+        System.out.println(this.theModel.getPlayerArrayList());
+        // You can perform additional setup here if needed
+    }
+
+
+    public void setModel(GameManager model) {
+        this.theModel = model;
+    }
+
     @FXML
     void initialize() {
         assert bluePawn1 != null : "fx:id=\"bluePawn1\" was not injected: check your FXML file 'BoardView.fxml'.";
@@ -440,23 +492,171 @@ public class BoardController {
         assert yellowPawn2 != null : "fx:id=\"yellowPawn2\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowPawn3 != null : "fx:id=\"yellowPawn3\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowPawn4 != null : "fx:id=\"yellowPawn4\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert startButton != null : "fx:id=\"startButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert blueRadioButton != null : "fx:id=\"blueRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert greenRadioButton != null : "fx:id=\"greenRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert redRadioButton != null : "fx:id=\"redRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert yellowRadioButton != null : "fx:id=\"yellowRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
 
-        move(bluePawn1, space25);
-        move(bluePawn2, space72);
-        move(redPawn1, space7);
+
+        this.isSetForRed = new SimpleBooleanProperty(true);
+        this.isSetForBlue = new SimpleBooleanProperty(true);
+        this.isSetForGreen = new SimpleBooleanProperty(true);
+        this.isSetForYellow = new SimpleBooleanProperty(true);
+
+        initPawnList();
+        //initBindings();
+        initEventHandlers();
+
+        //Test moving
+        //move(bluePawn1, space25);
+        //move(bluePawn2, space72);
+        //move(redPawn1, space7);
+
+    }
+    private void initPawnList() {
+        pawnList.add(bluePawn1);
+        pawnList.add(bluePawn2);
+        pawnList.add(bluePawn3);
+        pawnList.add(bluePawn4);
+        pawnList.add(redPawn1);
+        pawnList.add(redPawn2);
+        pawnList.add(redPawn3);
+        pawnList.add(redPawn4);
+        pawnList.add(greenPawn1);
+        pawnList.add(greenPawn2);
+        pawnList.add(greenPawn3);
+        pawnList.add(greenPawn4);
+        pawnList.add(yellowPawn1);
+        pawnList.add(yellowPawn2);
+        pawnList.add(yellowPawn3);
+        pawnList.add(yellowPawn4);
     }
 
 
     private void initEventHandlers() {
 
+        startButton.setOnMouseClicked(event -> {
+            this.theModel.playGame();
+        });
+
+        for (int i = 0; i < 4; i++) {
+            Circle pawn = pawnList.get(i);
+            pawn.setOnMouseEntered(event -> {
+                pawn.setFill(Color.AQUA);
+            });
+            pawn.setOnMouseExited(event -> {
+                pawn.setFill(Color.DODGERBLUE);
+            });
+        }
+
+        for (int i = 4; i < 8 ; i++) {
+            Circle pawn = pawnList.get(i);
+            pawn.setOnMouseEntered(event -> {
+                pawn.setFill(Color.PINK);
+            });
+            pawn.setOnMouseExited(event -> {
+                pawn.setFill(Color.web("#ff1f1f"));
+            });
+
+        }
+
+        for (int i = 8; i < 12; i++) {
+            Circle pawn = pawnList.get(i);
+            pawn.setOnMouseEntered(event -> {
+                pawn.setFill(Color.GREENYELLOW);
+            });
+            pawn.setOnMouseExited(event -> {
+                pawn.setFill(Color.web("#26ff00"));
+            });
+        }
+
+        for (int i = 12; i < 16; i++) {
+            Circle pawn = pawnList.get(i);
+            pawn.setOnMouseEntered(event -> {
+                pawn.setFill(Color.LIGHTYELLOW);
+            });
+            pawn.setOnMouseExited(event -> {
+                pawn.setFill(Color.web("#edff1f"));
+            });
+        }
+
+        redRadioButton.setOnMouseClicked(event -> {
+            if (isIsSetForRed()){
+                redPawn1.setFill(Color.PINK);
+                redPawn2.setFill(Color.PINK);
+                redPawn3.setFill(Color.PINK);
+                redPawn4.setFill(Color.PINK);
+                isSetForRed.setValue(false);
+            }
+            else if (!isIsSetForRed()){
+                redPawn1.setFill(Color.web("#ff1f1f"));
+                redPawn2.setFill(Color.web("#ff1f1f"));
+                redPawn3.setFill(Color.web("#ff1f1f"));
+                redPawn4.setFill(Color.web("#ff1f1f"));
+                isSetForRed.setValue(true);
+            }
+        });
+
+        blueRadioButton.setOnMouseClicked(event -> {
+            if (isIsSetForBlue()){
+                bluePawn1.setFill(Color.AQUA);
+                bluePawn2.setFill(Color.AQUA);
+                bluePawn3.setFill(Color.AQUA);
+                bluePawn4.setFill(Color.AQUA);
+                isSetForBlue.setValue(false);
+            }
+            else if (!isIsSetForBlue()){
+                bluePawn1.setFill(Color.DODGERBLUE);
+                bluePawn2.setFill(Color.DODGERBLUE);
+                bluePawn3.setFill(Color.DODGERBLUE);
+                bluePawn4.setFill(Color.DODGERBLUE);
+                isSetForBlue.setValue(true);
+            }
+        });
+
+        greenRadioButton.setOnMouseClicked(event -> {
+            if (isIsSetForGreen()){
+                greenPawn1.setFill(Color.GREENYELLOW);
+                greenPawn2.setFill(Color.GREENYELLOW);
+                greenPawn3.setFill(Color.GREENYELLOW);
+                greenPawn4.setFill(Color.GREENYELLOW);
+                isSetForGreen.setValue(false);
+            }
+            else if (!isIsSetForGreen()){
+                greenPawn1.setFill(Color.web("#26ff00"));
+                greenPawn2.setFill(Color.web("#26ff00"));
+                greenPawn3.setFill(Color.web("#26ff00"));
+                greenPawn4.setFill(Color.web("#26ff00"));
+                isSetForGreen.setValue(true);
+            }
+        });
+
+        yellowRadioButton.setOnMouseClicked(event -> {
+            if (isIsSetForYellow()){
+                yellowPawn1.setFill(Color.LIGHTYELLOW);
+                yellowPawn2.setFill(Color.LIGHTYELLOW);
+                yellowPawn3.setFill(Color.LIGHTYELLOW);
+                yellowPawn4.setFill(Color.LIGHTYELLOW);
+                isSetForYellow.setValue(false);
+            }
+            else if (!isIsSetForYellow()){
+                yellowPawn1.setFill(Color.web("#edff1f"));
+                yellowPawn2.setFill(Color.web("#edff1f"));
+                yellowPawn3.setFill(Color.web("#edff1f"));
+                yellowPawn4.setFill(Color.web("#edff1f"));
+                isSetForYellow.setValue(true);
+            }
+        });
 
     }
 
     private void initBindings() {
+
     }
 
     /**
-     * Moves a pawn to a regular space
+     * Moves a pawn to a regular space (not home)
      * @param pawn - pawn to move
      * @param space - space to move to
      */
@@ -501,5 +701,38 @@ public class BoardController {
         pawn.setCenterX(xDiff);
         pawn.setCenterY(yDiff);
     }
+
+    public boolean isIsSetForRed() {
+        return isSetForRed.get();
+    }
+
+    public SimpleBooleanProperty isSetForRedProperty() {
+        return isSetForRed;
+    }
+
+    public boolean isIsSetForBlue() {
+        return isSetForBlue.get();
+    }
+
+    public SimpleBooleanProperty isSetForBlueProperty() {
+        return isSetForBlue;
+    }
+
+    public boolean isIsSetForGreen() {
+        return isSetForGreen.get();
+    }
+
+    public SimpleBooleanProperty isSetForGreenProperty() {
+        return isSetForGreen;
+    }
+
+    public boolean isIsSetForYellow() {
+        return isSetForYellow.get();
+    }
+
+    public SimpleBooleanProperty isSetForYellowProperty() {
+        return isSetForYellow;
+    }
 }
+
 
