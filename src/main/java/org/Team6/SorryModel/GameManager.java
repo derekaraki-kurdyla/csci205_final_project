@@ -27,27 +27,41 @@ import java.util.Scanner;
 
 public class GameManager {
 
-    /** {@link Board} object for each Sorry game */
+    /**
+     * {@link Board} object for each Sorry game
+     */
     private Board gameBoard;
 
-    /** {@link Deck} object for each Sorry game */
+    /**
+     * {@link Deck} object for each Sorry game
+     */
     private Deck gameDeck;
 
-    /** {@link ArrayList} object for storing {@link Player} objects*/
+    /**
+     * {@link ArrayList} object for storing {@link Player} objects
+     */
     private ArrayList<Player> playerArrayList = new ArrayList<>();
 
-    /** number of players in this instance of Sorry boardgame */
+    /**
+     * number of players in this instance of Sorry boardgame
+     */
     private int numPlayers;
 
-    /** {@link Player} object whose turn it currently is */
+    /**
+     * {@link Player} object whose turn it currently is
+     */
     private Player currPlayer;
 
-    /** Colors chosen by players */
+    /**
+     * Colors chosen by players
+     */
     private ArrayList<String> pawnColors = new ArrayList<>();
 
 
-    /** constructor for {@link GameManager} class */
-    public GameManager(){
+    /**
+     * constructor for {@link GameManager} class
+     */
+    public GameManager() {
         this.displayWelcome();
 
         this.getNumPlayers(); //need to update this.numPlayers first
@@ -56,23 +70,24 @@ public class GameManager {
 
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
 
-        for(String pawnColor: this.pawnColors){
+        for (String pawnColor : this.pawnColors) {
             this.playerArrayList.add(new Player(pawnColor, this.gameBoard)); //this is just so that GameManager can access turnorder
         }
 
         this.gameDeck = new Deck();
+        System.out.println("hello");
     }
 
     /**
      * Method that runs the entire game logic until game is won or quit
      */
-    public void playGame(){
+    public void playGame() {
         boolean gameOver = false;
         int currPlayerIndex = 0;
         int countTurns = 0;
 
-        while(!gameOver){
-            if(currPlayerIndex == this.playerArrayList.size()){
+        while (!gameOver) {
+            if (currPlayerIndex == this.playerArrayList.size()) {
                 currPlayerIndex = 0;
             }
 
@@ -89,7 +104,7 @@ public class GameManager {
             this.currPlayer.takeTurn(drawnCard);
 
 
-            while(drawnCard.getCardValue().equals(CardValue.TWO)){
+            while (drawnCard.getCardValue().equals(CardValue.TWO)) {
                 //java fx to print this to screen
                 System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
 
@@ -98,34 +113,34 @@ public class GameManager {
                 this.currPlayer.takeTurn(drawnCard);
             }
 
-            currPlayerIndex ++; //set up for next player's turn
-            countTurns ++;
+            currPlayerIndex++; //set up for next player's turn
+            countTurns++;
 
             gameOver = this.isGameOver();
         }
     }
 
-    private boolean isGameOver(){
+    private boolean isGameOver() {
         int countRed = 0;
         int countBlue = 0;
         int countYellow = 0;
         int countGreen = 0;
 
-        for(Pawn pawn: this.gameBoard.getRedPawns()){
-            if(pawn.isAtEnd())
-                countRed ++;
+        for (Pawn pawn : this.gameBoard.getRedPawns()) {
+            if (pawn.isAtEnd())
+                countRed++;
         }
-        for(Pawn pawn: this.gameBoard.getBluePawns()){
-            if(pawn.isAtEnd())
-                countBlue ++;
+        for (Pawn pawn : this.gameBoard.getBluePawns()) {
+            if (pawn.isAtEnd())
+                countBlue++;
         }
-        for(Pawn pawn: this.gameBoard.getYellowPawns()){
-            if(pawn.isAtEnd())
-                countYellow ++;
+        for (Pawn pawn : this.gameBoard.getYellowPawns()) {
+            if (pawn.isAtEnd())
+                countYellow++;
         }
-        for(Pawn pawn: this.gameBoard.getGreenPawns()){
-            if(pawn.isAtEnd())
-                countGreen ++;
+        for (Pawn pawn : this.gameBoard.getGreenPawns()) {
+            if (pawn.isAtEnd())
+                countGreen++;
         }
 
         return (countRed == 4 || countBlue == 4 || countYellow == 4 || countGreen == 4);
@@ -141,7 +156,7 @@ public class GameManager {
     /**
      * asks the users for the number of {@link Player} and updates {@link #numPlayers}
      */
-    private void getNumPlayers(){
+    private void getNumPlayers() {
         System.out.println("How many players are playing Sorry? [1-4]");
         Scanner scan = new Scanner(System.in);
         int userInput = 0;
@@ -170,11 +185,11 @@ public class GameManager {
      * determines what {@link PawnColor} each of the{@link Player} objects
      * will use for their {@link Pawn} objects
      */
-    private void getColorPawns(){
+    private void getColorPawns() {
         ArrayList<String> chosenPawnColors = new ArrayList<>();
         ArrayList<String> availablePawnColors = new ArrayList<>(Arrays.asList("red", "blue", "yellow", "green"));
 
-        for(int i = 1; i <= this.numPlayers; i++){
+        for (int i = 1; i <= this.numPlayers; i++) {
             System.out.println("What color does player " + i + " want to be? [red, blue, yellow, green]");
             Scanner scan = new Scanner(System.in);
             String userInput = " ";
@@ -183,7 +198,7 @@ public class GameManager {
                 // Check if the input is a String
                 if (scan.hasNext()) {
                     userInput = scan.next();
-                    if(!chosenPawnColors.contains(userInput)) {
+                    if (!chosenPawnColors.contains(userInput)) {
                         if (availablePawnColors.contains(userInput)) {
                             System.out.println("Valid input: " + userInput);
                             chosenPawnColors.add(userInput); //remove this color from possible pawn colors
@@ -191,8 +206,7 @@ public class GameManager {
                         } else {
                             System.out.println("TRY AGAIN. Invalid input. Please enter a color [red, blue, yellow, green]");
                         }
-                    }
-                    else{
+                    } else {
                         System.out.println("TRY AGAIN. This color has already been chosen.");
                     }
                 } else {

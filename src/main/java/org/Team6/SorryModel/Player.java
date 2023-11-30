@@ -134,6 +134,22 @@ public class Player {
 
             }
             case SEVEN -> {
+                //Either move one pawn forward 7 spaces or split the move between any two pawns
+
+                //can get possible pawn moves for different moves but need to know
+
+                ArrayList<Pawn> possiblePawnMovesForSeven = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 7);
+
+                Scanner scan = new Scanner(System.in);
+
+                System.out.println("Would you like to move one pawn forwards 7 spaces [1] or two pawns forward for a combined 7 spaces [2]");
+
+                //String invalidInput
+
+                //while(scan.next().equals(1) || scan.next().equals){
+
+                //}
+
 
             }
             case EIGHT -> {
@@ -320,6 +336,8 @@ public class Player {
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
         pawnToRemove.sendStart();//update pawn itself, so now it is back at start
         this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
+
+
     }
 
     private void moveForwardShortSlide(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
@@ -384,6 +402,9 @@ public class Player {
         this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //mark old position as unoccupied
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //put pawn in new spot
         this.gameBoard.getMapOfSpaces().put(landingBoardIndex, SpaceType.OCCUPIED); //mark new spot as occupied
+
+        //BoardController.move(pawnToMove, landingBoardIndex);
+
     }
 
     private ArrayList<Pawn> determineColorPawnsToIterateThrough() {
