@@ -33,10 +33,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import org.Team6.SorryModel.Board;
-import org.Team6.SorryModel.Card;
-import org.Team6.SorryModel.GameManager;
-import org.Team6.SorryModel.Pawn;
+import org.Team6.SorryModel.*;
 
 public class SorryController {
 
@@ -562,9 +559,44 @@ public class SorryController {
     private void initEventHandlers() {
 
         drawButton.setOnMouseClicked(event -> {
+            this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
+
+            System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+
             Card drawnCard = this.theModel.getGameDeck().drawCard();
+
             this.theModel.setDrawnCard(drawnCard);
+
+            this.theModel.getCurrPlayer().takeTurn(theModel.getDrawnCard());
+
+            System.out.println(drawnCard);
+
+
+            if(drawnCard.getCardValue().equals(CardValue.TWO)) {
+                //java fx to print this to screen
+                System.out.println("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+            }
+
+            else{
+                if(this.theModel.isGameOver()){
+                    System.out.println("GAME OVER");
+                }
+                else{
+                    int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+                    this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+                    if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                        System.out.println(this.theModel.getCurrPlayerIndex());
+                        this.theModel.setCurrPlayerIndex(0);
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+                    }
+                    else{
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+                    }
+                }
+            }
         });
+
 
         startButton.setOnMouseClicked(event -> {
             int playerCount = 0;
@@ -590,8 +622,14 @@ public class SorryController {
             }
 
             this.theModel.setNumPlayers(playerCount);
-            this.theModel.playGame();
+            this.theModel.initBoardAndDeck();
+            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
         });
+
+
+
+
+
 
         for (int i = 0; i < 4; i++) {
             Circle pawn = pawnList.get(i);
