@@ -56,6 +56,7 @@ public class GameManager {
      * Colors chosen by players
      */
     private ArrayList<String> pawnColors = new ArrayList<>();
+    private Card drawnCard;
 
 
     /**
@@ -110,24 +111,42 @@ public class GameManager {
             System.out.println("It is " + this.currPlayer.getPawnColor() + "'s turn.");
 
             //use java FX for this function to run only if button to draw has been pressed
-            Card drawnCard = this.gameDeck.drawCard();
-
-            this.currPlayer.takeTurn(drawnCard);
-
-
-            while (drawnCard.getCardValue().equals(CardValue.TWO)) {
-                //java fx to print this to screen
-                System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
-
-                drawnCard = this.gameDeck.drawCard();
-
+            //drawnCard = this.gameDeck.drawCard();
+            if (drawnCard != null){
                 this.currPlayer.takeTurn(drawnCard);
+
+
+                while (drawnCard.getCardValue().equals(CardValue.TWO)) {
+                    //java fx to print this to screen
+                    System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
+
+                    drawnCard = this.gameDeck.drawCard();
+
+                    this.currPlayer.takeTurn(drawnCard);
+                }
+
+                currPlayerIndex++; //set up for next player's turn
+                countTurns++;
+
+                gameOver = this.isGameOver();
             }
+            System.out.println("hello");
+            //this.currPlayer.takeTurn(drawnCard);
 
-            currPlayerIndex++; //set up for next player's turn
-            countTurns++;
 
-            gameOver = this.isGameOver();
+            //while (drawnCard.getCardValue().equals(CardValue.TWO)) {
+            //    //java fx to print this to screen
+            //    System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
+
+            //    drawnCard = this.gameDeck.drawCard();
+
+            //    this.currPlayer.takeTurn(drawnCard);
+            //}
+
+            //currPlayerIndex++; //set up for next player's turn
+            //countTurns++;
+
+            //gameOver = this.isGameOver();
         }
     }
 
@@ -243,5 +262,17 @@ public class GameManager {
 
     public void setPawnColors(ArrayList<String> pawnColors) {
         this.pawnColors = pawnColors;
+    }
+
+    public Deck getGameDeck() {
+        return gameDeck;
+    }
+
+    public Card getDrawnCard() {
+        return drawnCard;
+    }
+
+    public void setDrawnCard(Card drawnCard) {
+        this.drawnCard = drawnCard;
     }
 }

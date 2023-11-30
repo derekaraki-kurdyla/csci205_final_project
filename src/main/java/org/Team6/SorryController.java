@@ -26,12 +26,15 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import org.Team6.SorryModel.Board;
+import org.Team6.SorryModel.Card;
 import org.Team6.SorryModel.GameManager;
 import org.Team6.SorryModel.Pawn;
 
@@ -364,10 +367,27 @@ public class SorryController {
     @FXML
     private RadioButton yellowRadioButton;
 
+
     private SimpleBooleanProperty isSetForRed;
     private SimpleBooleanProperty isSetForBlue;
     private SimpleBooleanProperty isSetForGreen;
     private SimpleBooleanProperty isSetForYellow;
+
+
+    @FXML
+    private Text cardDrawnText;
+
+    @FXML
+    private Text cardRuleText;
+
+    @FXML
+    private Label discardLabel;
+
+    @FXML
+    private Text turnText;
+
+    @FXML
+    private Button drawButton;
 
     //These are used???
     private ArrayList<Circle> pawnList = new ArrayList<>();
@@ -497,6 +517,11 @@ public class SorryController {
         assert greenRadioButton != null : "fx:id=\"greenRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert redRadioButton != null : "fx:id=\"redRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowRadioButton != null : "fx:id=\"yellowRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert cardDrawnText != null : "fx:id=\"cardDrawnText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert cardRuleText != null : "fx:id=\"cardRuleText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert drawButton != null : "fx:id=\"drawButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert turnText != null : "fx:id=\"turnText\" was not injected: check your FXML file 'BoardView.fxml'.";
 
 
         this.isSetForRed = new SimpleBooleanProperty(false);
@@ -535,6 +560,11 @@ public class SorryController {
 
 
     private void initEventHandlers() {
+
+        drawButton.setOnMouseClicked(event -> {
+            Card drawnCard = this.theModel.getGameDeck().drawCard();
+            this.theModel.setDrawnCard(drawnCard);
+        });
 
         startButton.setOnMouseClicked(event -> {
             int playerCount = 0;
