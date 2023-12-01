@@ -559,15 +559,22 @@ public class SorryController {
     private void initEventHandlers() {
 
         drawButton.setOnMouseClicked(event -> {
+
             this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
 
             System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+            //update UI
+            turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
 
             Card drawnCard = this.theModel.getGameDeck().drawCard();
 
             this.theModel.setDrawnCard(drawnCard);
+            //Update UI
+            cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
+            cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
 
             this.theModel.getCurrPlayer().takeTurn(theModel.getDrawnCard());
+
 
             System.out.println(drawnCard);
 
@@ -624,6 +631,8 @@ public class SorryController {
             this.theModel.setNumPlayers(playerCount);
             this.theModel.initBoardAndDeck();
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
+
+            turnText.setText("Please draw a card!");
         });
 
 
