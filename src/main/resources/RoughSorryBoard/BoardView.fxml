@@ -86,16 +86,7 @@
          <effect>
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect></Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="50.0" layoutX="266.0" layoutY="219.0" stroke="BLACK" strokeType="INSIDE" width="75.0">
-         <effect>
-            <DropShadow offsetX="5.0" offsetY="5.0" />
-         </effect></Rectangle>
-      <Label layoutX="277.0" layoutY="341.0" text="Discard">
-         <font>
-            <Font name="Comic Sans MS" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="286.0" layoutY="233.0" text="Draw">
+      <Label fx:id="discardLabel" layoutX="277.0" layoutY="341.0" text="Discard">
          <font>
             <Font name="Comic Sans MS" size="15.0" />
          </font>
@@ -304,5 +295,37 @@
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Button>
+      <Button fx:id="drawButton" layoutX="266.0" layoutY="222.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" text="Draw">
+         <font>
+            <Font name="Comic Sans MS" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Button>
+      <Text fx:id="turnText" layoutX="635.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
+      <Text fx:id="cardDrawnText" layoutX="635.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
+      <Text fx:id="cardRuleText" layoutX="635.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>

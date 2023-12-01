@@ -55,6 +55,14 @@ public class Player {
      */
     public void takeTurn(Card drawnCard) {
 
+        //new logic
+        // findPossiblePawnMoves() is called, and whatever the case is, that will first return an arraylist of possible pawnmoves to
+        // the controller, which will then highlight all the possible pawns in the controller
+        //
+
+
+
+
         ArrayList<Pawn> possiblePawnMoves = new ArrayList<>();
         ArrayList<Pawn> colorPawnsToIterateThrough = determineColorPawnsToIterateThrough();
 

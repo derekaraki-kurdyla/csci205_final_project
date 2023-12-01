@@ -26,14 +26,14 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Button;
-import org.Team6.SorryModel.Board;
-import org.Team6.SorryModel.GameManager;
-import org.Team6.SorryModel.Pawn;
+import javafx.scene.text.Text;
+import org.Team6.SorryModel.*;
 
 public class SorryController {
 
@@ -364,10 +364,27 @@ public class SorryController {
     @FXML
     private RadioButton yellowRadioButton;
 
+
     private SimpleBooleanProperty isSetForRed;
     private SimpleBooleanProperty isSetForBlue;
     private SimpleBooleanProperty isSetForGreen;
     private SimpleBooleanProperty isSetForYellow;
+
+
+    @FXML
+    private Text cardDrawnText;
+
+    @FXML
+    private Text cardRuleText;
+
+    @FXML
+    private Label discardLabel;
+
+    @FXML
+    private Text turnText;
+
+    @FXML
+    private Button drawButton;
 
     //These are used???
     private ArrayList<Circle> pawnList = new ArrayList<>();
@@ -497,12 +514,17 @@ public class SorryController {
         assert greenRadioButton != null : "fx:id=\"greenRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert redRadioButton != null : "fx:id=\"redRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowRadioButton != null : "fx:id=\"yellowRadioButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert cardDrawnText != null : "fx:id=\"cardDrawnText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert cardRuleText != null : "fx:id=\"cardRuleText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert drawButton != null : "fx:id=\"drawButton\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert turnText != null : "fx:id=\"turnText\" was not injected: check your FXML file 'BoardView.fxml'.";
 
 
-        this.isSetForRed = new SimpleBooleanProperty(true);
-        this.isSetForBlue = new SimpleBooleanProperty(true);
-        this.isSetForGreen = new SimpleBooleanProperty(true);
-        this.isSetForYellow = new SimpleBooleanProperty(true);
+        this.isSetForRed = new SimpleBooleanProperty(false);
+        this.isSetForBlue = new SimpleBooleanProperty(false);
+        this.isSetForGreen = new SimpleBooleanProperty(false);
+        this.isSetForYellow = new SimpleBooleanProperty(false);
 
         initPawnList();
         //initBindings();
@@ -536,9 +558,87 @@ public class SorryController {
 
     private void initEventHandlers() {
 
-        startButton.setOnMouseClicked(event -> {
-            this.theModel.playGame();
+        drawButton.setOnMouseClicked(event -> {
+
+            this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
+
+            System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+            //update UI
+            turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+
+            Card drawnCard = this.theModel.getGameDeck().drawCard();
+
+            this.theModel.setDrawnCard(drawnCard);
+            //Update UI
+            cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
+            cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
+
+            this.theModel.getCurrPlayer().takeTurn(theModel.getDrawnCard());
+
+
+            System.out.println(drawnCard);
+
+
+            if(drawnCard.getCardValue().equals(CardValue.TWO)) {
+                //java fx to print this to screen
+                System.out.println("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+            }
+
+            else{
+                if(this.theModel.isGameOver()){
+                    System.out.println("GAME OVER");
+                }
+                else{
+                    int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+                    this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+                    if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                        System.out.println(this.theModel.getCurrPlayerIndex());
+                        this.theModel.setCurrPlayerIndex(0);
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+                    }
+                    else{
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+                    }
+                }
+            }
         });
+
+
+        startButton.setOnMouseClicked(event -> {
+            int playerCount = 0;
+            if (isIsSetForRed()){
+                playerCount++;
+                this.theModel.getPawnColors().add("red");
+
+            }
+
+            if (isIsSetForBlue()){
+                playerCount++;
+                this.theModel.getPawnColors().add("blue");
+            }
+
+            if (isIsSetForGreen()){
+                playerCount++;
+                this.theModel.getPawnColors().add("green");
+            }
+
+            if (isIsSetForYellow()){
+                playerCount++;
+                this.theModel.getPawnColors().add("yellow");
+            }
+
+            this.theModel.setNumPlayers(playerCount);
+            this.theModel.initBoardAndDeck();
+            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
+
+            turnText.setText("Please draw a card!");
+        });
+
+
+
+
+
 
         for (int i = 0; i < 4; i++) {
             Circle pawn = pawnList.get(i);
@@ -582,72 +682,73 @@ public class SorryController {
         }
 
         redRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForRed()){
+            if (!isIsSetForRed()){
                 redPawn1.setFill(Color.PINK);
                 redPawn2.setFill(Color.PINK);
                 redPawn3.setFill(Color.PINK);
                 redPawn4.setFill(Color.PINK);
-                isSetForRed.setValue(false);
+                isSetForRed.setValue(true);
             }
-            else if (!isIsSetForRed()){
+            else if (isIsSetForRed()){
                 redPawn1.setFill(Color.web("#ff1f1f"));
                 redPawn2.setFill(Color.web("#ff1f1f"));
                 redPawn3.setFill(Color.web("#ff1f1f"));
                 redPawn4.setFill(Color.web("#ff1f1f"));
-                isSetForRed.setValue(true);
+                isSetForRed.setValue(false);
             }
         });
 
         blueRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForBlue()){
+            if (!isIsSetForBlue()){
                 bluePawn1.setFill(Color.AQUA);
                 bluePawn2.setFill(Color.AQUA);
                 bluePawn3.setFill(Color.AQUA);
                 bluePawn4.setFill(Color.AQUA);
-                isSetForBlue.setValue(false);
+                isSetForBlue.setValue(true);
             }
-            else if (!isIsSetForBlue()){
+            else if (isIsSetForBlue()){
                 bluePawn1.setFill(Color.DODGERBLUE);
                 bluePawn2.setFill(Color.DODGERBLUE);
                 bluePawn3.setFill(Color.DODGERBLUE);
                 bluePawn4.setFill(Color.DODGERBLUE);
-                isSetForBlue.setValue(true);
+                isSetForBlue.setValue(false);
             }
         });
 
         greenRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForGreen()){
+            if (!isIsSetForGreen()){
                 greenPawn1.setFill(Color.GREENYELLOW);
                 greenPawn2.setFill(Color.GREENYELLOW);
                 greenPawn3.setFill(Color.GREENYELLOW);
                 greenPawn4.setFill(Color.GREENYELLOW);
-                isSetForGreen.setValue(false);
+                isSetForGreen.setValue(true);
             }
-            else if (!isIsSetForGreen()){
+            else if (isIsSetForGreen()){
                 greenPawn1.setFill(Color.web("#26ff00"));
                 greenPawn2.setFill(Color.web("#26ff00"));
                 greenPawn3.setFill(Color.web("#26ff00"));
                 greenPawn4.setFill(Color.web("#26ff00"));
-                isSetForGreen.setValue(true);
+                isSetForGreen.setValue(false);
             }
         });
 
         yellowRadioButton.setOnMouseClicked(event -> {
-            if (isIsSetForYellow()){
+            if (!isIsSetForYellow()){
                 yellowPawn1.setFill(Color.LIGHTYELLOW);
                 yellowPawn2.setFill(Color.LIGHTYELLOW);
                 yellowPawn3.setFill(Color.LIGHTYELLOW);
                 yellowPawn4.setFill(Color.LIGHTYELLOW);
-                isSetForYellow.setValue(false);
+                isSetForYellow.setValue(true);
             }
-            else if (!isIsSetForYellow()){
+            else if (isIsSetForYellow()){
                 yellowPawn1.setFill(Color.web("#edff1f"));
                 yellowPawn2.setFill(Color.web("#edff1f"));
                 yellowPawn3.setFill(Color.web("#edff1f"));
                 yellowPawn4.setFill(Color.web("#edff1f"));
-                isSetForYellow.setValue(true);
+                isSetForYellow.setValue(false);
             }
         });
+
 
     }
 
