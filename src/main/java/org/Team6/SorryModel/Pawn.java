@@ -49,6 +49,8 @@ public class Pawn{
     /** ID to link to view */
     private String id;
 
+    private int landingIndex;
+
     /** Constructor that lets us set the color of the pawn */
     public Pawn(PawnColor color, int idNum)
     {
@@ -57,6 +59,7 @@ public class Pawn{
         this.onBoard = false;
         this.atEnd = false;
         this.id = generateId(idNum);
+        this.landingIndex = 0;
     }
 
     private String generateId(int idNum) {
@@ -123,5 +126,13 @@ public class Pawn{
 
     public String getId() {
         return id;
+    }
+
+    public int getLandingIndex() {
+        return landingIndex;
+    }
+
+    public void setLandingIndex(int landingIndex) {
+        this.landingIndex = landingIndex;
     }
 }

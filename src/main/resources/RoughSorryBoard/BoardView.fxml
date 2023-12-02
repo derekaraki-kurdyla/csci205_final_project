@@ -323,5 +323,13 @@
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Text>
+      <Button fx:id="moveButton" layoutX="660.0" layoutY="529.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" text="Move!">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>
