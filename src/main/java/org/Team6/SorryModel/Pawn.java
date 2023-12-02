@@ -46,13 +46,33 @@ public class Pawn{
     /** the pawn is initialized as not in the end circle */
     private boolean atEnd;
 
+    /** ID to link to view */
+    private String id;
+
     /** Constructor that lets us set the color of the pawn */
-    public Pawn(PawnColor color)
+    public Pawn(PawnColor color, int idNum)
     {
         this.color = color;
         this.atStart = true;
         this.onBoard = false;
         this.atEnd = false;
+        this.id = generateId(idNum);
+    }
+
+    private String generateId(int idNum) {
+        if (this.color == PawnColor.RED){
+            this.id = "redPawn" + idNum;
+        }
+        else if (this.color == PawnColor.BLUE){
+            this.id = "bluePawn" + idNum;
+        }
+        else if (this.color == PawnColor.GREEN){
+            this.id = "greenPawn" + idNum;
+        }
+        else if (this.color == PawnColor.YELLOW){
+            this.id = "yellowPawn" + idNum;
+        }
+        return this.id;
     }
 
 
@@ -101,5 +121,7 @@ public class Pawn{
         this.onBoard = true;
     }
 
-
+    public String getId() {
+        return id;
+    }
 }

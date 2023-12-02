@@ -384,6 +384,9 @@ public class SorryController {
     private Text turnText;
 
     @FXML
+    private Text movesText;
+
+    @FXML
     private Button drawButton;
 
     //These are used???
@@ -391,8 +394,7 @@ public class SorryController {
     private ArrayList<Rectangle> spacesList = new ArrayList<>();
     private ArrayList<Circle> homeList = new ArrayList<>();
     private GameManager gm;
-
-
+    private Card lastCardDrawn = null;
 
     public SorryController(GameManager model, SorryView view) {
         this.theModel = model;
@@ -519,6 +521,7 @@ public class SorryController {
         assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert drawButton != null : "fx:id=\"drawButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert turnText != null : "fx:id=\"turnText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert movesText != null : "fx:id=\"movesText\" was not injected: check your FXML file 'BoardView.fxml'.";
 
 
         this.isSetForRed = new SimpleBooleanProperty(false);
@@ -558,6 +561,7 @@ public class SorryController {
 
     private void initEventHandlers() {
 
+
         drawButton.setOnMouseClicked(event -> {
 
             this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
@@ -567,6 +571,7 @@ public class SorryController {
             turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
 
             Card drawnCard = this.theModel.getGameDeck().drawCard();
+            this.lastCardDrawn = drawnCard;
 
             this.theModel.setDrawnCard(drawnCard);
             //Update UI
@@ -574,6 +579,13 @@ public class SorryController {
             cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
 
             this.theModel.getCurrPlayer().takeTurn(theModel.getDrawnCard());
+
+            if (this.theModel.getCurrPlayer().getPossiblePawnMoves().size() == 0){
+                movesText.setText("No possible moves! Draw card for next turn!");
+            }
+            else{
+                movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
+            }
 
 
             System.out.println(drawnCard);
@@ -633,10 +645,37 @@ public class SorryController {
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
 
             turnText.setText("Please draw a card!");
+
+            redPawn1.setFill(Color.web("#ff1f1f"));
+            redPawn2.setFill(Color.web("#ff1f1f"));
+            redPawn3.setFill(Color.web("#ff1f1f"));
+            redPawn4.setFill(Color.web("#ff1f1f"));
+            bluePawn1.setFill(Color.DODGERBLUE);
+            bluePawn2.setFill(Color.DODGERBLUE);
+            bluePawn3.setFill(Color.DODGERBLUE);
+            bluePawn4.setFill(Color.DODGERBLUE);
+            greenPawn1.setFill(Color.web("#26ff00"));
+            greenPawn2.setFill(Color.web("#26ff00"));
+            greenPawn3.setFill(Color.web("#26ff00"));
+            greenPawn4.setFill(Color.web("#26ff00"));
+            yellowPawn1.setFill(Color.web("#edff1f"));
+            yellowPawn2.setFill(Color.web("#edff1f"));
+            yellowPawn3.setFill(Color.web("#edff1f"));
+            yellowPawn4.setFill(Color.web("#edff1f"));
+
+
+            for (Circle BoardPawn : pawnList){
+                String pawnId = BoardPawn.getId();
+                for(Pawn pawn: this.theModel.getGameBoard().getAllPawns()){
+                    if (pawn.getId().equals(pawnId)){
+                        BoardPawn.setOnMouseClicked(event2 -> {
+                            //this.theModel.getCurrPlayer().
+                            System.out.println(pawn.getId());
+                        });
+                    }
+                }
+            }
         });
-
-
-
 
 
 
@@ -835,5 +874,3 @@ public class SorryController {
         return isSetForYellow;
     }
 }
-
-

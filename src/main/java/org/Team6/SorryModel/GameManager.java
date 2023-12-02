@@ -137,6 +137,7 @@ public class GameManager {
         }
 
         this.gameDeck = new Deck();
+
     }
 
     public boolean isGameOver() {
