@@ -34,6 +34,8 @@ public class Player {
     private ArrayList<Pawn> possiblePawnMoves;
     private Pawn pawnToMove;
 
+    private ArrayList<Pawn> listOfPawnsToMoveToStart = new ArrayList<>();
+
     /** constructor for {@link Player} object that initializes {@link} */
     public Player(String pawnColor, Board gameBoard){
         this.pawnColor = determinePawnColor(pawnColor);
@@ -143,6 +145,7 @@ public class Player {
 
             }
             case SEVEN -> {
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 7);
                 //Either move one pawn forward 7 spaces or split the move between any two pawns
 
                 //can get possible pawn moves for different moves but need to know
@@ -173,15 +176,7 @@ public class Player {
             }
             case TEN -> {
 
-                ArrayList<Pawn> possiblePawnMovesForForwards = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
-                ArrayList<Pawn> possiblePawnMovesForBackwards = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 1);
-
-                possiblePawnMoves.addAll(possiblePawnMovesForForwards);
-                for(Pawn pawn: possiblePawnMovesForBackwards){
-                    if(!possiblePawnMoves.contains(pawn)) { //if pawn is already in possiblePawnMoves
-                        possiblePawnMoves.add(pawn);
-                    }
-                }
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 10);
 
 //                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 //
@@ -205,6 +200,7 @@ public class Player {
 //                }
             }
             case ELEVEN -> {
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 11);
 
             }
             case TWELVE-> {
@@ -218,7 +214,7 @@ public class Player {
 
             }
             case SORRY -> {
-
+                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 13);
             }
         }
     }
@@ -273,7 +269,8 @@ public class Player {
                 System.out.println("Moved 5 spaces!");
             }
             case SEVEN -> {
-
+                if(pawnToMove != null)
+                    this.moveForward(pawnToMove,7);
             }
             case EIGHT -> {
 
@@ -281,6 +278,8 @@ public class Player {
                     this.moveForward(pawnToMove,8);
             }
             case TEN -> {
+                if(pawnToMove != null)
+                    this.moveForward(pawnToMove,10);
 //                ArrayList<Pawn> possiblePawnMovesForForwards = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
 //                ArrayList<Pawn> possiblePawnMovesForBackwards = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 1);
 //
@@ -311,7 +310,8 @@ public class Player {
 //                }
             }
             case ELEVEN -> {
-
+                if(pawnToMove != null)
+                    this.moveForward(pawnToMove,11);
             }
             case TWELVE -> {
 
@@ -321,7 +321,10 @@ public class Player {
                 System.out.println("Moved 12 spaces!");
             }
             case SORRY -> {
+                if(pawnToMove != null)
+                    this.moveForward(pawnToMove,13);
 
+                System.out.println("Moved 13 spaces!");
             }
 
         }
@@ -337,8 +340,12 @@ public class Player {
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
             pawnToMove.moveFromStart();
             pawnToRemove.sendStart();
+
+            System.out.println("LINE 347!");
+
+            this.listOfPawnsToMoveToStart.add(pawnToRemove);
         }
-        else{
+        else{ //not occupied
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
             this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
             pawnToMove.moveFromStart();
@@ -380,6 +387,7 @@ public class Player {
 
                 }
             }
+
         }
 
         SpaceType landingIndexSpaceType = this.gameBoard.getMapOfSpaces().get(landingBoardIndex);
@@ -401,6 +409,8 @@ public class Player {
         else{
             moveForwardBaseCase(pawnToMove, currBoardIndex, landingBoardIndex);
         }
+
+        this.pawnToMove.setLandingIndex(landingBoardIndex);
 
     }
 
@@ -446,15 +456,20 @@ public class Player {
 
     private void moveForwardOccupied(Pawn pawnToMove, int landingBoardIndex, int currBoardIndex) {
         Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
-        if(pawnToRemove == null){
-            System.out.println("line 316 THIS SHOULD NEVER HAPPEN");
-        }
+
+        System.out.println("move forward occupied reached line 469");
+
         this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
         this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex); //update board by adding new pawn
         pawnToRemove.sendStart();//update pawn itself, so now it is back at start
         this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED); //update space that you moved from as unoccupied
 
+        //add to list which is used to update UI
+        this.listOfPawnsToMoveToStart.add(pawnToRemove);
+        for(Pawn pawn: this.listOfPawnsToMoveToStart){
+            System.out.println("Pawn number " + pawn.getId());
+        }
 
     }
 
@@ -468,6 +483,9 @@ public class Player {
         if(pawnToRemoveAtStartSlide != null){
             this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
             pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
+
+            //add to list which is used to update UI
+            this.listOfPawnsToMoveToStart.add(pawnToRemoveAtStartSlide);
             //don't update space type because still a SLIDE_START
         }
         for(int index = landingBoardIndex + 1; index < landingBoardIndex + 4; index++){ //for all pawns on slide other than the START_SLIDE
@@ -476,11 +494,17 @@ public class Player {
                 this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
                 pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
                 this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
+
+                //add to list which is used to update UI
+                this.listOfPawnsToMoveToStart.add(pawnToRemoveOnSlide);
             }
         }
         //still have to remove new pawn from original place, and put it down to new location
         this.gameBoard.getMapOfBoard().remove(pawnToMove);
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 3);
+
+        this.pawnToMove.setLandingIndex(landingBoardIndex + 3); //set this after we move button
+        System.out.println("line 500 landing board index is: " + landingBoardIndex);
     }
 
     private void moveForwardLongSlide(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
@@ -493,6 +517,10 @@ public class Player {
         if(pawnToRemoveAtStartSlide != null){
             this.gameBoard.getMapOfBoard().remove(pawnToRemoveAtStartSlide); //update board by removing pawn at start slide
             pawnToRemoveAtStartSlide.sendStart(); //update pawn itself
+
+            //add to list which is used to update UI
+            this.listOfPawnsToMoveToStart.add(pawnToRemoveAtStartSlide);
+
             //don't update space type because still a SLIDE_START
         }
         for(int index = landingBoardIndex + 1; index < landingBoardIndex + 5; index++){ //for all pawns on slide other than the START_SLIDE
@@ -501,11 +529,17 @@ public class Player {
                 this.gameBoard.getMapOfBoard().remove(pawnToRemoveOnSlide); //update board by removing old pawns
                 pawnToRemoveOnSlide.sendStart(); //update removed pawn(s) themselves
                 this.gameBoard.getMapOfSpaces().put(index, SpaceType.UNOCCUPIED); //update space types as well
+
+                //add to list which is used to update UI
+                this.listOfPawnsToMoveToStart.add(pawnToRemoveOnSlide);
             }
         }
         //still have to remove new pawn from original place, and put it down to new location
         this.gameBoard.getMapOfBoard().remove(pawnToMove);
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 4);
+
+        System.out.println("line 540 landing board index is: " + landingBoardIndex);
+        this.pawnToMove.setLandingIndex(landingBoardIndex + 4);
     }
 
     private void moveForwardReachedEnd(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
@@ -513,6 +547,7 @@ public class Player {
         this.gameBoard.getMapOfBoard().remove(pawnToMove);
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex);
         pawnToMove.reachedEnd();
+
         this.pawnToMove.setLandingIndex(landingBoardIndex);
     }
 
@@ -711,5 +746,13 @@ public class Player {
 
     public void setPawnToMove(Pawn pawnToMove) {
         this.pawnToMove = pawnToMove;
+    }
+
+    public ArrayList<Pawn> getListOfPawnsToMoveToStart() {
+        return this.listOfPawnsToMoveToStart;
+    }
+
+    public void clearListOfPawnsToMoveToStart(){
+        this.listOfPawnsToMoveToStart.clear();
     }
 }

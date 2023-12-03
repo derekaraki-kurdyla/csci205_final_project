@@ -119,6 +119,10 @@
       <Circle fx:id="space66" fill="#ff1f1f" layoutX="513.0" layoutY="331.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="space84" fill="#26ff00" layoutX="331.0" layoutY="95.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="space78" fill="#edff1f" layoutX="95.0" layoutY="276.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="blueStart" fill="DODGERBLUE" layoutX="86.0" layoutY="437.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="yellowStart" fill="#edff1f" layoutX="171.0" layoutY="86.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="greenStart" fill="#26ff00" layoutX="523.0" layoutY="171.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="redStart" fill="#ff1f1f" layoutX="437.0" layoutY="523.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
       <Label layoutX="493.0" layoutY="320.0" text="Home">
          <font>
             <Font name="Comic Sans MS" size="15.0" />

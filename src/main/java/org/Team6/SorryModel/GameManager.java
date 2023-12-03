@@ -285,4 +285,5 @@ public class GameManager {
     public Board getGameBoard() {
         return gameBoard;
     }
+
 }

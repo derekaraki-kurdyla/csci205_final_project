@@ -18,16 +18,6 @@
  */
 package org.Team6.SorryModel;
 
-/**
- * enums used to assign a color to a {@link Pawn} since there are only four possible colors for each pawn
- */
-enum PawnColor {
-    RED,
-    GREEN,
-    BLUE,
-    YELLOW;
-}
-
 
 public class Pawn{
 
