@@ -214,7 +214,7 @@ public class Player {
 
             }
             case SORRY -> {
-                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 13);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 13);
             }
         }
     }
