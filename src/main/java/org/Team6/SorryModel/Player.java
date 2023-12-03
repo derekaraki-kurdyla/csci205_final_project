@@ -145,7 +145,7 @@ public class Player {
 
             }
             case SEVEN -> {
-                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 7);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 7);
                 //Either move one pawn forward 7 spaces or split the move between any two pawns
 
                 //can get possible pawn moves for different moves but need to know
@@ -176,7 +176,7 @@ public class Player {
             }
             case TEN -> {
 
-                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 10);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
 
 //                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
 //
@@ -200,7 +200,7 @@ public class Player {
 //                }
             }
             case ELEVEN -> {
-                possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 11);
+                possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 11);
 
             }
             case TWELVE-> {
