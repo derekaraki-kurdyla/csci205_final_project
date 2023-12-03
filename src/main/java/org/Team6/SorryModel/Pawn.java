@@ -18,16 +18,8 @@
  */
 package org.Team6.SorryModel;
 
-/**
- * enums used to assign a color to a {@link Pawn} since there are only four possible colors for each pawn
- */
-enum PawnColor {
-    RED,
-    GREEN,
-    BLUE,
-    YELLOW;
-}
 
+import javafx.scene.shape.Circle;
 
 public class Pawn{
 
@@ -135,4 +127,41 @@ public class Pawn{
     public void setLandingIndex(int landingIndex) {
         this.landingIndex = landingIndex;
     }
+
+//    private void sendToHome(Circle pawn) {
+//        double xStart = 0;
+//        double yStart = 0;
+//        for(Pawn movedPawn: this.theModel.getGameBoard().getAllPawns()){
+//            if (movedPawn.getId().equals(pawn.getId())){
+//                if (movedPawn.getColor() == PawnColor.RED){
+//                    xStart = redStart.getBoundsInParent().getCenterX();
+//                    yStart = redStart.getBoundsInParent().getCenterY();
+//                }
+//                else if (movedPawn.getColor() == PawnColor.BLUE){
+//                    xStart = blueStart.getBoundsInParent().getCenterX();
+//                    yStart = blueStart.getBoundsInParent().getCenterY();
+//                }
+//                else if (movedPawn.getColor() == PawnColor.GREEN){
+//                    xStart = greenStart.getBoundsInParent().getCenterX();
+//                    yStart = greenStart.getBoundsInParent().getCenterY();
+//                }
+//                else if (movedPawn.getColor() == PawnColor.YELLOW){
+//                    xStart = yellowStart.getBoundsInParent().getCenterX();
+//                    yStart = yellowStart.getBoundsInParent().getCenterY();
+//                }
+//
+//                // Get position of the pawn
+//                double xPawn = pawn.getLayoutX();
+//                double yPawn = pawn.getLayoutY();
+//
+//                // Find the difference between them
+//                double xDiff = xStart - xPawn;
+//                double yDiff = yStart - yPawn;
+//
+//                // Set the pawn to move the difference
+//                pawn.setCenterX(xDiff);
+//                pawn.setCenterY(yDiff);
+//            }
+//        }
+//    }
 }
