@@ -303,29 +303,33 @@
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Button>
-      <Text fx:id="turnText" layoutX="635.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="14.0" />
-         </font>
+      <Text fx:id="turnText" layoutX="615.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Text>
-      <Text fx:id="cardDrawnText" layoutX="635.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="14.0" />
-         </font>
+      <Text fx:id="cardDrawnText" layoutX="615.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Text>
-      <Text fx:id="cardRuleText" layoutX="635.0" layoutY="416.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="14.0" />
-         </font>
+      <Text fx:id="cardRuleText" layoutX="615.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <effect>
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Text>
+      <Text fx:id="movesText" layoutX="615.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
+      <Button fx:id="moveButton" layoutX="660.0" layoutY="529.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" text="Move!">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

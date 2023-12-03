@@ -41,6 +41,9 @@ public class Board {
     /** array of green {@link Pawn} objects */
     private ArrayList<Pawn> greenPawns = new ArrayList<>();
 
+    /** array of all {@link Pawn} objects */
+    private ArrayList<Pawn> allPawns = new ArrayList<>();
+
     /** {@link Map} of {@link Integer} objects for the {@link #mapOfBoard} indices
      * and their corresponding {@link Pawn} object on that index
      */
@@ -112,22 +115,30 @@ public class Board {
             switch (pawnColor) {
                 case "red" -> {
                     for(int i = 0; i < 4; i++) {
-                        this.redPawns.add(new Pawn(PawnColor.RED));
+                        Pawn pawn = new Pawn(PawnColor.RED, i + 1);
+                        this.redPawns.add(pawn);
+                        this.allPawns.add(pawn);
                     }
                 }
                 case "blue" -> {
                     for(int i = 0; i < 4; i++) {
-                        this.bluePawns.add(new Pawn(PawnColor.BLUE));
+                        Pawn pawn = new Pawn(PawnColor.BLUE, i + 1);
+                        this.bluePawns.add(pawn);
+                        this.allPawns.add(pawn);
                     }
                 }
                 case "yellow" -> {
                     for(int i = 0; i < 4; i++) {
-                        this.yellowPawns.add(new Pawn(PawnColor.YELLOW));
+                        Pawn pawn = new Pawn(PawnColor.YELLOW,i + 1);
+                        this.yellowPawns.add(pawn);
+                        this.allPawns.add(pawn);
                     }
                 }
                 case "green" -> {
                     for(int i = 0; i < 4; i++) {
-                        this.greenPawns.add(new Pawn(PawnColor.GREEN));
+                        Pawn pawn = new Pawn(PawnColor.GREEN,i + 1);
+                        this.greenPawns.add(pawn);
+                        this.allPawns.add(pawn);
                     }
                 }
             }
@@ -177,5 +188,9 @@ public class Board {
 
     public ArrayList<Pawn> getYellowPawns(){
         return this.yellowPawns;
+    }
+
+    public ArrayList<Pawn> getAllPawns() {
+        return allPawns;
     }
 }

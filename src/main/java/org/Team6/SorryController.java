@@ -384,15 +384,21 @@ public class SorryController {
     private Text turnText;
 
     @FXML
+    private Text movesText;
+
+    @FXML
     private Button drawButton;
+
+    @FXML
+    private Button moveButton;
 
     //These are used???
     private ArrayList<Circle> pawnList = new ArrayList<>();
     private ArrayList<Rectangle> spacesList = new ArrayList<>();
     private ArrayList<Circle> homeList = new ArrayList<>();
     private GameManager gm;
-
-
+    private Card lastCardDrawn;
+    private Circle pawnSelected;
 
     public SorryController(GameManager model, SorryView view) {
         this.theModel = model;
@@ -519,6 +525,8 @@ public class SorryController {
         assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert drawButton != null : "fx:id=\"drawButton\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert turnText != null : "fx:id=\"turnText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert movesText != null : "fx:id=\"movesText\" was not injected: check your FXML file 'BoardView.fxml'.";
+        assert moveButton != null : "fx:id=\"moveButton\" was not injected: check your FXML file 'BoardView.fxml'.";
 
 
         this.isSetForRed = new SimpleBooleanProperty(false);
@@ -527,6 +535,8 @@ public class SorryController {
         this.isSetForYellow = new SimpleBooleanProperty(false);
 
         initPawnList();
+        initSpacesList();
+        initHomeList();
         //initBindings();
         initEventHandlers();
 
@@ -536,6 +546,100 @@ public class SorryController {
         //move(redPawn1, space7);
 
     }
+
+    private void initHomeList() {
+        this.homeList.add(space66);
+        this.homeList.add(space72);
+        this.homeList.add(space78);
+        this.homeList.add(space84);
+    }
+
+    private void initSpacesList() {
+        this.spacesList.add(space1);
+        this.spacesList.add(space2);
+        this.spacesList.add(space3);
+        this.spacesList.add(space4);
+        this.spacesList.add(space5);
+        this.spacesList.add(space6);
+        this.spacesList.add(space7);
+        this.spacesList.add(space8);
+        this.spacesList.add(space9);
+        this.spacesList.add(space10);
+        this.spacesList.add(space11);
+        this.spacesList.add(space12);
+        this.spacesList.add(space13);
+        this.spacesList.add(space14);
+        this.spacesList.add(space15);
+        this.spacesList.add(space16);
+        this.spacesList.add(space17);
+        this.spacesList.add(space18);
+        this.spacesList.add(space19);
+        this.spacesList.add(space20);
+        this.spacesList.add(space21);
+        this.spacesList.add(space22);
+        this.spacesList.add(space23);
+        this.spacesList.add(space24);
+        this.spacesList.add(space25);
+        this.spacesList.add(space26);
+        this.spacesList.add(space27);
+        this.spacesList.add(space28);
+        this.spacesList.add(space29);
+        this.spacesList.add(space30);
+        this.spacesList.add(space31);
+        this.spacesList.add(space32);
+        this.spacesList.add(space33);
+        this.spacesList.add(space34);
+        this.spacesList.add(space35);
+        this.spacesList.add(space36);
+        this.spacesList.add(space37);
+        this.spacesList.add(space38);
+        this.spacesList.add(space39);
+        this.spacesList.add(space40);
+        this.spacesList.add(space41);
+        this.spacesList.add(space42);
+        this.spacesList.add(space43);
+        this.spacesList.add(space44);
+        this.spacesList.add(space45);
+        this.spacesList.add(space46);
+        this.spacesList.add(space47);
+        this.spacesList.add(space48);
+        this.spacesList.add(space49);
+        this.spacesList.add(space50);
+        this.spacesList.add(space51);
+        this.spacesList.add(space52);
+        this.spacesList.add(space53);
+        this.spacesList.add(space54);
+        this.spacesList.add(space55);
+        this.spacesList.add(space56);
+        this.spacesList.add(space57);
+        this.spacesList.add(space58);
+        this.spacesList.add(space59);
+        this.spacesList.add(space60);
+        this.spacesList.add(space61);
+        this.spacesList.add(space62);
+        this.spacesList.add(space63);
+        this.spacesList.add(space64);
+        this.spacesList.add(space65);
+        this.spacesList.add(space67);
+        this.spacesList.add(space68);
+        this.spacesList.add(space69);
+        this.spacesList.add(space70);
+        this.spacesList.add(space71);
+        this.spacesList.add(space73);
+        this.spacesList.add(space74);
+        this.spacesList.add(space75);
+        this.spacesList.add(space76);
+        this.spacesList.add(space77);
+        this.spacesList.add(space79);
+        this.spacesList.add(space80);
+        this.spacesList.add(space81);
+        this.spacesList.add(space82);
+        this.spacesList.add(space83);
+
+
+
+    }
+
     private void initPawnList() {
         pawnList.add(bluePawn1);
         pawnList.add(bluePawn2);
@@ -567,13 +671,21 @@ public class SorryController {
             turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
 
             Card drawnCard = this.theModel.getGameDeck().drawCard();
+            this.lastCardDrawn = drawnCard;
 
             this.theModel.setDrawnCard(drawnCard);
             //Update UI
             cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
             cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
 
-            this.theModel.getCurrPlayer().takeTurn(theModel.getDrawnCard());
+            this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
+
+            if (this.theModel.getCurrPlayer().getPossiblePawnMoves().size() == 0){
+                movesText.setText("No possible moves! Draw card for next turn!");
+            }
+            else{
+                movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
+            }
 
 
             System.out.println(drawnCard);
@@ -604,6 +716,22 @@ public class SorryController {
             }
         });
 
+        moveButton.setOnMouseClicked(event -> {
+            this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue());
+            int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
+            String id = "space" + landingIndex;
+            for(Rectangle space: spacesList){
+                if (id.equals(space.getId())){
+                    move(this.pawnSelected, space);
+                }
+            }
+            for(Circle space: homeList){
+                if (id.equals(space.getId())){
+                    move(this.pawnSelected, space);
+                }
+            }
+
+        });
 
         startButton.setOnMouseClicked(event -> {
             int playerCount = 0;
@@ -633,10 +761,39 @@ public class SorryController {
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
 
             turnText.setText("Please draw a card!");
+
+            redPawn1.setFill(Color.web("#ff1f1f"));
+            redPawn2.setFill(Color.web("#ff1f1f"));
+            redPawn3.setFill(Color.web("#ff1f1f"));
+            redPawn4.setFill(Color.web("#ff1f1f"));
+            bluePawn1.setFill(Color.DODGERBLUE);
+            bluePawn2.setFill(Color.DODGERBLUE);
+            bluePawn3.setFill(Color.DODGERBLUE);
+            bluePawn4.setFill(Color.DODGERBLUE);
+            greenPawn1.setFill(Color.web("#26ff00"));
+            greenPawn2.setFill(Color.web("#26ff00"));
+            greenPawn3.setFill(Color.web("#26ff00"));
+            greenPawn4.setFill(Color.web("#26ff00"));
+            yellowPawn1.setFill(Color.web("#edff1f"));
+            yellowPawn2.setFill(Color.web("#edff1f"));
+            yellowPawn3.setFill(Color.web("#edff1f"));
+            yellowPawn4.setFill(Color.web("#edff1f"));
+
+
+            for (Circle BoardPawn : pawnList){
+                String pawnId = BoardPawn.getId();
+                for(Pawn pawn: this.theModel.getGameBoard().getAllPawns()){
+                    if (pawn.getId().equals(pawnId)){
+                        BoardPawn.setOnMouseClicked(event2 -> {
+                            this.theModel.getCurrPlayer().setPawnToMove(pawn);
+                            this.pawnSelected = BoardPawn;
+                            this.pawnSelected.setFill(Color.BLACK);
+                            //System.out.println(pawn.getId());
+                        });
+                    }
+                }
+            }
         });
-
-
-
 
 
 
@@ -835,5 +992,3 @@ public class SorryController {
         return isSetForYellow;
     }
 }
-
-
