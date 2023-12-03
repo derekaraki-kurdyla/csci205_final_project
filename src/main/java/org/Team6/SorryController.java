@@ -662,6 +662,18 @@ public class SorryController {
 
     private void initEventHandlers() {
 
+        //press the draw button:
+        // draw card, and set lastcarddrawn to it
+        // find possible pawn moves for the current player
+        // if its a 2, do nothing
+        // if its not a 2, increment current player
+
+        //logic is, if there is no possible pawn moves, you want to increment to next player in draw
+        // but if there are possible pawn moves, you don't want to increment to next player in draw because
+        // then you will increment the player before you move for that player, so you will move the pawn for the next player
+        // so if no possible pawn moves, you want to increment next player in draw
+        // but if there are, increment next player in move function unless the card is a two
+
         drawButton.setOnMouseClicked(event -> {
 
             this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
@@ -680,57 +692,74 @@ public class SorryController {
 
             this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
 
-            if (this.theModel.getCurrPlayer().getPossiblePawnMoves().size() == 0){
+            if (this.theModel.getCurrPlayer().getPossiblePawnMoves().isEmpty()){
+
+                this.theModel.getCurrPlayer().setPawnToMove(null);
+
                 movesText.setText("No possible moves! Draw card for next turn!");
+
+                //incrementing to the next player
+                int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+                this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+                if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                    System.out.println(this.theModel.getCurrPlayerIndex());
+                    this.theModel.setCurrPlayerIndex(0);
+                    this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+                }
+                else{
+                    this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+                }
             }
             else{
                 movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
             }
-
-
-            System.out.println(drawnCard);
-
-
-            if(drawnCard.getCardValue().equals(CardValue.TWO)) {
-                //java fx to print this to screen
-                System.out.println("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-            }
-
-            else{
-                if(this.theModel.isGameOver()){
-                    System.out.println("GAME OVER");
-                }
-                else{
-                    int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
-                    this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
-
-                    if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-                        System.out.println(this.theModel.getCurrPlayerIndex());
-                        this.theModel.setCurrPlayerIndex(0);
-                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
-                    }
-                    else{
-                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
-                    }
-                }
-            }
         });
 
         moveButton.setOnMouseClicked(event -> {
-            this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue());
-            int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
-            String id = "space" + landingIndex;
-            for(Rectangle space: spacesList){
-                if (id.equals(space.getId())){
-                    move(this.pawnSelected, space);
+            if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
+                this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue());
+                int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
+                String id = "space" + landingIndex;
+                for (Rectangle space : spacesList) {
+                    if (id.equals(space.getId())) {
+                        move(this.pawnSelected, space);
+                    }
                 }
-            }
-            for(Circle space: homeList){
-                if (id.equals(space.getId())){
-                    move(this.pawnSelected, space);
+                for (Circle space : homeList) {
+                    if (id.equals(space.getId())) {
+                        move(this.pawnSelected, space);
+                    }
                 }
-            }
 
+                //after you moved, now increment the current player unless its a two
+                if(this.lastCardDrawn.getCardValue().equals(CardValue.TWO)) {
+                    //java fx to print this to screen
+                    System.out.println("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+                }
+
+                else{
+                    if(this.theModel.isGameOver()){
+                        System.out.println("GAME OVER");
+                    }
+                    else{
+                        int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+                        this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+                        if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                            System.out.println(this.theModel.getCurrPlayerIndex());
+                            this.theModel.setCurrPlayerIndex(0);
+                            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+                        }
+                        else{
+                            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+                        }
+                    }
+                }
+            }
+            else{
+                turnText.setText("You cannot move a pawn this turn!");
+            }
         });
 
         startButton.setOnMouseClicked(event -> {

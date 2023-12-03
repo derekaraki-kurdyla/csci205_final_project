@@ -352,7 +352,6 @@ public class Player {
         int landingBoardColorIndex = 100000; //just to initialize it
         int landingBoardIndex = 100000; //just to initialize it
 
-
         if(currBoardColorIndex > 4) {
             landingBoardColorIndex = currBoardColorIndex - numSpaces;
             landingBoardIndex = this.converter.convertToBoardIndex(landingBoardColorIndex); //put in -4 for this
