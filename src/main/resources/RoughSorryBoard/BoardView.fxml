@@ -112,10 +112,10 @@
       <Rectangle fx:id="space64" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="418.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
       <Rectangle fx:id="space65" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="38.0" layoutX="494.0" layoutY="380.0" stroke="BLACK" strokeType="INSIDE" width="38.0" />
       <Circle fx:id="space72" fill="DODGERBLUE" layoutX="277.0" layoutY="513.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="DODGERBLUE" layoutX="86.0" layoutY="437.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#edff1f" layoutX="171.0" layoutY="86.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#26ff00" layoutX="523.0" layoutY="171.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="#ff1f1f" layoutX="437.0" layoutY="523.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="blueStart" fill="DODGERBLUE" layoutX="86.0" layoutY="437.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="yellowStart" fill="#edff1f" layoutX="171.0" layoutY="86.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="greenStart" fill="#26ff00" layoutX="523.0" layoutY="171.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="redStart" fill="#ff1f1f" layoutX="437.0" layoutY="523.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="space66" fill="#ff1f1f" layoutX="513.0" layoutY="331.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="space84" fill="#26ff00" layoutX="331.0" layoutY="95.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="space78" fill="#edff1f" layoutX="95.0" layoutY="276.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" />
@@ -323,7 +323,7 @@
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Text>
-      <Button fx:id="moveButton" layoutX="660.0" layoutY="529.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" text="Move!">
+      <Button fx:id="moveButton" layoutX="662.0" layoutY="529.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="75.0" text="Move!">
          <font>
             <Font name="Comic Sans MS" size="16.0" />
          </font>
@@ -331,5 +331,10 @@
             <DropShadow offsetX="5.0" offsetY="5.0" />
          </effect>
       </Button>
+      <Text fx:id="endTurnText" layoutX="615.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0" />
+         </effect>
+      </Text>
    </children>
 </AnchorPane>
