@@ -19,11 +19,7 @@
 package org.Team6;
 
 
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Formattable;
-import java.util.ResourceBundle;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -45,8 +41,9 @@ public class SorryController {
 
     /**
      * These are all the spaces and pawns we use
-     * There are 84 spaces total. The four homes are {@link Circle} objects,
+     * There are 88 spaces total. The four Homes and Start spaces are {@link Circle} objects,
      * while the rest of them are {@link Rectangle} objects.
+     * Pawns are all {@link Circle} objects.
      */
 
     @FXML
@@ -258,6 +255,7 @@ public class SorryController {
     @FXML
     private Circle yellowStart;
 
+    
     /** The Buttons we used */
     @FXML
     private Button startButton;
@@ -266,6 +264,7 @@ public class SorryController {
     @FXML
     private Button moveButton;
 
+    
     /** The RadioButtons we used */
     @FXML
     private RadioButton blueRadioButton;
@@ -276,12 +275,14 @@ public class SorryController {
     @FXML
     private RadioButton yellowRadioButton;
 
+    
     /** SimpleBooleanProperties that we used */
     private SimpleBooleanProperty isSetForRed;
     private SimpleBooleanProperty isSetForBlue;
     private SimpleBooleanProperty isSetForGreen;
     private SimpleBooleanProperty isSetForYellow;
 
+    
     /** Text and Labels we used*/
     @FXML
     private Text cardDrawnText;
@@ -306,6 +307,7 @@ public class SorryController {
     private Circle pawnSelected;
 
 
+    
     public SorryController(GameManager model, SorryView view) {
         this.theModel = model;
         this.theView = view;
@@ -788,64 +790,83 @@ public class SorryController {
     }
 
     private void moveButtonHandleEvent() {
+        // If the pawnToMove is not null
         if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
+            // Update the Pawn location in the logic
             this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue()); //this moves this.pawnToMove
+            // Move the pawn in the UI
             int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
-            String id = "space" + landingIndex;
-            for (Rectangle space : spacesList) {
-                if (id.equals(space.getId())) {
-                    move(this.pawnSelected, space);
-                    sendPawnsStartOnUI();
-                    if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
-                        this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
-                }
+            movePawnInUI(landingIndex);
 
-            }
-            for (Circle space : homeList) {
-                if (id.equals(space.getId())) {
-                    move(this.pawnSelected, space);
-                    sendPawnsStartOnUI();
-                    if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
-                        this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
-                }
-            }
-
-            //after you moved, now increment the current player unless its a two
+            //after you moved, now increment the current player unless it's a two
             if(this.lastCardDrawn.getCardValue().equals(CardValue.TWO)) {
                 //java fx to print this to screen
-                turnText.setText("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-                cardRuleText.setText(null);
-                cardDrawnText.setText(null);
-                movesText.setText(null);
+                updateTurnText("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
             }
 
             else{
+                // If the game is over, thank the user
                 if(this.theModel.isGameOver()){
                     System.out.println("GAME OVER");
+                    updateTurnText("Game Over! Thanks for Playing!");
                 }
+                // Game is not over, so update the current player for the next turn
                 else{
-                    int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
-                    this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
-
-                    if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-                        System.out.println(this.theModel.getCurrPlayerIndex());
-                        this.theModel.setCurrPlayerIndex(0);
-                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
-                    }
-                    else{
-                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
-                    }
+                    updateCurrentPlayerIndex();
                 }
-                turnText.setText("Next player draw!");
-                cardRuleText.setText(null);
-                cardDrawnText.setText(null);
-                movesText.setText(null);
+                // Tell the next player to draw a card
+                updateTurnText("Next player draw!");
             }
         }
+
+        // If pawnToMove is null, the player cannot move this turn
         else{
             turnText.setText("You cannot move a pawn this turn!");
         }
     }
+
+    private void movePawnInUI(int landingIndex) {
+        String id = "space" + landingIndex;
+        for (Rectangle space : spacesList) {
+            if (id.equals(space.getId())) {
+                move(this.pawnSelected, space);
+                sendPawnsStartOnUI();
+                if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
+                    this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
+            }
+
+        }
+        for (Circle space : homeList) {
+            if (id.equals(space.getId())) {
+                move(this.pawnSelected, space);
+                sendPawnsStartOnUI();
+                if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
+                    this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
+            }
+        }
+    }
+
+    private void updateTurnText(String newTurnText) {
+        turnText.setText(newTurnText);
+        cardRuleText.setText(null);
+        cardDrawnText.setText(null);
+        movesText.setText(null);
+    }
+
+    private void updateCurrentPlayerIndex() {
+        int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+        this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+        if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+            System.out.println(this.theModel.getCurrPlayerIndex());
+            this.theModel.setCurrPlayerIndex(0);
+            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+        }
+        else{
+            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+        }
+    }
+
 
     private void drawButtonHandleEvent() {
         this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
@@ -871,17 +892,7 @@ public class SorryController {
             movesText.setText("No possible moves! Draw card for next turn!");
 
             //incrementing to the next player
-            int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
-            this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
-
-            if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-                System.out.println(this.theModel.getCurrPlayerIndex());
-                this.theModel.setCurrPlayerIndex(0);
-                this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
-            }
-            else{
-                this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
-            }
+            updateCurrentPlayerIndex();
         }
         else{
             movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
