@@ -56,8 +56,15 @@ public class GameManager {
      * Colors chosen by players
      */
     private ArrayList<String> pawnColors = new ArrayList<>();
+
+    /**
+     * Most recent card drawn
+     */
     private Card drawnCard;
 
+    /**
+     * Index that correlates to the current player
+     */
     private int currPlayerIndex;
 
 
@@ -68,6 +75,11 @@ public class GameManager {
     }
 
 
+    /**
+     * This method creates a new {@link Board} object.
+     * Then for each color in the pawnColors ArrayList, create a new player
+     * Finally, create a new deck
+     */
     public void initBoardAndDeck() {
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
 
