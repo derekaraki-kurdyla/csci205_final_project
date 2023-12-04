@@ -23,17 +23,17 @@ package org.Team6.SorryModel;
  */
 
 public enum CardValue {
-    ONE("Move from Start, or move one space forward"),
-    TWO("Move from Start, or move two spaces forward. Draw Again."),
-    THREE("Move three spaces forward."),
-    FOUR("Move four spaces backward."),
-    FIVE("Move five spaces forward."),
-    SEVEN("Move seven spaces forward, or split between two pawns."),
-    EIGHT("Move eight spaces forward."),
-    TEN("Move ten spaces forward or one space backward."),
-    ELEVEN("Move eleven spaces forward, or switch with another pawn."),
-    TWELVE("Move twelve spaces forward."),
-    SORRY("Send a pawn to Start.");
+    ONE("Move from Start, or move forward one space."),
+    TWO("Move from Start, or move forward two spaces. Draw Again."),
+    THREE("Move forward three spaces."),
+    FOUR("Move backward four spaces."),
+    FIVE("Move forward five spaces."),
+    SEVEN("Move forward seven spaces."),
+    EIGHT("Move forward eight spaces."),
+    TEN("Move forward ten spaces."),
+    ELEVEN("Move forward eleven spaces."),
+    TWELVE("Move forward twelve spaces."),
+    SORRY("Move forward thirteen spaces.");
 
     /**
      * String representation of the card method that is displayed to user

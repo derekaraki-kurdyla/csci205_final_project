@@ -1,3 +1,21 @@
+/* *****************************************
+ * CSCI205 - Software Engineering and Design
+ * Fall 2023
+ *
+ * Author: Prof. King
+ *
+ * Name: Nathan Stamford
+ * Date: 10/11/2023
+ * Time: 9:30 PM
+
+ * Project: csci205FinalProject
+ * Class: RoughBoardFirstTry
+ * Description: This was our first try at making the visuals for our Sorry! game.
+ * The method we used was a needlessly complex, so we ended up switching to
+ * SceneBuilder for our visuals instead.
+ *
+ * ****************************************
+ */
 package org.Team6.RoughBoard;
 
 import javafx.application.Application;
@@ -20,12 +38,24 @@ public class RoughBoardFirstTry extends Application {
     /** The root node for our JavaFX App. The BorderPane reflect what a Sorry!
      * board looks like */
     private BorderPane root;
+
+    /** This HBox would represent a container to hold the yellow pawns
+     *  and the Start, Home, and Slide spaces */
     private HBox top;
+    /** This HBox would represent a container to hold the red pawns
+     *  and the Start, Home, and Slide spaces */
     private HBox bottom;
+    /** This VBox would represent a container to hold the green pawns
+     *  and the Start, Home, and Slide spaces */
     private VBox right;
+    /** This VBox would represent a container to hold the blue pawns
+     *  and the Start, Home, and Slide spaces */
     private VBox left;
+    /** This BorderPane would hold the Sorry! label, and the discard and draw piles */
     private BorderPane center;
+    /** A VBox to order everything in the center */
     private VBox cardPile;
+    /** Labels for the piles and Sorry! text*/
     private Label drawPileLabel;
     private Label discardPileLabel;
     private Label sorryLbl;
@@ -55,7 +85,12 @@ public class RoughBoardFirstTry extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Create the SceneGraph
+     * @param root - a BorderPane scene
+     */
     private void initSceneGraph(BorderPane root) {
+        // Create the containers
         top = new HBox();
         bottom = new HBox();
         right = new VBox();
@@ -63,6 +98,7 @@ public class RoughBoardFirstTry extends Application {
         center = new BorderPane();
         cardPile = new VBox();
 
+        //Initialize everything
         initTop();
         initBottom();
         initRight();
@@ -71,6 +107,7 @@ public class RoughBoardFirstTry extends Application {
         initRedStartGreenHome();
         initBlueStartRedHome();
 
+        // Set the containers in the BorderPane root
         root.setTop(top);
         root.setBottom(bottom);
         root.setRight(right);
@@ -79,11 +116,15 @@ public class RoughBoardFirstTry extends Application {
 
     }
 
+    /**
+     * Create the red Home and the blue Start spaces
+     */
     private void initBlueStartRedHome() {
+        // Create containers for the spaces
         HBox redHomeHBox = new HBox();
-
         VBox blueStartRedHome = new VBox();
 
+        // Create some empty, invisible spaces for spacing
         for (int i = 0; i < 6; i++) {
             Label spacePadding = new Label();
             spacePadding.setBorder(new Border(new BorderStroke(null,
@@ -92,9 +133,11 @@ public class RoughBoardFirstTry extends Application {
             blueStartRedHome.getChildren().add(spacePadding);
         }
 
+        // Create the blue Home
         Circle blueHome = new Circle(42.5, Color.BLUE);
         blueStartRedHome.getChildren().add(blueHome);
 
+        // More space
         for (int i = 0; i < 3; i++) {
             Label filler = new Label();
             filler.setBorder(new Border(new BorderStroke(null,
@@ -103,6 +146,7 @@ public class RoughBoardFirstTry extends Application {
             blueStartRedHome.getChildren().add(filler);
         }
 
+        // Create the red Home
         Label redHome = new Label("Home");
         redHome.setBorder(new Border(new BorderStroke(null,
                 BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
@@ -111,6 +155,7 @@ public class RoughBoardFirstTry extends Application {
 
         blueStartRedHome.getChildren().add(redHome);
 
+        // More spacing
         for (int i = 0; i < 5; i++) {
             Label spacePadding = new Label();
             spacePadding.setBorder(new Border(new BorderStroke(null,
@@ -120,16 +165,18 @@ public class RoughBoardFirstTry extends Application {
         }
 
 
+        // Set everything
         redHomeHBox.getChildren().add(blueStartRedHome);
         center.setRight(redHomeHBox);
     }
 
 
+    // Create the Red Start and Green Home spaces
     private void initRedStartGreenHome() {
 
         VBox greenHomeVBox = new VBox();
-
         HBox redStartGreenHome = new HBox();
+
         for (int i = 0; i < 5; i++) {
             Label greenSafeZone = new Label();
             greenSafeZone.setBorder(new Border(new BorderStroke(null,
