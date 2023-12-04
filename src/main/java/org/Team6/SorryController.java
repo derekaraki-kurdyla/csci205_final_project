@@ -316,7 +316,6 @@ public class SorryController {
         // You can perform additional setup here if needed
     }
 
-
     public void setModel(GameManager model) {
         this.theModel = model;
     }
@@ -789,6 +788,7 @@ public class SorryController {
         return playerCount;
     }
 
+
     private void moveButtonHandleEvent() {
         // If the pawnToMove is not null
         if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
@@ -845,14 +845,12 @@ public class SorryController {
             }
         }
     }
-
     private void updateTurnText(String newTurnText) {
         turnText.setText(newTurnText);
         cardRuleText.setText(null);
         cardDrawnText.setText(null);
         movesText.setText(null);
     }
-
     private void updateCurrentPlayerIndex() {
         int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
         this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
@@ -867,36 +865,49 @@ public class SorryController {
         }
     }
 
-
     private void drawButtonHandleEvent() {
+        // Create slide spaces
         this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
 
-        System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-        //update UI
-        turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-
+        // Draw a card and store it for later
         Card drawnCard = this.theModel.getGameDeck().drawCard();
         this.lastCardDrawn = drawnCard;
-
         this.theModel.setDrawnCard(drawnCard);
-        //Update UI
-        cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
-        cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
 
+        // Update Text
+        System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+        updateTextAfterDraw();
+
+        // Get possible moves list
         this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
 
+        // Assess the possible moves
+        assessPossibleMoves();
+    }
+
+    private void assessPossibleMoves() {
+        // If no possible moves
         if (this.theModel.getCurrPlayer().getPossiblePawnMoves().isEmpty()){
 
+            // Set pawnToMove to null, and update the player index
             this.theModel.getCurrPlayer().setPawnToMove(null);
-
             movesText.setText("No possible moves! Draw card for next turn!");
 
             //incrementing to the next player
             updateCurrentPlayerIndex();
         }
+
+        // Else, display the number of possible moves
         else{
             movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
         }
+    }
+    private void updateTextAfterDraw() {
+        // Update UI text
+        turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+        cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
+        cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
+        discardLabel.setText(this.lastCardDrawn.getCardValue().toString());
     }
 
     private void sendPawnsStartOnUI() {
@@ -976,31 +987,22 @@ public class SorryController {
     public boolean isIsSetForRed() {
         return isSetForRed.get();
     }
-
     public SimpleBooleanProperty isSetForRedProperty() {
         return isSetForRed;
     }
-
     public boolean isIsSetForBlue() {
         return isSetForBlue.get();
     }
-
     public SimpleBooleanProperty isSetForBlueProperty() {
         return isSetForBlue;
     }
-
     public boolean isIsSetForGreen() {
         return isSetForGreen.get();
     }
-
     public SimpleBooleanProperty isSetForGreenProperty() {
         return isSetForGreen;
     }
-
-    public boolean isIsSetForYellow() {
-        return isSetForYellow.get();
-    }
-
+    public boolean isIsSetForYellow() {return isSetForYellow.get();}
     public SimpleBooleanProperty isSetForYellowProperty() {
         return isSetForYellow;
     }
