@@ -307,19 +307,22 @@ public class SorryController {
     private Circle pawnSelected;
 
 
-    
+    /**
+     * Constructor for SorryController
+     * @param model - a {@link GameManager} object
+     * @param view - a {@link SorryView} object
+     */
     public SorryController(GameManager model, SorryView view) {
+
         this.theModel = model;
         this.theView = view;
-        //System.out.println("constructor correct!");
-        //System.out.println(this.theModel.getPlayerArrayList());
-        // You can perform additional setup here if needed
+
     }
 
-    public void setModel(GameManager model) {
-        this.theModel = model;
-    }
-
+    /**
+     * Create the FXML objects, SBPs, the lists for the pawns, spaces, and homes
+     * and set event handlers
+     */
     @FXML
     void initialize() {
         // Assert that all FXML objects are accounted for
@@ -342,12 +345,19 @@ public class SorryController {
 
     }
 
+    /**
+     * Create the SimpleBooleanProperties for the {@link RadioButton} objects
+     */
     private void initSBPs() {
         this.isSetForRed = new SimpleBooleanProperty(false);
         this.isSetForBlue = new SimpleBooleanProperty(false);
         this.isSetForGreen = new SimpleBooleanProperty(false);
         this.isSetForYellow = new SimpleBooleanProperty(false);
     }
+
+    /**
+     * Assert that all the named fxid objects have been created
+     */
     private void assertFMXLObjects() {
         assert bluePawn1 != null : "fx:id=\"bluePawn1\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert bluePawn2 != null : "fx:id=\"bluePawn2\" was not injected: check your FXML file 'BoardView.fxml'.";
@@ -466,12 +476,21 @@ public class SorryController {
         assert redStart != null : "fx:id=\"redStart\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowStart != null : "fx:id=\"yellowStart\" was not injected: check your FXML file 'BoardView.fxml'.";
     }
+
+
+    /**
+     * Create the Home List
+     */
     private void initHomeList() {
         this.homeList.add(space66);
         this.homeList.add(space72);
         this.homeList.add(space78);
         this.homeList.add(space84);
     }
+
+    /**
+     * Create the spaces list
+     */
     private void initSpacesList() {
         this.spacesList.add(space1);
         this.spacesList.add(space2);
@@ -557,6 +576,11 @@ public class SorryController {
 
 
     }
+
+
+    /**
+     * Create the pawn list
+     */
     private void initPawnList() {
         pawnList.add(bluePawn1);
         pawnList.add(bluePawn2);
@@ -576,29 +600,24 @@ public class SorryController {
         pawnList.add(yellowPawn4);
     }
 
+
+    /**
+     * Set the event handlers for the Buttons, RadioButtons, and Circle objects
+     */
     private void initEventHandlers() {
 
-        //press the draw button:
-        // draw card, and set lastcarddrawn to it
-        // find possible pawn moves for the current player
-        // if its a 2, do nothing
-        // if its not a 2, increment current player
-
-        //logic is, if there is no possible pawn moves, you want to increment to next player in draw
-        // but if there are possible pawn moves, you don't want to increment to next player in draw because
-        // then you will increment the player before you move for that player, so you will move the pawn for the next player
-        // so if no possible pawn moves, you want to increment next player in draw
-        // but if there are, increment next player in move function unless the card is a two
-
+        // Set event handlers for each Button
         drawButton.setOnMouseClicked(event -> {drawButtonHandleEvent();});
         moveButton.setOnMouseClicked(event -> {moveButtonHandleEvent();});
         startButton.setOnMouseClicked(event -> {startButtonHandleEvent();});
 
+        // Set event handlers for each circle pawn
         bluePawnHighlight();
         redPawnHighlight();
         greenPawnHighlight();
         yellowPawnHighlight();
 
+        // Set event handlers for each RadioButton
         redRadioButton.setOnMouseClicked(event -> {redIndicateSelected();});
         blueRadioButton.setOnMouseClicked(event -> {blueIndicateSelected();});
         greenRadioButton.setOnMouseClicked(event -> {greenIndicateSelected();});
@@ -606,7 +625,12 @@ public class SorryController {
 
     }
 
+    /**
+     * Light up the yellow pawns when the yellow {@link RadioButton} is toggled on
+     * Revert the change if the {@link RadioButton} is toggled off
+     */
     private void yellowIndicateSelected() {
+        // Light up pawns, and set SimpleBooleanProperty to true
         if (!isIsSetForYellow()){
             yellowPawn1.setFill(Color.LIGHTYELLOW);
             yellowPawn2.setFill(Color.LIGHTYELLOW);
@@ -614,6 +638,7 @@ public class SorryController {
             yellowPawn4.setFill(Color.LIGHTYELLOW);
             isSetForYellow.setValue(true);
         }
+        // Revert the changes, and set SimpleBooleanProperty to false
         else if (isIsSetForYellow()){
             yellowPawn1.setFill(Color.web("#edff1f"));
             yellowPawn2.setFill(Color.web("#edff1f"));
@@ -622,7 +647,13 @@ public class SorryController {
             isSetForYellow.setValue(false);
         }
     }
+
+    /**
+     * Light up the green pawns when the green {@link RadioButton} is toggled on
+     * Revert the change if the {@link RadioButton} is toggled off
+     */
     private void greenIndicateSelected() {
+        // Light up pawns, and set SimpleBooleanProperty to true
         if (!isIsSetForGreen()){
             greenPawn1.setFill(Color.GREENYELLOW);
             greenPawn2.setFill(Color.GREENYELLOW);
@@ -630,6 +661,7 @@ public class SorryController {
             greenPawn4.setFill(Color.GREENYELLOW);
             isSetForGreen.setValue(true);
         }
+        // Revert the changes, and set SimpleBooleanProperty to false
         else if (isIsSetForGreen()){
             greenPawn1.setFill(Color.web("#26ff00"));
             greenPawn2.setFill(Color.web("#26ff00"));
@@ -638,7 +670,13 @@ public class SorryController {
             isSetForGreen.setValue(false);
         }
     }
+
+    /**
+     * Light up the blue pawns when the blue {@link RadioButton} is toggled on
+     * Revert the change if the {@link RadioButton} is toggled off
+     */
     private void blueIndicateSelected() {
+        // Light up pawns, and set SimpleBooleanProperty to true
         if (!isIsSetForBlue()){
             bluePawn1.setFill(Color.AQUA);
             bluePawn2.setFill(Color.AQUA);
@@ -646,6 +684,7 @@ public class SorryController {
             bluePawn4.setFill(Color.AQUA);
             isSetForBlue.setValue(true);
         }
+        // Revert the changes, and set SimpleBooleanProperty to false
         else if (isIsSetForBlue()){
             bluePawn1.setFill(Color.DODGERBLUE);
             bluePawn2.setFill(Color.DODGERBLUE);
@@ -654,7 +693,13 @@ public class SorryController {
             isSetForBlue.setValue(false);
         }
     }
+
+    /**
+     * Light up the red pawns when the red {@link RadioButton} is toggled on
+     * Revert the change if the {@link RadioButton} is toggled off
+     */
     private void redIndicateSelected() {
+        // Light up pawns, and set SimpleBooleanProperty to true
         if (!isIsSetForRed()){
             redPawn1.setFill(Color.PINK);
             redPawn2.setFill(Color.PINK);
@@ -662,6 +707,7 @@ public class SorryController {
             redPawn4.setFill(Color.PINK);
             isSetForRed.setValue(true);
         }
+        // Revert the changes, and set SimpleBooleanProperty to false
         else if (isIsSetForRed()){
             redPawn1.setFill(Color.web("#ff1f1f"));
             redPawn2.setFill(Color.web("#ff1f1f"));
@@ -671,9 +717,16 @@ public class SorryController {
         }
     }
 
+    /**
+     * Light up the yellow pawns when the cursor is hovered over them
+     */
     private void yellowPawnHighlight() {
+        // For the yellow pawns
         for (int i = 12; i < 16; i++) {
+            // Get the Circle object
             Circle pawn = pawnList.get(i);
+
+            // Apply the highlight effect
             pawn.setOnMouseEntered(event -> {
                 pawn.setFill(Color.LIGHTYELLOW);
             });
@@ -682,9 +735,17 @@ public class SorryController {
             });
         }
     }
+
+    /**
+     * Light up the green pawns when the cursor is hovered over them
+     */
     private void greenPawnHighlight() {
+        // For the green pawns
         for (int i = 8; i < 12; i++) {
+            // Get the Circle object
             Circle pawn = pawnList.get(i);
+
+            // Apply the highlight effect
             pawn.setOnMouseEntered(event -> {
                 pawn.setFill(Color.GREENYELLOW);
             });
@@ -693,9 +754,17 @@ public class SorryController {
             });
         }
     }
+
+    /**
+     * Light up the red pawns when the cursor is hovered over them
+     */
     private void redPawnHighlight() {
+        // For the red pawns
         for (int i = 4; i < 8 ; i++) {
+            // Get the Circle object
             Circle pawn = pawnList.get(i);
+
+            // Apply the highlight effect
             pawn.setOnMouseEntered(event -> {
                 pawn.setFill(Color.PINK);
             });
@@ -705,9 +774,17 @@ public class SorryController {
 
         }
     }
+
+    /**
+     * Light up the blue pawns when the cursor is hovered over them
+     */
     private void bluePawnHighlight() {
+        // For the blue pawns
         for (int i = 0; i < 4; i++) {
+            // Get the Circle object
             Circle pawn = pawnList.get(i);
+
+            // Apply the highlight effect
             pawn.setOnMouseEntered(event -> {
                 pawn.setFill(Color.AQUA);
             });
@@ -718,24 +795,44 @@ public class SorryController {
     }
 
 
+    /**
+     * Set up the game when the start button is pressed
+     */
     private void startButtonHandleEvent() {
 
+        // Get and set the player count
         int playerCount = getPlayerCount();
         this.theModel.setNumPlayers(playerCount);
+
+        // Create the Board, Players, and Deck
         this.theModel.initBoardAndDeck();
+
+        // Set the current player to red
         this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
 
+        // Tell the user to draw a card
         turnText.setText("Please draw a card!");
 
+        // Turn off the highlight effect of the pawns
         setPawnToOgColors();
+
+        // Set Pawn event handlers
         setPawnEventHandlers();
     }
 
+    /**
+     * Change the pawn selected if the user clicks on a new pawn
+     */
     private void setPawnEventHandlers() {
+        // For each circle pawn on the UI
         for (Circle BoardPawn : pawnList){
+
+            // Match the fxid to the id of the Pawns in the logic
             String pawnId = BoardPawn.getId();
             for(Pawn pawn: this.theModel.getGameBoard().getAllPawns()){
                 if (pawn.getId().equals(pawnId)){
+
+                    // Set pawn selected and indicate this change to the user
                     BoardPawn.setOnMouseClicked(event2 -> {
                         this.theModel.getCurrPlayer().setPawnToMove(pawn);
                         this.pawnSelected = BoardPawn;
@@ -746,26 +843,44 @@ public class SorryController {
             }
         }
     }
+
+    /**
+     * Return all the pawns to their original colors
+     */
     private void setPawnToOgColors() {
+        // Red pawns
         redPawn1.setFill(Color.web("#ff1f1f"));
         redPawn2.setFill(Color.web("#ff1f1f"));
         redPawn3.setFill(Color.web("#ff1f1f"));
         redPawn4.setFill(Color.web("#ff1f1f"));
+
+        // Blue pawns
         bluePawn1.setFill(Color.DODGERBLUE);
         bluePawn2.setFill(Color.DODGERBLUE);
         bluePawn3.setFill(Color.DODGERBLUE);
         bluePawn4.setFill(Color.DODGERBLUE);
+
+        // Green pawns
         greenPawn1.setFill(Color.web("#26ff00"));
         greenPawn2.setFill(Color.web("#26ff00"));
         greenPawn3.setFill(Color.web("#26ff00"));
         greenPawn4.setFill(Color.web("#26ff00"));
+
+        // Yellow pawns
         yellowPawn1.setFill(Color.web("#edff1f"));
         yellowPawn2.setFill(Color.web("#edff1f"));
         yellowPawn3.setFill(Color.web("#edff1f"));
         yellowPawn4.setFill(Color.web("#edff1f"));
     }
+
+    /**
+     * Get the player count by checking if the {@link RadioButton} are toggled
+     * @return the number of players in the game
+     */
     private int getPlayerCount() {
         int playerCount = 0;
+
+        // If each radioButton is toggled on, increase the player count
         if (isIsSetForRed()){
             playerCount++;
             this.theModel.getPawnColors().add("red");
@@ -785,10 +900,13 @@ public class SorryController {
             playerCount++;
             this.theModel.getPawnColors().add("green");
         }
+
         return playerCount;
     }
 
-
+    /**
+     * Move the pawn selected when the move button is pressed
+     */
     private void moveButtonHandleEvent() {
         // If the pawnToMove is not null
         if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
@@ -804,6 +922,7 @@ public class SorryController {
                 updateTurnText("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
             }
 
+            // If the card draw is not a two...
             else{
                 // If the game is over, thank the user
                 if(this.theModel.isGameOver()){
@@ -812,10 +931,11 @@ public class SorryController {
                 }
                 // Game is not over, so update the current player for the next turn
                 else{
+                    // Tell the next player to draw a card
+                    updateTurnText("Next player draw!");
                     updateCurrentPlayerIndex();
                 }
-                // Tell the next player to draw a card
-                updateTurnText("Next player draw!");
+
             }
         }
 
@@ -825,10 +945,17 @@ public class SorryController {
         }
     }
 
+    /**
+     * Move the pawn in the UI to match how it moved in the logic
+     * @param landingIndex - int of landing index that the pawn will move to
+     */
     private void movePawnInUI(int landingIndex) {
+        // Find the space that correlates with the landing index
         String id = "space" + landingIndex;
         for (Rectangle space : spacesList) {
             if (id.equals(space.getId())) {
+
+                // Move the pawn to that space
                 move(this.pawnSelected, space);
                 sendPawnsStartOnUI();
                 if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
@@ -836,6 +963,8 @@ public class SorryController {
             }
 
         }
+
+        // If the landing index correlates to a home space...
         for (Circle space : homeList) {
             if (id.equals(space.getId())) {
                 move(this.pawnSelected, space);
@@ -845,26 +974,40 @@ public class SorryController {
             }
         }
     }
+
+    /**
+     * Change the turnText and set everything else to a blank string
+     * @param newTurnText - new text for turnText to display
+     */
     private void updateTurnText(String newTurnText) {
         turnText.setText(newTurnText);
         cardRuleText.setText(null);
         cardDrawnText.setText(null);
         movesText.setText(null);
     }
+
+    /**
+     * Update the current player index in the logic
+     */
     private void updateCurrentPlayerIndex() {
         int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
         this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
 
+        // Check if index would go out of bounds
         if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-            //System.out.println(this.theModel.getCurrPlayerIndex());
             this.theModel.setCurrPlayerIndex(0);
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
         }
+
+        // Update it normally
         else{
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
         }
     }
 
+    /**
+     * Draw a card, update text for the user, then find and assess possible moves
+     */
     private void drawButtonHandleEvent() {
         // Create slide spaces
         this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
@@ -875,7 +1018,6 @@ public class SorryController {
         this.theModel.getCurrPlayer().setDrawnCard(drawnCard);
 
         // Update Text
-        //System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
         updateTextAfterDraw();
 
         // Get possible moves list
@@ -885,6 +1027,9 @@ public class SorryController {
         assessPossibleMoves();
     }
 
+    /**
+     * Tell the user how many possible moves they can make
+     */
     private void assessPossibleMoves() {
         // If no possible moves
         if (this.theModel.getCurrPlayer().getPossiblePawnMoves().isEmpty()){
@@ -902,6 +1047,10 @@ public class SorryController {
             movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
         }
     }
+
+    /**
+     * Updating text for the user after a card is drawn
+     */
     private void updateTextAfterDraw() {
         // Update UI text
         turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
@@ -910,15 +1059,19 @@ public class SorryController {
         discardLabel.setText(this.lastCardDrawn.getCardValue().toString());
     }
 
+    /**
+     * Send any pawns to start that need to be removed from the board
+     */
     private void sendPawnsStartOnUI() {
-        //System.out.println("REACHED CONTROLLER LOGIC HERE LINE 968");
+        // If there is a pawn to be sent back...
         if (!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty()){
-            //System.out.println("reached here");
+
+            // Find the corresponding Circle object
             for(Pawn pawn: this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart()){
-                //System.out.println("reached here 2");
                 for(Circle UIPawn: this.pawnList){
-                    //System.out.println("reached here 3");
-                    if (pawn.getId().equals(UIPawn.getId())){ //we found the pawn to move on the UI
+                    if (pawn.getId().equals(UIPawn.getId())){
+
+                        // Send the pawn back based on its color
                         if(pawn.getColor().equals(PawnColor.RED)){
                             move(UIPawn, redStart);
                         }
@@ -1006,6 +1159,5 @@ public class SorryController {
     public SimpleBooleanProperty isSetForYellowProperty() {
         return isSetForYellow;
     }
-
-
+    public void setModel(GameManager model) {this.theModel = model;}
 }
