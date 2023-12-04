@@ -3,7 +3,7 @@
  * Fall 2023
  * Instructor: Prof. Brian King / Prof. Joshua Stough
  *
- * Name: Derek Araki-Kurdyla
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
  * Section: 9am-10am
  * Date: 11/30/23
  * Time: 12:00 PM

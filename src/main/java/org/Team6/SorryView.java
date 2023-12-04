@@ -3,7 +3,7 @@
  * Fall 2023
  * Instructor: Prof. Brian King / Prof. Joshua Stough
  *
- * Name: Derek Araki-Kurdyla
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
  * Section: 9am-10am
  * Date: 11/29/23
  * Time: 5:50 PM
@@ -23,6 +23,9 @@ import javafx.scene.Parent;
 import org.Team6.SorryModel.GameManager;
 import java.io.IOException;
 
+/**
+ * This class will take care of creating the visual aspect of our code
+ */
 public class SorryView {
     private GameManager theModel;
 

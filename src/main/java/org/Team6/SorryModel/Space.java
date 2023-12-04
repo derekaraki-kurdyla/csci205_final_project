@@ -3,7 +3,7 @@
  * Fall 2023
  * Instructor: Prof. Brian King / Prof. Joshua Stough
  *
- * Name: Leo McMenimen
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
  * Section: CSCI 205 section 02
  * Date: 11/10/23
  * Time: 10:08 AM

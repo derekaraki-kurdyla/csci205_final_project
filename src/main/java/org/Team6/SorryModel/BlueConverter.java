@@ -3,7 +3,7 @@
  * Fall 2023
  * Instructor: Prof. Brian King / Prof. Joshua Stough
  *
- * Name: Derek Araki-Kurdyla
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
  * Section: 9am-10am
  * Date: 11/19/23
  * Time: 11:49 AM
@@ -18,6 +18,9 @@
  */
 package org.Team6.SorryModel;
 
+/**
+ * This code will convert to the Board Index as needed for the code
+ */
 public class BlueConverter implements BoardPawnIndexConverter{
 
     public int convertToBoardIndex(int index){

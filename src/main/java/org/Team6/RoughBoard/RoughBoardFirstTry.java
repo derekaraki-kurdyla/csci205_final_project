@@ -4,7 +4,7 @@
  *
  * Author: Prof. King
  *
- * Name: Nathan Stamford
+ * Name: Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
  * Date: 10/11/2023
  * Time: 9:30 PM
 
