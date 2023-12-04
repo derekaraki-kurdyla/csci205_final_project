@@ -57,11 +57,6 @@ public class GameManager {
     private ArrayList<String> pawnColors = new ArrayList<>();
 
     /**
-     * Most recent card drawn
-     */
-    private Card drawnCard;
-
-    /**
      * Index that correlates to the current player
      */
     private int currPlayerIndex;
@@ -208,14 +203,6 @@ public class GameManager {
 
     public Deck getGameDeck() {
         return gameDeck;
-    }
-
-    public Card getDrawnCard() {
-        return drawnCard;
-    }
-
-    public void setDrawnCard(Card drawnCard) {
-        this.drawnCard = drawnCard;
     }
 
     public Player getCurrPlayer() {

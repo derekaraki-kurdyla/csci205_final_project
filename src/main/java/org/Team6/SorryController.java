@@ -872,14 +872,14 @@ public class SorryController {
         // Draw a card and store it for later
         Card drawnCard = this.theModel.getGameDeck().drawCard();
         this.lastCardDrawn = drawnCard;
-        this.theModel.setDrawnCard(drawnCard);
+        this.theModel.getCurrPlayer().setDrawnCard(drawnCard);
 
         // Update Text
         //System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
         updateTextAfterDraw();
 
         // Get possible moves list
-        this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
+        this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getCurrPlayer().getDrawnCard());
 
         // Assess the possible moves
         assessPossibleMoves();
@@ -905,8 +905,8 @@ public class SorryController {
     private void updateTextAfterDraw() {
         // Update UI text
         turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-        cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
-        cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
+        cardDrawnText.setText("You have drawn a " + this.theModel.getCurrPlayer().getDrawnCard().getCardValue());
+        cardRuleText.setText(this.theModel.getCurrPlayer().getDrawnCard().getCardValue().getCardMethod());
         discardLabel.setText(this.lastCardDrawn.getCardValue().toString());
     }
 

@@ -38,6 +38,11 @@ public class Player {
 
     private ArrayList<Pawn> listOfPawnsToMoveToStart = new ArrayList<>();
 
+    /**
+     * Most recent card drawn
+     */
+    private Card drawnCard;
+
     /** constructor for {@link Player} object that initializes {@link} */
     public Player(String pawnColor, Board gameBoard){
         this.pawnColor = determinePawnColor(pawnColor);
@@ -663,5 +668,13 @@ public class Player {
 
     public void clearListOfPawnsToMoveToStart(){
         this.listOfPawnsToMoveToStart.clear();
+    }
+
+    public Card getDrawnCard() {
+        return drawnCard;
+    }
+
+    public void setDrawnCard(Card drawnCard) {
+        this.drawnCard = drawnCard;
     }
 }
