@@ -69,6 +69,11 @@ public class Board {
         }
     }
 
+    /**
+     * This method will initialize the slide spaces to the board, we will have cases for each color
+     *
+     * @param player
+     */
     public void initSlideSpacesOnBoard(Player player){
         // make sure when setting a spacetype as occupied by different, that only holds true if it is also not the start of the slide
         // reason for this is because can only be one type, so it needs to be start of slide so that the pawn will slide.
@@ -80,6 +85,7 @@ public class Board {
             }
         }
 
+        //Switch depending on the color that is needed
         switch(player.getPawnColor()){
             case RED -> {
                 this.initBlueSlideSpaces();
@@ -149,18 +155,37 @@ public class Board {
         System.out.println("length of yellowPawns: " + this.yellowPawns.size());
     }
 
+    /**
+     * This initializes the red slide space on the board
+     *
+     */
     private void initRedSlideSpaces(){
         this.mapOfSpaces.put(2, SpaceType.START_SHORT_SLIDE_DIFFERENT);
         this.mapOfSpaces.put(10, SpaceType.START_LONG_SLIDE_DIFFERENT);
     }
+
+    /**
+     * This initializes the blue slide space on the board
+     *
+     */
     private void initBlueSlideSpaces(){
         this.mapOfSpaces.put(17, SpaceType.START_SHORT_SLIDE_DIFFERENT);
         this.mapOfSpaces.put(25, SpaceType.START_LONG_SLIDE_DIFFERENT);
     }
+
+    /**
+     * This initializes the yellow slide space on the board
+     *
+     */
     private void initYellowSlideSpaces(){
         this.mapOfSpaces.put(32, SpaceType.START_SHORT_SLIDE_DIFFERENT);
         this.mapOfSpaces.put(40, SpaceType.START_LONG_SLIDE_DIFFERENT);
     }
+
+    /**
+     * This initializes the green slide space on the board
+     *
+     */
     private void initGreenSlideSpaces(){
         this.mapOfSpaces.put(47, SpaceType.START_SHORT_SLIDE_DIFFERENT);
         this.mapOfSpaces.put(55, SpaceType.START_LONG_SLIDE_DIFFERENT);
