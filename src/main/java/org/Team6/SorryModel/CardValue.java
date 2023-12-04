@@ -13,7 +13,8 @@
  * Class: CardValue
  *
  * Description:
- *
+ * An enumerator that represents all the card values that are possible for a user to get.
+ * These will be used to assign values to the card class
  * ****************************************
  */
 package org.Team6.SorryModel;

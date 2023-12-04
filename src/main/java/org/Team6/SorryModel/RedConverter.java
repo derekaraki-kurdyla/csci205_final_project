@@ -13,13 +13,16 @@
  * Class: RedConverter
  *
  * Description:
- *
+ * The class will be used to change how the individual color views the board
+ * and convert it to the way the board is created on scenebuilder
  * ****************************************
  */
 package org.Team6.SorryModel;
 
 public class RedConverter implements BoardPawnIndexConverter{
 
+
+    //This will add to the index of the spaces that are out of order from the Color then to the Board index
     public int convertToBoardIndex(int index){
         if(index >= 61 && index <= 66){
             return index;
@@ -32,6 +35,7 @@ public class RedConverter implements BoardPawnIndexConverter{
         }
     }
 
+    //This will add or subtract to the index of spaces that are ou tof order from the Board then to the color index
     public int convertToColorIndex(int index){
         if(index >= 61 && index <= 66){
             return index;

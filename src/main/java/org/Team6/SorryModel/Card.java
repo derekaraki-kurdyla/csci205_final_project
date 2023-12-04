@@ -13,7 +13,7 @@
  * Class: Card
  *
  * Description:
- *
+ * This is the class for cards, it will create a Sorry card and links it to the associated card value
  * ****************************************
  */
 package org.Team6.SorryModel;

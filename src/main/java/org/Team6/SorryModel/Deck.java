@@ -13,6 +13,8 @@
  * Class: Deck
  *
  * Description:
+ * A class that will encapsulate the deck of cards of the sorry board game.
+ * It will have methods to initialize and draw cards.
  *
  * ****************************************
  */
@@ -66,8 +68,7 @@ public class Deck {
         Random random = new Random();
         int drawIndex = random.nextInt(this.gameDeck.size());
         Card drawnCard = this.gameDeck.get(drawIndex);
-        //System.out.println("You have drawn a " + drawnCard.getCardValue());
-        //System.out.println(drawnCard.getCardValue().getCardMethod());
+
 
         //update instance variables
         this.gameDeck.remove(drawnCard);

@@ -13,6 +13,9 @@
  * Class: Spaces
  *
  * Description:
+ * SpaceType is an Enumerator that is responsible for showing the different types of spaces on the board
+ *
+ * Space will just be used to create a new space
  *
  * ****************************************
  */

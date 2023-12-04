@@ -13,6 +13,8 @@
  * Class: PawnColor
  *
  * Description:
+ * An enumeration that is used to assigning a color to the pawns.
+ * There are only going to be four possible colors
  *
  * ****************************************
  */
