@@ -12,7 +12,7 @@
  * Package: org.Team6
  * Class: SorryController
  *
- * Description:
+ * Description: This is the Controller Class for our Sorry! program.
  *
  * ****************************************
  */
@@ -37,361 +37,218 @@ import org.Team6.SorryModel.*;
 
 public class SorryController {
 
+    /** The {@link GameManager}  object that will be the logic and the Model */
     private GameManager theModel;
 
+    /** The {@link SorryView}  object that will be used as the View */
     private SorryView theView;
-
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     /**
      * These are all the spaces and pawns we use
+     * There are 84 spaces total. The four homes are {@link Circle} objects,
+     * while the rest of them are {@link Rectangle} objects.
      */
 
     @FXML
     private Circle bluePawn1;
-
     @FXML
     private Circle bluePawn2;
-
     @FXML
     private Circle bluePawn3;
-
     @FXML
     private Circle bluePawn4;
-
     @FXML
     private Circle greenPawn1;
-
     @FXML
     private Circle greenPawn2;
-
     @FXML
     private Circle greenPawn3;
-
     @FXML
     private Circle greenPawn4;
-
     @FXML
     private Circle redPawn1;
-
     @FXML
     private Circle redPawn2;
-
     @FXML
     private Circle redPawn3;
-
     @FXML
     private Circle redPawn4;
-
     @FXML
     private Rectangle space1;
-
     @FXML
     private Rectangle space10;
-
     @FXML
     private Rectangle space11;
-
     @FXML
     private Rectangle space12;
-
     @FXML
     private Rectangle space13;
-
     @FXML
     private Rectangle space14;
-
     @FXML
     private Rectangle space15;
-
     @FXML
     private Rectangle space16;
-
     @FXML
     private Rectangle space17;
-
     @FXML
     private Rectangle space18;
-
     @FXML
     private Rectangle space19;
-
     @FXML
     private Rectangle space2;
-
     @FXML
     private Rectangle space20;
-
     @FXML
     private Rectangle space21;
-
     @FXML
     private Rectangle space22;
-
     @FXML
     private Rectangle space23;
-
     @FXML
     private Rectangle space24;
-
     @FXML
     private Rectangle space25;
-
     @FXML
     private Rectangle space26;
-
     @FXML
     private Rectangle space27;
-
     @FXML
     private Rectangle space28;
-
     @FXML
     private Rectangle space29;
-
     @FXML
     private Rectangle space3;
-
     @FXML
     private Rectangle space30;
-
     @FXML
     private Rectangle space31;
-
     @FXML
     private Rectangle space32;
-
     @FXML
     private Rectangle space33;
-
     @FXML
     private Rectangle space34;
-
     @FXML
     private Rectangle space35;
-
     @FXML
     private Rectangle space36;
-
     @FXML
     private Rectangle space37;
-
     @FXML
     private Rectangle space38;
-
     @FXML
     private Rectangle space39;
-
     @FXML
     private Rectangle space4;
-
     @FXML
     private Rectangle space40;
-
     @FXML
     private Rectangle space41;
-
     @FXML
     private Rectangle space42;
-
     @FXML
     private Rectangle space43;
-
     @FXML
     private Rectangle space44;
-
     @FXML
     private Rectangle space45;
-
     @FXML
     private Rectangle space46;
-
     @FXML
     private Rectangle space47;
-
     @FXML
     private Rectangle space48;
-
     @FXML
     private Rectangle space49;
-
     @FXML
     private Rectangle space5;
-
     @FXML
     private Rectangle space50;
-
     @FXML
     private Rectangle space51;
-
     @FXML
     private Rectangle space52;
-
     @FXML
     private Rectangle space53;
-
     @FXML
     private Rectangle space54;
-
     @FXML
     private Rectangle space55;
-
     @FXML
     private Rectangle space56;
-
     @FXML
     private Rectangle space57;
-
     @FXML
     private Rectangle space58;
-
     @FXML
     private Rectangle space59;
-
     @FXML
     private Rectangle space6;
-
     @FXML
     private Rectangle space60;
-
     @FXML
     private Rectangle space61;
-
     @FXML
     private Rectangle space62;
-
     @FXML
     private Rectangle space63;
-
     @FXML
     private Rectangle space64;
-
     @FXML
     private Rectangle space65;
-
     @FXML
     private Circle space66;
-
     @FXML
     private Rectangle space67;
-
     @FXML
     private Rectangle space68;
-
     @FXML
     private Rectangle space69;
-
     @FXML
     private Rectangle space7;
-
     @FXML
     private Rectangle space70;
-
     @FXML
     private Rectangle space71;
-
     @FXML
     private Circle space72;
-
     @FXML
     private Rectangle space73;
-
     @FXML
     private Rectangle space74;
-
     @FXML
     private Rectangle space75;
-
     @FXML
     private Rectangle space76;
-
     @FXML
     private Rectangle space77;
-
     @FXML
     private Circle space78;
-
     @FXML
     private Rectangle space79;
-
     @FXML
     private Rectangle space8;
-
     @FXML
     private Rectangle space80;
-
     @FXML
     private Rectangle space81;
-
     @FXML
     private Rectangle space82;
-
     @FXML
     private Rectangle space83;
-
     @FXML
     private Circle space84;
-
     @FXML
     private Rectangle space9;
-
     @FXML
     private Circle yellowPawn1;
-
     @FXML
     private Circle yellowPawn2;
-
     @FXML
     private Circle yellowPawn3;
-
     @FXML
     private Circle yellowPawn4;
-
-
-    @FXML
-    private Button startButton;
-    @FXML
-    private RadioButton blueRadioButton;
-    @FXML
-    private RadioButton greenRadioButton;
-    @FXML
-    private RadioButton redRadioButton;
-    @FXML
-    private RadioButton yellowRadioButton;
-
-
-    private SimpleBooleanProperty isSetForRed;
-    private SimpleBooleanProperty isSetForBlue;
-    private SimpleBooleanProperty isSetForGreen;
-    private SimpleBooleanProperty isSetForYellow;
-
-
-    @FXML
-    private Text cardDrawnText;
-
-    @FXML
-    private Text cardRuleText;
-
-    @FXML
-    private Label discardLabel;
-
-    @FXML
-    private Text turnText;
-
-    @FXML
-    private Text movesText;
-
-    @FXML
-    private Button drawButton;
-
-    @FXML
-    private Button moveButton;
-
     @FXML
     private Circle blueStart;
     @FXML
@@ -401,13 +258,53 @@ public class SorryController {
     @FXML
     private Circle yellowStart;
 
-    //These are used???
+    /** The Buttons we used */
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button drawButton;
+    @FXML
+    private Button moveButton;
+
+    /** The RadioButtons we used */
+    @FXML
+    private RadioButton blueRadioButton;
+    @FXML
+    private RadioButton greenRadioButton;
+    @FXML
+    private RadioButton redRadioButton;
+    @FXML
+    private RadioButton yellowRadioButton;
+
+    /** SimpleBooleanProperties that we used */
+    private SimpleBooleanProperty isSetForRed;
+    private SimpleBooleanProperty isSetForBlue;
+    private SimpleBooleanProperty isSetForGreen;
+    private SimpleBooleanProperty isSetForYellow;
+
+    /** Text and Labels we used*/
+    @FXML
+    private Text cardDrawnText;
+    @FXML
+    private Text cardRuleText;
+    @FXML
+    private Label discardLabel;
+    @FXML
+    private Text turnText;
+    @FXML
+    private Text movesText;
+
+
+    /** Some ArrayLists that store Pawns and Spaces*/
     private ArrayList<Circle> pawnList = new ArrayList<>();
     private ArrayList<Rectangle> spacesList = new ArrayList<>();
     private ArrayList<Circle> homeList = new ArrayList<>();
-    private GameManager gm;
+
+
+    /** Other objects that are useful to store */
     private Card lastCardDrawn;
     private Circle pawnSelected;
+
 
     public SorryController(GameManager model, SorryView view) {
         this.theModel = model;
@@ -424,6 +321,33 @@ public class SorryController {
 
     @FXML
     void initialize() {
+        // Assert that all FXML objects are accounted for
+        assertFMXLObjects();
+
+        // Create the SimpleBooleanProperties
+        initSBPs();
+
+        // Create the PawnList
+        initPawnList();
+
+        // Create the SpacesList
+        initSpacesList();
+
+        // Creates the Home List
+        initHomeList();
+
+        // Creates all the Event Handlers
+        initEventHandlers();
+
+    }
+
+    private void initSBPs() {
+        this.isSetForRed = new SimpleBooleanProperty(false);
+        this.isSetForBlue = new SimpleBooleanProperty(false);
+        this.isSetForGreen = new SimpleBooleanProperty(false);
+        this.isSetForYellow = new SimpleBooleanProperty(false);
+    }
+    private void assertFMXLObjects() {
         assert bluePawn1 != null : "fx:id=\"bluePawn1\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert bluePawn2 != null : "fx:id=\"bluePawn2\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert bluePawn3 != null : "fx:id=\"bluePawn3\" was not injected: check your FXML file 'BoardView.fxml'.";
@@ -540,33 +464,13 @@ public class SorryController {
         assert greenStart != null : "fx:id=\"greenStart\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert redStart != null : "fx:id=\"redStart\" was not injected: check your FXML file 'BoardView.fxml'.";
         assert yellowStart != null : "fx:id=\"yellowStart\" was not injected: check your FXML file 'BoardView.fxml'.";
-
-
-        this.isSetForRed = new SimpleBooleanProperty(false);
-        this.isSetForBlue = new SimpleBooleanProperty(false);
-        this.isSetForGreen = new SimpleBooleanProperty(false);
-        this.isSetForYellow = new SimpleBooleanProperty(false);
-
-        initPawnList();
-        initSpacesList();
-        initHomeList();
-        //initBindings();
-        initEventHandlers();
-
-        //Test moving
-        //move(bluePawn1, space25);
-        //move(bluePawn2, space72);
-        //move(redPawn1, space7);
-
     }
-
     private void initHomeList() {
         this.homeList.add(space66);
         this.homeList.add(space72);
         this.homeList.add(space78);
         this.homeList.add(space84);
     }
-
     private void initSpacesList() {
         this.spacesList.add(space1);
         this.spacesList.add(space2);
@@ -652,7 +556,6 @@ public class SorryController {
 
 
     }
-
     private void initPawnList() {
         pawnList.add(bluePawn1);
         pawnList.add(bluePawn2);
@@ -687,182 +590,110 @@ public class SorryController {
         // so if no possible pawn moves, you want to increment next player in draw
         // but if there are, increment next player in move function unless the card is a two
 
-        drawButton.setOnMouseClicked(event -> {
+        drawButton.setOnMouseClicked(event -> {drawButtonHandleEvent();});
+        moveButton.setOnMouseClicked(event -> {moveButtonHandleEvent();});
+        startButton.setOnMouseClicked(event -> {startButtonHandleEvent();});
 
-            this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
+        bluePawnHighlight();
+        redPawnHighlight();
+        greenPawnHighlight();
+        yellowPawnHighlight();
 
-            System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-            //update UI
-            turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+        redRadioButton.setOnMouseClicked(event -> {redIndicateSelected();});
+        blueRadioButton.setOnMouseClicked(event -> {blueIndicateSelected();});
+        greenRadioButton.setOnMouseClicked(event -> {greenIndicateSelected();});
+        yellowRadioButton.setOnMouseClicked(event -> {yellowIndicateSelected();});
 
-            Card drawnCard = this.theModel.getGameDeck().drawCard();
-            this.lastCardDrawn = drawnCard;
+    }
 
-            this.theModel.setDrawnCard(drawnCard);
-            //Update UI
-            cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
-            cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
-
-            this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
-
-            if (this.theModel.getCurrPlayer().getPossiblePawnMoves().isEmpty()){
-
-                this.theModel.getCurrPlayer().setPawnToMove(null);
-
-                movesText.setText("No possible moves! Draw card for next turn!");
-
-                //incrementing to the next player
-                int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
-                this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
-
-                if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-                    System.out.println(this.theModel.getCurrPlayerIndex());
-                    this.theModel.setCurrPlayerIndex(0);
-                    this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
-                }
-                else{
-                    this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
-                }
-            }
-            else{
-                movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
-            }
-        });
-
-        moveButton.setOnMouseClicked(event -> {
-            if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
-                this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue()); //this moves this.pawnToMove
-                int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
-                String id = "space" + landingIndex;
-                for (Rectangle space : spacesList) {
-                    if (id.equals(space.getId())) {
-                        move(this.pawnSelected, space);
-                        sendPawnsStartOnUI();
-                        if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
-                            this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
-                    }
-
-                }
-                for (Circle space : homeList) {
-                    if (id.equals(space.getId())) {
-                        move(this.pawnSelected, space);
-                        sendPawnsStartOnUI();
-                        if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
-                            this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
-                    }
-                }
-
-                //after you moved, now increment the current player unless its a two
-                if(this.lastCardDrawn.getCardValue().equals(CardValue.TWO)) {
-                    //java fx to print this to screen
-                    turnText.setText("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
-                    cardRuleText.setText(null);
-                    cardDrawnText.setText(null);
-                    movesText.setText(null);
-                }
-
-                else{
-                    if(this.theModel.isGameOver()){
-                        System.out.println("GAME OVER");
-                    }
-                    else{
-                        int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
-                        this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
-
-                        if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-                            System.out.println(this.theModel.getCurrPlayerIndex());
-                            this.theModel.setCurrPlayerIndex(0);
-                            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
-                        }
-                        else{
-                            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
-                        }
-                    }
-                    turnText.setText("Next player draw!");
-                    cardRuleText.setText(null);
-                    cardDrawnText.setText(null);
-                    movesText.setText(null);
-                }
-            }
-            else{
-                turnText.setText("You cannot move a pawn this turn!");
-            }
-        });
-
-        startButton.setOnMouseClicked(event -> {
-            int playerCount = 0;
-            if (isIsSetForRed()){
-                playerCount++;
-                this.theModel.getPawnColors().add("red");
-
-            }
-
-            if (isIsSetForBlue()){
-                playerCount++;
-                this.theModel.getPawnColors().add("blue");
-            }
-
-            if (isIsSetForYellow()){
-                playerCount++;
-                this.theModel.getPawnColors().add("yellow");
-            }
-
-            if (isIsSetForGreen()){
-                playerCount++;
-                this.theModel.getPawnColors().add("green");
-            }
-
-            this.theModel.setNumPlayers(playerCount);
-            this.theModel.initBoardAndDeck();
-            this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
-
-            turnText.setText("Please draw a card!");
-
-            redPawn1.setFill(Color.web("#ff1f1f"));
-            redPawn2.setFill(Color.web("#ff1f1f"));
-            redPawn3.setFill(Color.web("#ff1f1f"));
-            redPawn4.setFill(Color.web("#ff1f1f"));
-            bluePawn1.setFill(Color.DODGERBLUE);
-            bluePawn2.setFill(Color.DODGERBLUE);
-            bluePawn3.setFill(Color.DODGERBLUE);
-            bluePawn4.setFill(Color.DODGERBLUE);
-            greenPawn1.setFill(Color.web("#26ff00"));
-            greenPawn2.setFill(Color.web("#26ff00"));
-            greenPawn3.setFill(Color.web("#26ff00"));
-            greenPawn4.setFill(Color.web("#26ff00"));
+    private void yellowIndicateSelected() {
+        if (!isIsSetForYellow()){
+            yellowPawn1.setFill(Color.LIGHTYELLOW);
+            yellowPawn2.setFill(Color.LIGHTYELLOW);
+            yellowPawn3.setFill(Color.LIGHTYELLOW);
+            yellowPawn4.setFill(Color.LIGHTYELLOW);
+            isSetForYellow.setValue(true);
+        }
+        else if (isIsSetForYellow()){
             yellowPawn1.setFill(Color.web("#edff1f"));
             yellowPawn2.setFill(Color.web("#edff1f"));
             yellowPawn3.setFill(Color.web("#edff1f"));
             yellowPawn4.setFill(Color.web("#edff1f"));
+            isSetForYellow.setValue(false);
+        }
+    }
+    private void greenIndicateSelected() {
+        if (!isIsSetForGreen()){
+            greenPawn1.setFill(Color.GREENYELLOW);
+            greenPawn2.setFill(Color.GREENYELLOW);
+            greenPawn3.setFill(Color.GREENYELLOW);
+            greenPawn4.setFill(Color.GREENYELLOW);
+            isSetForGreen.setValue(true);
+        }
+        else if (isIsSetForGreen()){
+            greenPawn1.setFill(Color.web("#26ff00"));
+            greenPawn2.setFill(Color.web("#26ff00"));
+            greenPawn3.setFill(Color.web("#26ff00"));
+            greenPawn4.setFill(Color.web("#26ff00"));
+            isSetForGreen.setValue(false);
+        }
+    }
+    private void blueIndicateSelected() {
+        if (!isIsSetForBlue()){
+            bluePawn1.setFill(Color.AQUA);
+            bluePawn2.setFill(Color.AQUA);
+            bluePawn3.setFill(Color.AQUA);
+            bluePawn4.setFill(Color.AQUA);
+            isSetForBlue.setValue(true);
+        }
+        else if (isIsSetForBlue()){
+            bluePawn1.setFill(Color.DODGERBLUE);
+            bluePawn2.setFill(Color.DODGERBLUE);
+            bluePawn3.setFill(Color.DODGERBLUE);
+            bluePawn4.setFill(Color.DODGERBLUE);
+            isSetForBlue.setValue(false);
+        }
+    }
+    private void redIndicateSelected() {
+        if (!isIsSetForRed()){
+            redPawn1.setFill(Color.PINK);
+            redPawn2.setFill(Color.PINK);
+            redPawn3.setFill(Color.PINK);
+            redPawn4.setFill(Color.PINK);
+            isSetForRed.setValue(true);
+        }
+        else if (isIsSetForRed()){
+            redPawn1.setFill(Color.web("#ff1f1f"));
+            redPawn2.setFill(Color.web("#ff1f1f"));
+            redPawn3.setFill(Color.web("#ff1f1f"));
+            redPawn4.setFill(Color.web("#ff1f1f"));
+            isSetForRed.setValue(false);
+        }
+    }
 
-
-            for (Circle BoardPawn : pawnList){
-                String pawnId = BoardPawn.getId();
-                for(Pawn pawn: this.theModel.getGameBoard().getAllPawns()){
-                    if (pawn.getId().equals(pawnId)){
-                        BoardPawn.setOnMouseClicked(event2 -> {
-                            this.theModel.getCurrPlayer().setPawnToMove(pawn);
-                            this.pawnSelected = BoardPawn;
-                            this.pawnSelected.setFill(Color.BLACK);
-                            //System.out.println(pawn.getId());
-                        });
-                    }
-                }
-            }
-        });
-
-
-
-        for (int i = 0; i < 4; i++) {
+    private void yellowPawnHighlight() {
+        for (int i = 12; i < 16; i++) {
             Circle pawn = pawnList.get(i);
             pawn.setOnMouseEntered(event -> {
-                pawn.setFill(Color.AQUA);
+                pawn.setFill(Color.LIGHTYELLOW);
             });
             pawn.setOnMouseExited(event -> {
-                pawn.setFill(Color.DODGERBLUE);
+                pawn.setFill(Color.web("#edff1f"));
             });
         }
-
+    }
+    private void greenPawnHighlight() {
+        for (int i = 8; i < 12; i++) {
+            Circle pawn = pawnList.get(i);
+            pawn.setOnMouseEntered(event -> {
+                pawn.setFill(Color.GREENYELLOW);
+            });
+            pawn.setOnMouseExited(event -> {
+                pawn.setFill(Color.web("#26ff00"));
+            });
+        }
+    }
+    private void redPawnHighlight() {
         for (int i = 4; i < 8 ; i++) {
             Circle pawn = pawnList.get(i);
             pawn.setOnMouseEntered(event -> {
@@ -873,96 +704,189 @@ public class SorryController {
             });
 
         }
-
-        for (int i = 8; i < 12; i++) {
+    }
+    private void bluePawnHighlight() {
+        for (int i = 0; i < 4; i++) {
             Circle pawn = pawnList.get(i);
             pawn.setOnMouseEntered(event -> {
-                pawn.setFill(Color.GREENYELLOW);
+                pawn.setFill(Color.AQUA);
             });
             pawn.setOnMouseExited(event -> {
-                pawn.setFill(Color.web("#26ff00"));
+                pawn.setFill(Color.DODGERBLUE);
             });
         }
+    }
 
-        for (int i = 12; i < 16; i++) {
-            Circle pawn = pawnList.get(i);
-            pawn.setOnMouseEntered(event -> {
-                pawn.setFill(Color.LIGHTYELLOW);
-            });
-            pawn.setOnMouseExited(event -> {
-                pawn.setFill(Color.web("#edff1f"));
-            });
+
+    private void startButtonHandleEvent() {
+
+        int playerCount = getPlayerCount();
+        this.theModel.setNumPlayers(playerCount);
+        this.theModel.initBoardAndDeck();
+        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0));
+
+        turnText.setText("Please draw a card!");
+
+        setPawnToOgColors();
+        setPawnEventHandlers();
+    }
+
+    private void setPawnEventHandlers() {
+        for (Circle BoardPawn : pawnList){
+            String pawnId = BoardPawn.getId();
+            for(Pawn pawn: this.theModel.getGameBoard().getAllPawns()){
+                if (pawn.getId().equals(pawnId)){
+                    BoardPawn.setOnMouseClicked(event2 -> {
+                        this.theModel.getCurrPlayer().setPawnToMove(pawn);
+                        this.pawnSelected = BoardPawn;
+                        this.pawnSelected.setFill(Color.BLACK);
+
+                    });
+                }
+            }
+        }
+    }
+    private void setPawnToOgColors() {
+        redPawn1.setFill(Color.web("#ff1f1f"));
+        redPawn2.setFill(Color.web("#ff1f1f"));
+        redPawn3.setFill(Color.web("#ff1f1f"));
+        redPawn4.setFill(Color.web("#ff1f1f"));
+        bluePawn1.setFill(Color.DODGERBLUE);
+        bluePawn2.setFill(Color.DODGERBLUE);
+        bluePawn3.setFill(Color.DODGERBLUE);
+        bluePawn4.setFill(Color.DODGERBLUE);
+        greenPawn1.setFill(Color.web("#26ff00"));
+        greenPawn2.setFill(Color.web("#26ff00"));
+        greenPawn3.setFill(Color.web("#26ff00"));
+        greenPawn4.setFill(Color.web("#26ff00"));
+        yellowPawn1.setFill(Color.web("#edff1f"));
+        yellowPawn2.setFill(Color.web("#edff1f"));
+        yellowPawn3.setFill(Color.web("#edff1f"));
+        yellowPawn4.setFill(Color.web("#edff1f"));
+    }
+    private int getPlayerCount() {
+        int playerCount = 0;
+        if (isIsSetForRed()){
+            playerCount++;
+            this.theModel.getPawnColors().add("red");
         }
 
-        redRadioButton.setOnMouseClicked(event -> {
-            if (!isIsSetForRed()){
-                redPawn1.setFill(Color.PINK);
-                redPawn2.setFill(Color.PINK);
-                redPawn3.setFill(Color.PINK);
-                redPawn4.setFill(Color.PINK);
-                isSetForRed.setValue(true);
-            }
-            else if (isIsSetForRed()){
-                redPawn1.setFill(Color.web("#ff1f1f"));
-                redPawn2.setFill(Color.web("#ff1f1f"));
-                redPawn3.setFill(Color.web("#ff1f1f"));
-                redPawn4.setFill(Color.web("#ff1f1f"));
-                isSetForRed.setValue(false);
-            }
-        });
+        if (isIsSetForBlue()){
+            playerCount++;
+            this.theModel.getPawnColors().add("blue");
+        }
 
-        blueRadioButton.setOnMouseClicked(event -> {
-            if (!isIsSetForBlue()){
-                bluePawn1.setFill(Color.AQUA);
-                bluePawn2.setFill(Color.AQUA);
-                bluePawn3.setFill(Color.AQUA);
-                bluePawn4.setFill(Color.AQUA);
-                isSetForBlue.setValue(true);
-            }
-            else if (isIsSetForBlue()){
-                bluePawn1.setFill(Color.DODGERBLUE);
-                bluePawn2.setFill(Color.DODGERBLUE);
-                bluePawn3.setFill(Color.DODGERBLUE);
-                bluePawn4.setFill(Color.DODGERBLUE);
-                isSetForBlue.setValue(false);
-            }
-        });
+        if (isIsSetForYellow()){
+            playerCount++;
+            this.theModel.getPawnColors().add("yellow");
+        }
 
-        greenRadioButton.setOnMouseClicked(event -> {
-            if (!isIsSetForGreen()){
-                greenPawn1.setFill(Color.GREENYELLOW);
-                greenPawn2.setFill(Color.GREENYELLOW);
-                greenPawn3.setFill(Color.GREENYELLOW);
-                greenPawn4.setFill(Color.GREENYELLOW);
-                isSetForGreen.setValue(true);
-            }
-            else if (isIsSetForGreen()){
-                greenPawn1.setFill(Color.web("#26ff00"));
-                greenPawn2.setFill(Color.web("#26ff00"));
-                greenPawn3.setFill(Color.web("#26ff00"));
-                greenPawn4.setFill(Color.web("#26ff00"));
-                isSetForGreen.setValue(false);
-            }
-        });
+        if (isIsSetForGreen()){
+            playerCount++;
+            this.theModel.getPawnColors().add("green");
+        }
+        return playerCount;
+    }
 
-        yellowRadioButton.setOnMouseClicked(event -> {
-            if (!isIsSetForYellow()){
-                yellowPawn1.setFill(Color.LIGHTYELLOW);
-                yellowPawn2.setFill(Color.LIGHTYELLOW);
-                yellowPawn3.setFill(Color.LIGHTYELLOW);
-                yellowPawn4.setFill(Color.LIGHTYELLOW);
-                isSetForYellow.setValue(true);
-            }
-            else if (isIsSetForYellow()){
-                yellowPawn1.setFill(Color.web("#edff1f"));
-                yellowPawn2.setFill(Color.web("#edff1f"));
-                yellowPawn3.setFill(Color.web("#edff1f"));
-                yellowPawn4.setFill(Color.web("#edff1f"));
-                isSetForYellow.setValue(false);
-            }
-        });
+    private void moveButtonHandleEvent() {
+        if(this.theModel.getCurrPlayer().getPawnToMove() != null) {
+            this.theModel.getCurrPlayer().movePawn(this.lastCardDrawn.getCardValue()); //this moves this.pawnToMove
+            int landingIndex = this.theModel.getCurrPlayer().getPawnToMove().getLandingIndex();
+            String id = "space" + landingIndex;
+            for (Rectangle space : spacesList) {
+                if (id.equals(space.getId())) {
+                    move(this.pawnSelected, space);
+                    sendPawnsStartOnUI();
+                    if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
+                        this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
+                }
 
+            }
+            for (Circle space : homeList) {
+                if (id.equals(space.getId())) {
+                    move(this.pawnSelected, space);
+                    sendPawnsStartOnUI();
+                    if(!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty())
+                        this.theModel.getCurrPlayer().clearListOfPawnsToMoveToStart();
+                }
+            }
 
+            //after you moved, now increment the current player unless its a two
+            if(this.lastCardDrawn.getCardValue().equals(CardValue.TWO)) {
+                //java fx to print this to screen
+                turnText.setText("Draw Again! It is still " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+                cardRuleText.setText(null);
+                cardDrawnText.setText(null);
+                movesText.setText(null);
+            }
+
+            else{
+                if(this.theModel.isGameOver()){
+                    System.out.println("GAME OVER");
+                }
+                else{
+                    int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+                    this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+                    if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                        System.out.println(this.theModel.getCurrPlayerIndex());
+                        this.theModel.setCurrPlayerIndex(0);
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+                    }
+                    else{
+                        this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+                    }
+                }
+                turnText.setText("Next player draw!");
+                cardRuleText.setText(null);
+                cardDrawnText.setText(null);
+                movesText.setText(null);
+            }
+        }
+        else{
+            turnText.setText("You cannot move a pawn this turn!");
+        }
+    }
+
+    private void drawButtonHandleEvent() {
+        this.theModel.getGameBoard().initSlideSpacesOnBoard(this.theModel.getCurrPlayer());
+
+        System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+        //update UI
+        turnText.setText("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+
+        Card drawnCard = this.theModel.getGameDeck().drawCard();
+        this.lastCardDrawn = drawnCard;
+
+        this.theModel.setDrawnCard(drawnCard);
+        //Update UI
+        cardDrawnText.setText("You have drawn a " + this.theModel.getDrawnCard().getCardValue());
+        cardRuleText.setText(this.theModel.getDrawnCard().getCardValue().getCardMethod());
+
+        this.theModel.getCurrPlayer().findPossiblePawnMoves(theModel.getDrawnCard());
+
+        if (this.theModel.getCurrPlayer().getPossiblePawnMoves().isEmpty()){
+
+            this.theModel.getCurrPlayer().setPawnToMove(null);
+
+            movesText.setText("No possible moves! Draw card for next turn!");
+
+            //incrementing to the next player
+            int currIndex = this.theModel.getCurrPlayerIndex(); //current player index
+            this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
+
+            if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
+                System.out.println(this.theModel.getCurrPlayerIndex());
+                this.theModel.setCurrPlayerIndex(0);
+                this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
+            }
+            else{
+                this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(this.theModel.getCurrPlayerIndex()));
+            }
+        }
+        else{
+            movesText.setText(this.theModel.getCurrPlayer().getPossiblePawnMoves().size() + " possible moves! Please select a pawn!");
+        }
     }
 
     private void sendPawnsStartOnUI() {
@@ -990,10 +914,6 @@ public class SorryController {
                 }
             }
         }
-    }
-
-    private void initBindings() {
-
     }
 
     /**
@@ -1075,40 +995,5 @@ public class SorryController {
         return isSetForYellow;
     }
 
-    private void sendToStart(Circle pawn) {
-        double xStart = 0;
-        double yStart = 0;
-        for(Pawn movedPawn: this.theModel.getGameBoard().getAllPawns()){
-            if (movedPawn.getId().equals(pawn.getId())){
-                if (movedPawn.getColor() == PawnColor.RED){
-                    xStart = redStart.getBoundsInParent().getCenterX();
-                    yStart = redStart.getBoundsInParent().getCenterY();
-                }
-                else if (movedPawn.getColor() == PawnColor.BLUE){
-                    xStart = blueStart.getBoundsInParent().getCenterX();
-                    yStart = blueStart.getBoundsInParent().getCenterY();
-                }
-                else if (movedPawn.getColor() == PawnColor.GREEN){
-                    xStart = greenStart.getBoundsInParent().getCenterX();
-                    yStart = greenStart.getBoundsInParent().getCenterY();
-                }
-                else if (movedPawn.getColor() == PawnColor.YELLOW){
-                    xStart = yellowStart.getBoundsInParent().getCenterX();
-                    yStart = yellowStart.getBoundsInParent().getCenterY();
-                }
 
-                // Get position of the pawn
-                double xPawn = pawn.getLayoutX();
-                double yPawn = pawn.getLayoutY();
-
-                // Find the difference between them
-                double xDiff = xStart - xPawn;
-                double yDiff = yStart - yPawn;
-
-                // Set the pawn to move the difference
-                pawn.setCenterX(xDiff);
-                pawn.setCenterY(yDiff);
-            }
-        }
-    }
 }
