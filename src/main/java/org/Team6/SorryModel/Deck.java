@@ -65,8 +65,8 @@ public class Deck {
         Random random = new Random();
         int drawIndex = random.nextInt(this.gameDeck.size());
         Card drawnCard = this.gameDeck.get(drawIndex);
-        System.out.println("You have drawn a " + drawnCard.getCardValue());
-        System.out.println(drawnCard.getCardValue().getCardMethod());
+        //System.out.println("You have drawn a " + drawnCard.getCardValue());
+        //System.out.println(drawnCard.getCardValue().getCardMethod());
 
         //update instance variables
         this.gameDeck.remove(drawnCard);

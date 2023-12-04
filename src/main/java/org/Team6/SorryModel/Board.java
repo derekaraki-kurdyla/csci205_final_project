@@ -12,15 +12,14 @@
  * Package: org.Team6.SorryModel
  * Class: Board
  *
- * Description:
+ * Description: This class represents the Sorry! Board. It keeps track of all the
+ * pawns and spaces currently on the board.
  *
  * ****************************************
  */
 package org.Team6.SorryModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -149,10 +148,10 @@ public class Board {
                 }
             }
         }
-        System.out.println("length of redPawns: " + this.redPawns.size());
-        System.out.println("length of bluePawns: " + this.bluePawns.size());
-        System.out.println("length of greenPawns: " + this.greenPawns.size());
-        System.out.println("length of yellowPawns: " + this.yellowPawns.size());
+        //System.out.println("length of redPawns: " + this.redPawns.size());
+        //System.out.println("length of bluePawns: " + this.bluePawns.size());
+        //System.out.println("length of greenPawns: " + this.greenPawns.size());
+        //System.out.println("length of yellowPawns: " + this.yellowPawns.size());
     }
 
     /**

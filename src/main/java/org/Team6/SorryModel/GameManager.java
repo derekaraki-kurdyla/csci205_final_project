@@ -12,17 +12,16 @@
  * Package: org.Team6.SorryModel
  * Class: GameManager
  *
- * Description:
+ * Description: This class is used to create the necessary objects that will be used
+ * in our Sorry! game. This class creates a board, deck, and players, and it checks
+ * for a win condition
  *
  * ****************************************
  */
 package org.Team6.SorryModel;
 
-import java.awt.image.AreaAveragingScaleFilter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
@@ -118,14 +117,15 @@ public class GameManager {
     }
 
     /**
-     * Welcomes the players to Sorry
+     * Welcomes the players to Sorry, not used as we have set Text to do this in the UI
      */
     private void displayWelcome() {
         System.out.println("Welcome to Sorry!");
     }
 
     /**
-     * asks the users for the number of {@link Player} and updates {@link #numPlayers}
+     * Asks the users for the number of {@link Player} and updates {@link #numPlayers}
+     * Not used as we replaced this function with the RadioButtons in the UI
      */
     private void getNumPlayers() {
         System.out.println("How many players are playing Sorry? [1-4]");
@@ -155,6 +155,7 @@ public class GameManager {
     /**
      * determines what {@link PawnColor} each of the{@link Player} objects
      * will use for their {@link Pawn} objects
+     * Not used as we replaced this function with the RadioButtons in the UI
      */
     private void getColorPawns() {
         ArrayList<String> chosenPawnColors = new ArrayList<>();

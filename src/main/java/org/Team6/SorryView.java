@@ -36,7 +36,7 @@ public class SorryView {
     public Parent initializeView() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoughSorryBoard/BoardView.fxml"));
-            System.out.println("initialize view");
+            //System.out.println("initialize view");
             SorryController controller = new SorryController(this.theModel, this);
             loader.setController(controller);
             return loader.load();

@@ -311,8 +311,8 @@ public class SorryController {
     public SorryController(GameManager model, SorryView view) {
         this.theModel = model;
         this.theView = view;
-        System.out.println("constructor correct!");
-        System.out.println(this.theModel.getPlayerArrayList());
+        //System.out.println("constructor correct!");
+        //System.out.println(this.theModel.getPlayerArrayList());
         // You can perform additional setup here if needed
     }
 
@@ -807,7 +807,7 @@ public class SorryController {
             else{
                 // If the game is over, thank the user
                 if(this.theModel.isGameOver()){
-                    System.out.println("GAME OVER");
+                    //System.out.println("GAME OVER");
                     updateTurnText("Game Over! Thanks for Playing!");
                 }
                 // Game is not over, so update the current player for the next turn
@@ -856,7 +856,7 @@ public class SorryController {
         this.theModel.setCurrPlayerIndex(currIndex + 1); //increment current player index
 
         if(this.theModel.getCurrPlayerIndex() == this.theModel.getPlayerArrayList().size()) { //if incrementing it caused it to go out of bounds
-            System.out.println(this.theModel.getCurrPlayerIndex());
+            //System.out.println(this.theModel.getCurrPlayerIndex());
             this.theModel.setCurrPlayerIndex(0);
             this.theModel.setCurrPlayer(this.theModel.getPlayerArrayList().get(0)); //set currplayer to
         }
@@ -875,7 +875,7 @@ public class SorryController {
         this.theModel.setDrawnCard(drawnCard);
 
         // Update Text
-        System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
+        //System.out.println("It is " + this.theModel.getCurrPlayer().getPawnColor() + "'s turn.");
         updateTextAfterDraw();
 
         // Get possible moves list
@@ -911,13 +911,13 @@ public class SorryController {
     }
 
     private void sendPawnsStartOnUI() {
-        System.out.println("REACHED CONTROLLER LOGIC HERE LINE 968");
+        //System.out.println("REACHED CONTROLLER LOGIC HERE LINE 968");
         if (!this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart().isEmpty()){
-            System.out.println("reached here");
+            //System.out.println("reached here");
             for(Pawn pawn: this.theModel.getCurrPlayer().getListOfPawnsToMoveToStart()){
-                System.out.println("reached here 2");
+                //System.out.println("reached here 2");
                 for(Circle UIPawn: this.pawnList){
-                    System.out.println("reached here 3");
+                    //System.out.println("reached here 3");
                     if (pawn.getId().equals(UIPawn.getId())){ //we found the pawn to move on the UI
                         if(pawn.getColor().equals(PawnColor.RED)){
                             move(UIPawn, redStart);

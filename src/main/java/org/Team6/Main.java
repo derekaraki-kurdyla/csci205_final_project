@@ -31,7 +31,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        System.out.println("reached start method");
+        //System.out.println("reached start method");
 
         Parent root = this.theView.initializeView();
 

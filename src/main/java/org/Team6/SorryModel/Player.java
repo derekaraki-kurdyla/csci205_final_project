@@ -12,7 +12,9 @@
  * Package: org.Team6.SorryModel
  * Class: Player
  *
- * Description:
+ * Description: This class represents a person playing a Sorry! game.
+ * It is responsible to keep track of its own color, the board, the current pawn to move, and
+ * possible pawn moves.
  *
  * ****************************************
  */
@@ -64,32 +66,18 @@ public class Player {
         // the controller, which will then highlight all the possible pawns in the controller
         //
 
-
         possiblePawnMoves = new ArrayList<>();
         ArrayList<Pawn> colorPawnsToIterateThrough = determineColorPawnsToIterateThrough();
 
         switch (drawnCard.getCardValue()) {
             case ONE -> {
+
                 ArrayList<Pawn> possiblePawnMovesOnBoard = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 1);
                 ArrayList<Pawn> possiblePawnMovesAtStart = this.findPossiblePawnMovesAtStart(colorPawnsToIterateThrough);
 
                 possiblePawnMoves.addAll(possiblePawnMovesOnBoard);
                 possiblePawnMoves.addAll(possiblePawnMovesAtStart);
 
-                // javaFX part
-//                pawnToMove = getPawnToMove(possiblePawnMoves);
-//
-//                if(pawnToMove != null){
-//                    if(pawnToMove.isOnBoard()){
-//                        this.moveForward(pawnToMove,1);
-//                    }
-//                    else if(pawnToMove.isAtStart()){
-//                        this.moveFromStart(pawnToMove);
-//                    }
-//                    else{
-//                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 80");
-//                    }
-//                }
             }
             case TWO -> {
 
@@ -99,105 +87,37 @@ public class Player {
                 possiblePawnMoves.addAll(possiblePawnMovesOnBoard);
                 possiblePawnMoves.addAll(possiblePawnMovesAtStart);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null){
-//                    if(pawnToMove.isOnBoard()){
-//                        this.moveForward(pawnToMove,2);
-//                    }
-//                    else if(pawnToMove.isAtStart()){
-//                        this.moveFromStart(pawnToMove);
-//                    }
-//                    else{
-//                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 103");
-//                    }
-//                }
-
             }
             case THREE -> {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 3);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null)
-//                    this.moveForward(pawnToMove,3);
             }
 
             case FOUR -> {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 4);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves);
-//
-//                if(pawnToMove != null){
-//                    this.moveBackward(pawnToMove, 4);
-//                }
             }
             case FIVE -> {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 5);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null)
-//                    this.moveForward(pawnToMove,5);
-
             }
             case SEVEN -> {
+
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 7);
-                //Either move one pawn forward 7 spaces or split the move between any two pawns
-
-                //can get possible pawn moves for different moves but need to know
-
-//                ArrayList<Pawn> possiblePawnMovesForSeven = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 7);
-//
-//                Scanner scan = new Scanner(System.in);
-//
-//                System.out.println("Would you like to move one pawn forwards 7 spaces [1] or two pawns forward for a combined 7 spaces [2]");
-
-                //String invalidInput
-
-                //while(scan.next().equals(1) || scan.next().equals){
-
-                //}
-
 
             }
             case EIGHT -> {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 8);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null)
-//                    this.moveForward(pawnToMove,8);
-
             }
             case TEN -> {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null){
-//                    Scanner scan = new Scanner(System.in);
-//                    // Java FX part
-//                    System.out.println("Would you like to move backwards or forwards? [backwards][forwards]");
-//                    String userInput = scan.next();
-//                    if(userInput.equalsIgnoreCase("backwards") && possiblePawnMovesForBackwards.contains(pawnToMove)){
-//                        //need second part of if statement because it could only be contained in possiblePawnMovesForForwards
-//                        this.moveBackward(pawnToMove, 1);
-//                    }
-//                    else if(userInput.equalsIgnoreCase("forwards") && possiblePawnMovesForForwards.contains(pawnToMove)){
-//                        this.moveForward(pawnToMove, 10);
-//                    }
-//                    else{
-//                        //java fx part
-//                        int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
-//                        System.out.println("Pawn at index " + currBoardIndex + " cannot move " + userInput);
-//                    }
-//                }
             }
             case ELEVEN -> {
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 11);
@@ -207,20 +127,18 @@ public class Player {
 
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 12);
 
-//                Pawn pawnToMove = getPawnToMove(possiblePawnMoves); // javaFX part
-//
-//                if(pawnToMove != null)
-//                    this.moveForward(pawnToMove,12);
-
             }
             case SORRY -> {
+
                 possiblePawnMoves = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 13);
+
             }
         }
     }
 
     public void movePawn(CardValue cardValue){
         switch(cardValue){
+
             case ONE -> {
                 if(pawnToMove != null){
                     if(pawnToMove.isOnBoard()){
@@ -229,11 +147,11 @@ public class Player {
                     else if(pawnToMove.isAtStart()){
                         this.moveFromStart(pawnToMove);
                     }
-                    else{
-                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 80");
-                    }
+                    //else{
+                    //    System.out.println("THIS SHOULD NEVER HAPPEN LINE 80");
+                    //}
                 }
-                System.out.println("Moved 1 space!");
+                //System.out.println("Moved 1 space!");
             }
             case TWO -> {
 
@@ -244,31 +162,33 @@ public class Player {
                     else if(pawnToMove.isAtStart()){
                         this.moveFromStart(pawnToMove);
                     }
-                    else{
-                        System.out.println("THIS SHOULD NEVER HAPPEN LINE 103");
-                    }
+                    //else{
+                    //    System.out.println("THIS SHOULD NEVER HAPPEN LINE 103");
+                    //}
                 }
-                System.out.println("Moved 2 spaces!");
+                //System.out.println("Moved 2 spaces!");
             }
             case THREE -> {
+
                 if(this.pawnToMove != null)
                     this.moveForward(this.pawnToMove,3);
-                System.out.println("Moved 3 spaces!");
+                //System.out.println("Moved 3 spaces!");
             }
             case FOUR -> {
 
                 if(pawnToMove != null){
                     this.moveBackward(pawnToMove, 4);
                 }
-                System.out.println("Moved 4 spaces!");
+                //System.out.println("Moved 4 spaces!");
             }
             case FIVE -> {
 
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,5);
-                System.out.println("Moved 5 spaces!");
+                //System.out.println("Moved 5 spaces!");
             }
             case SEVEN -> {
+
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,7);
             }
@@ -278,53 +198,31 @@ public class Player {
                     this.moveForward(pawnToMove,8);
             }
             case TEN -> {
+
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,10);
-//                ArrayList<Pawn> possiblePawnMovesForForwards = this.findPossiblePawnMovesForForwards(colorPawnsToIterateThrough, 10);
-//                ArrayList<Pawn> possiblePawnMovesForBackwards = this.findPossiblePawnMovesForBackwards(colorPawnsToIterateThrough, 1);
-//
-//                possiblePawnMoves.addAll(possiblePawnMovesForForwards);
-//                for(Pawn pawn: possiblePawnMovesForBackwards){
-//                    if(!possiblePawnMoves.contains(pawn)) { //if pawn is already in possiblePawnMoves
-//                        possiblePawnMoves.add(pawn);
-//                    }
-//                }
 
-//                if(pawnToMove != null){
-//                    Scanner scan = new Scanner(System.in);
-//                    // Java FX part
-//                    System.out.println("Would you like to move backwards or forwards? [backwards][forwards]");
-//                    String userInput = scan.next();
-//                    if(userInput.equalsIgnoreCase("backwards") && possiblePawnMovesForBackwards.contains(pawnToMove)){
-//                        //need second part of if statement because it could only be contained in possiblePawnMovesForForwards
-//                        this.moveBackward(pawnToMove, 1);
-//                    }
-//                    else if(userInput.equalsIgnoreCase("forwards") && possiblePawnMovesForForwards.contains(pawnToMove)){
-//                        this.moveForward(pawnToMove, 10);
-//                    }
-//                    else{
-//                        //java fx part
-//                        int currBoardIndex = this.gameBoard.getMapOfBoard().get(pawnToMove);
-//                        System.out.println("Pawn at index " + currBoardIndex + " cannot move " + userInput);
-//                    }
-//                }
             }
+
             case ELEVEN -> {
+
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,11);
             }
+
             case TWELVE -> {
 
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,12);
 
-                System.out.println("Moved 12 spaces!");
+                //System.out.println("Moved 12 spaces!");
             }
             case SORRY -> {
+
                 if(pawnToMove != null)
                     this.moveForward(pawnToMove,13);
 
-                System.out.println("Moved 13 spaces!");
+                //System.out.println("Moved 13 spaces!");
             }
 
         }
@@ -334,23 +232,34 @@ public class Player {
 
         //check if index is occupied
         int indexAfterStartCircle = this.converter.convertToBoardIndex(2); //CHECK THIS
+
         if(this.gameBoard.getMapOfSpaces().get(indexAfterStartCircle).equals(SpaceType.OCCUPIED)) { //means different color
             Pawn pawnToRemove = this.findPawnFromBoardIndex(indexAfterStartCircle);
-            this.gameBoard.getMapOfBoard().remove(pawnToRemove);
-            this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
-            pawnToMove.moveFromStart();
-            pawnToRemove.sendStart();
 
-            System.out.println("LINE 347!");
+            // Update the locations of both pawns in the logic
+            updateLocationsOfPawns(pawnToMove, pawnToRemove, indexAfterStartCircle);
 
+            // Add pawnToRemove to the list of pawns to remove
             this.listOfPawnsToMoveToStart.add(pawnToRemove);
         }
-        else{ //not occupied
+
+        // If the space is not occupied, move the pawn from start
+        else{
             this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
             this.gameBoard.getMapOfSpaces().put(indexAfterStartCircle, SpaceType.OCCUPIED);
             pawnToMove.moveFromStart();
         }
+
+        // Update the landing index of pawnToMove
         this.pawnToMove.setLandingIndex(indexAfterStartCircle);
+    }
+
+    private void updateLocationsOfPawns(Pawn pawnToMove, Pawn pawnToRemove, int indexAfterStartCircle) {
+        // Update location in the logic and move the pawns
+        this.gameBoard.getMapOfBoard().remove(pawnToRemove);
+        this.gameBoard.getMapOfBoard().put(pawnToMove, indexAfterStartCircle);
+        pawnToMove.moveFromStart();
+        pawnToRemove.sendStart();
     }
 
     private void moveBackward(Pawn pawnToMove, int numSpaces){
@@ -457,7 +366,7 @@ public class Player {
     private void moveForwardOccupied(Pawn pawnToMove, int landingBoardIndex, int currBoardIndex) {
         Pawn pawnToRemove = this.findPawnFromBoardIndex(landingBoardIndex);
 
-        System.out.println("move forward occupied reached line 469");
+        //System.out.println("move forward occupied reached line 469");
 
         this.gameBoard.getMapOfBoard().remove(pawnToRemove); //update board by removing old pawn
         this.gameBoard.getMapOfBoard().remove(pawnToMove); //update board by removing new pawn from old position
@@ -468,7 +377,7 @@ public class Player {
         //add to list which is used to update UI
         this.listOfPawnsToMoveToStart.add(pawnToRemove);
         for(Pawn pawn: this.listOfPawnsToMoveToStart){
-            System.out.println("Pawn number " + pawn.getId());
+            //System.out.println("Pawn number " + pawn.getId());
         }
 
     }
@@ -504,7 +413,7 @@ public class Player {
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 3);
 
         this.pawnToMove.setLandingIndex(landingBoardIndex + 3); //set this after we move button
-        System.out.println("line 500 landing board index is: " + landingBoardIndex);
+        //System.out.println("line 500 landing board index is: " + landingBoardIndex);
     }
 
     private void moveForwardLongSlide(Pawn pawnToMove, int currBoardIndex, int landingBoardIndex) {
@@ -538,7 +447,7 @@ public class Player {
         this.gameBoard.getMapOfBoard().remove(pawnToMove);
         this.gameBoard.getMapOfBoard().put(pawnToMove, landingBoardIndex + 4);
 
-        System.out.println("line 540 landing board index is: " + landingBoardIndex);
+       //System.out.println("line 540 landing board index is: " + landingBoardIndex);
         this.pawnToMove.setLandingIndex(landingBoardIndex + 4);
     }
 
@@ -686,7 +595,7 @@ public class Player {
                     possiblePawnIndices.add(possibleIndex); //for start index, although not an index
                 }
                 //Java FX
-                System.out.println("You can move a pawn at index " + possibleIndex);
+                //System.out.println("You can move a pawn at index " + possibleIndex);
             }
 
             Scanner scan = new Scanner(System.in);
@@ -697,7 +606,7 @@ public class Player {
 
                 //could be zero, and no pawn at index 0
                 if(index == 0){
-                    System.out.println("Valid index (0)");
+                    //System.out.println("Valid index (0)");
                     //need a for loop because unlike other indices, there could be multiple pawns at index 0
                     for(Pawn pawn: possiblePawnMoves){
                         if (pawn.isAtStart()) {
