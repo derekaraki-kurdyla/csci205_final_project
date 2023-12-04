@@ -12,15 +12,30 @@
  * Package: org.Team6.SorryModel
  * Class: BoardPawnIndexConverter
  *
- * Description:
+ * Description: An interface that we used to convert the individual color views
+ * to the universal board index.
  *
  * ****************************************
  */
 package org.Team6.SorryModel;
 
+/**
+ * An interface that we used to convert the individual color views
+ * to the universal board index.
+ */
 public interface BoardPawnIndexConverter {
 
+    /**
+     * Convert a color index to a board index
+     * @param index - index of a pawn or space before conversion
+     * @return the converted index
+     */
     public abstract int convertToBoardIndex(int index);
 
+    /**
+     * Convert a board index to a color index
+     * @param index - index of a pawn or space before conversion
+     * @return the converted index
+     */
     public abstract int convertToColorIndex(int index);
 }

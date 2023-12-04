@@ -12,13 +12,17 @@
  * Package: org.Team6.SorryModel
  * Class: Pawn
  *
- * Description:
+ * Description: A class to represent a Pawn in the game Sorry! Pawns will keep track
+ * of where they are on the board.
  *
  * ****************************************
  */
 package org.Team6.SorryModel;
 
-
+/**
+ * A class to represent a Pawn in the game Sorry! Pawns will keep track
+ * of where they are on the board.
+ */
 public class Pawn{
 
     /** Max index for each Pawn i.e. index of end circle */
@@ -39,6 +43,9 @@ public class Pawn{
     /** ID to link to view */
     private String id;
 
+    /**
+     * The landing index of the pawn
+     */
     private int landingIndex;
 
     /** Constructor that lets us set the color of the pawn */
@@ -52,6 +59,12 @@ public class Pawn{
         this.landingIndex = 0;
     }
 
+    /**
+     * Generate and set the id of a {@link Pawn} object
+     * @param idNum - number of pawn
+     * @return an id of a pawn that matches the fxid of an
+     * FXML {@link javafx.scene.shape.Circle} object.
+     */
     private String generateId(int idNum) {
         if (this.color == PawnColor.RED){
             this.id = "redPawn" + idNum;
@@ -69,37 +82,25 @@ public class Pawn{
     }
 
 
+    public PawnColor getColor() {return this.color;}
+
+    public boolean isAtStart() {return this.atStart;}
+
+    public boolean isAtEnd() {return this.atEnd;}
+
+    public boolean isOnBoard() {return this.onBoard;}
+
     /**
-     * Method to move a pawn backward
-     * @param numSpaces: the number of spaces the pawn will move backward
+     * Update the pawn's location booleans when it is at Start
      */
-    public void moveBackward(int numSpaces)
-    {
-
-    }
-
-    public PawnColor getColor()
-    {
-        return this.color;
-    }
-
-    public boolean isAtStart(){
-        return this.atStart;
-    }
-
-    public boolean isAtEnd(){ //this can be used for jUnit tests when game is over
-        return this.atEnd;
-    }
-
-    public boolean isOnBoard(){
-        return this.onBoard;
-    }
-
     public void sendStart(){
         this.atStart = true;
         this.onBoard = false;
     }
 
+    /**
+     * Update the pawn's location booleans when it reaches the end
+     */
     public void reachedEnd(){
         this.onBoard = false;
         this.atEnd = true;
@@ -114,15 +115,9 @@ public class Pawn{
         this.onBoard = true;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() {return id;}
 
-    public int getLandingIndex() {
-        return landingIndex;
-    }
+    public int getLandingIndex() {return landingIndex;}
 
-    public void setLandingIndex(int landingIndex) {
-        this.landingIndex = landingIndex;
-    }
+    public void setLandingIndex(int landingIndex) {this.landingIndex = landingIndex;}
 }
