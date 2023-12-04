@@ -53,17 +53,4 @@ public class Space {
     public Space(SpaceType spaceType){
         this.spaceType = spaceType;
     }
-
-
-
-    /**
-     * Create a method that will allow you to set the space to whatever you would like
-     */
-    public void setSpace(SpaceType spaceType){
-        this.spaceType = spaceType;
-    }
-
-    public SpaceType getSpaceType(){
-        return this.spaceType;
-    }
 }
