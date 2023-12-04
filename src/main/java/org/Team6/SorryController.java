@@ -575,7 +575,6 @@ public class SorryController {
         pawnList.add(yellowPawn4);
     }
 
-
     private void initEventHandlers() {
 
         //press the draw button:

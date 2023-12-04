@@ -55,6 +55,7 @@ public class RoughBoardFirstTry extends Application {
     private BorderPane center;
     /** A VBox to order everything in the center */
     private VBox cardPile;
+
     /** Labels for the piles and Sorry! text*/
     private Label drawPileLabel;
     private Label discardPileLabel;
@@ -65,6 +66,7 @@ public class RoughBoardFirstTry extends Application {
         launch(args);
     }
 
+    /** The Start method to run our JavaFX application*/
     @Override
     public void start(Stage primaryStage) {
         root = new BorderPane();
@@ -171,12 +173,13 @@ public class RoughBoardFirstTry extends Application {
     }
 
 
-    // Create the Red Start and Green Home spaces
+    /** Create the Red Start and Green Home spaces */
     private void initRedStartGreenHome() {
-
+        // Create containers for the spaces
         VBox greenHomeVBox = new VBox();
         HBox redStartGreenHome = new HBox();
 
+        // Create the Green Safe Zone
         for (int i = 0; i < 5; i++) {
             Label greenSafeZone = new Label();
             greenSafeZone.setBorder(new Border(new BorderStroke(null,
@@ -185,16 +188,18 @@ public class RoughBoardFirstTry extends Application {
             redStartGreenHome.getChildren().add(greenSafeZone);
         }
 
-
+        // Create the Green Home
         Label greenHome = new Label("Home");
         greenHome.setBorder(new Border(new BorderStroke(null,
                 BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
         greenHome.setPrefSize(75,75);
         greenHome.setAlignment(Pos.CENTER);
 
+        // Add the Home
         redStartGreenHome.getChildren().add(greenHome);
         greenHomeVBox.getChildren().add(redStartGreenHome);
 
+        // Create some space
         for (int i = 0; i < 3; i++) {
             Label filler = new Label();
             filler.setBorder(new Border(new BorderStroke(null,
@@ -203,28 +208,36 @@ public class RoughBoardFirstTry extends Application {
             redStartGreenHome.getChildren().add(filler);
         }
 
+        // Create the red Home
         Circle redHome = new Circle(42.5, Color.RED);
         redStartGreenHome.getChildren().add(redHome);
 
+        // Set it to the center
         center.setBottom(greenHomeVBox);
 
     }
 
+    /** Create the Sorry label and pile objects */
     private void initCenter() {
+        // Create the Sorry! label object
         sorryLbl = new Label("Sorry!");
         sorryLbl.setFont(new Font("Comic Sans", 35));
 
+        // Create the draw pile
         drawPileLabel = new Label("Draw Pile");
         drawPileLabel.setFont(new Font("Comic Sans", 15));
 
+        // Create the discard pile
         discardPileLabel = new Label("Discard Pile");
         discardPileLabel.setFont(new Font("Comic Sans", 15));
 
+        // Create the borders to represent a physical stack of cards
         drawPileLabel.setBorder(new Border(new BorderStroke(null,
                 BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
         discardPileLabel.setBorder(new Border(new BorderStroke(null,
                 BorderStrokeStyle.SOLID, new CornerRadii(4), BorderWidths.DEFAULT)));
 
+        // Set the preferred width, height, and alignment
         drawPileLabel.setPrefWidth(100);
         drawPileLabel.setPrefHeight(50);
 
@@ -240,10 +253,14 @@ public class RoughBoardFirstTry extends Application {
 
     }
 
+    /**
+     * Create the left side of the board
+     */
     private void initLeft() {
         left.setSpacing(0);
         left.setStyle("-fx-background-color: #32CD32;");
 
+        // Create the green spaces
         for (int i = 0; i < 14; i++) {
             Label spaceOutline = new Label();
             spaceOutline.setBorder(new Border(new BorderStroke(null,
@@ -251,16 +268,17 @@ public class RoughBoardFirstTry extends Application {
             spaceOutline.setPrefSize(50,50);
             left.getChildren().add(spaceOutline);
 
-            //Button buttonCurrent = new Button("Space");
-            //buttonCurrent.setPrefSize(50, 100);
-            //left.getChildren().add(buttonCurrent);
         }
     }
 
+    /**
+     * Create the right side of the board
+     */
     private void initRight() {
         right.setSpacing(0);
         right.setStyle("-fx-background-color: #1E90FF;");
 
+        // Create the blue spaces
         for (int i = 0; i < 14; i++) {
             Label spaceOutline = new Label();
             spaceOutline.setBorder(new Border(new BorderStroke(null,
@@ -268,16 +286,17 @@ public class RoughBoardFirstTry extends Application {
             spaceOutline.setPrefSize(50,50);
             right.getChildren().add(spaceOutline);
 
-            //Button buttonCurrent = new Button("Space");
-            //buttonCurrent.setPrefSize(50, 50);
-            //right.getChildren().add(buttonCurrent);
         }
     }
 
+    /**
+     * Create the bottom side of the board
+     */
     private void initBottom() {
         bottom.setSpacing(0);
         bottom.setStyle("-fx-background-color: #B22222;");
 
+        // Create the red spaces
         for (int i = 0; i < 16; i++) {
             Label spaceOutline = new Label();
             spaceOutline.setBorder(new Border(new BorderStroke(null,
@@ -285,16 +304,17 @@ public class RoughBoardFirstTry extends Application {
             spaceOutline.setPrefSize(50,50);
             bottom.getChildren().add(spaceOutline);
 
-            //Button buttonCurrent = new Button("Space");
-            //buttonCurrent.setPrefSize(50, 50);
-            //bottom.getChildren().add(buttonCurrent);
         }
     }
 
+    /**
+     * Create the top side of the board
+     */
     private void initTop() {
         top.setSpacing(0);
         top.setStyle("-fx-background-color: #FFD700;");
 
+        // Create the yellow spaces
         for (int i = 0; i < 16; i++) {
             Label spaceOutline = new Label();
             spaceOutline.setBorder(new Border(new BorderStroke(null,
@@ -302,16 +322,7 @@ public class RoughBoardFirstTry extends Application {
             spaceOutline.setPrefSize(50,50);
             top.getChildren().add(spaceOutline);
 
-            //Button buttonCurrent = new Button("Space");
-            //buttonCurrent.setPrefSize(50, 50);
-            //top.getChildren().add(buttonCurrent);
         }
 
-        // Button buttonCurrent = new Button("Current");
-        //buttonCurrent.setPrefSize(50, 20);
-
-        //Button buttonProjected = new Button("Projected");
-        //buttonProjected.setPrefSize(100, 20);
-        //top.getChildren().addAll(buttonCurrent, buttonProjected);
     }
 }

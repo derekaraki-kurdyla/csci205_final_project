@@ -65,69 +65,8 @@ public class GameManager {
      * constructor for {@link GameManager} class
      */
     public GameManager() {
-
     }
 
-    /**
-     * Method that runs the entire game logic until game is won or quit
-     */
-//    public void playGame() {
-//
-//        boolean gameOver = false;
-//        this.currPlayerIndex = 0;
-//        int countTurns = 0;
-//
-//        while (!gameOver) {
-//            if (currPlayerIndex == this.playerArrayList.size()) {
-//                currPlayerIndex = 0;
-//            }
-//
-//            this.currPlayer = this.playerArrayList.get(currPlayerIndex);
-//
-//            this.gameBoard.initSlideSpacesOnBoard(this.currPlayer); //do this for every turn because spaces on turn depend on color of pawn currently going
-//
-//            //use java fx to print this to screen
-//            System.out.println("It is " + this.currPlayer.getPawnColor() + "'s turn.");
-//
-//            //use java FX for this function to run only if button to draw has been pressed
-//            //drawnCard = this.gameDeck.drawCard();
-//            if (drawnCard != null){
-//                this.currPlayer.takeTurn(drawnCard);
-//                System.out.println("hello");
-//
-//
-//                while (drawnCard.getCardValue().equals(CardValue.TWO)) {
-//                    //java fx to print this to screen
-//                    System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
-//
-//                    drawnCard = this.gameDeck.drawCard();
-//
-//                    this.currPlayer.takeTurn(drawnCard);
-//                }
-//
-//                currPlayerIndex++; //set up for next player's turn
-//                countTurns++;
-//
-//                gameOver = this.isGameOver();
-//            }
-            //this.currPlayer.takeTurn(drawnCard);
-
-
-            //while (drawnCard.getCardValue().equals(CardValue.TWO)) {
-            //    //java fx to print this to screen
-            //    System.out.println("Draw Again! It is still " + this.currPlayer.getPawnColor() + "'s turn.");
-
-            //    drawnCard = this.gameDeck.drawCard();
-
-            //    this.currPlayer.takeTurn(drawnCard);
-            //}
-
-            //currPlayerIndex++; //set up for next player's turn
-            //countTurns++;
-
-            //gameOver = this.isGameOver();
-     //   }
-    //}
 
     public void initBoardAndDeck() {
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
