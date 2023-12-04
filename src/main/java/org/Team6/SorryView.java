@@ -12,7 +12,7 @@
  * Package: org.Team6
  * Class: SorryView
  *
- * Description:
+ * Description: The View for our Sorry! game. The FXML file is in our resources folder
  *
  * ****************************************
  */
@@ -35,15 +35,17 @@ public class SorryView {
 
     public Parent initializeView() {
         try {
+            // Get FXML from resources folder
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/RoughSorryBoard/BoardView.fxml"));
-            //System.out.println("initialize view");
+
             SorryController controller = new SorryController(this.theModel, this);
             loader.setController(controller);
             return loader.load();
         }
+
+        // Handle IOExceptions
         catch (IOException e) {
             e.printStackTrace();
-            // Handle exception appropriately
             return null;
         }
     }

@@ -12,8 +12,8 @@
  * Package: org.Team6.SorryModel
  * Class: Board
  *
- * Description: This class represents the Sorry! Board. It keeps track of all the
- * pawns and spaces currently on the board.
+ * Description: This class represents the Sorry! Board. It keeps track of and creates
+ * all the pawns and spaces currently on the board.
  *
  * ****************************************
  */
@@ -24,7 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Board class that encapsulates the functionality of the Sorry board game.
+ * This class represents the Sorry! Board. It keeps track of and creates
+ * all the pawns and spaces currently on the board.
  */
 public class Board {
 
@@ -52,14 +53,14 @@ public class Board {
     private Map<Integer, SpaceType> mapOfSpaces = new HashMap<>();
 
 
-    /** constructor for {@link Board} class */
+    /** Constructor for {@link Board} class */
     public Board(ArrayList<String> pawnColors){
         this.initPawnsOnBoard(pawnColors);
         this.initSpacesOnBoard();
     }
 
     /**
-     * method that initializes {@link #mapOfSpaces}
+     * Method that initializes {@link #mapOfSpaces}
      * to their starting space enumerations {@link SpaceType}
      */
     private void initSpacesOnBoard(){
@@ -74,9 +75,6 @@ public class Board {
      * @param player
      */
     public void initSlideSpacesOnBoard(Player player){
-        // make sure when setting a spacetype as occupied by different, that only holds true if it is also not the start of the slide
-        // reason for this is because can only be one type, so it needs to be start of slide so that the pawn will slide.
-        // (this will automatically knock off all other pawns on the slide anyway)
 
         for(int i = 1; i <= 84; i++){ //have to do this to clear all slide indices
             if(this.mapOfSpaces.get(i).equals(SpaceType.START_LONG_SLIDE_DIFFERENT) || this.mapOfSpaces.get(i).equals(SpaceType.START_SHORT_SLIDE_DIFFERENT)){
@@ -115,6 +113,7 @@ public class Board {
      */
     private void initPawnsOnBoard(ArrayList<String> pawnColors) {
 
+        // For each PawnColor, create four pawns
         for (String pawnColor : pawnColors) {
 
             switch (pawnColor) {
@@ -148,10 +147,6 @@ public class Board {
                 }
             }
         }
-        //System.out.println("length of redPawns: " + this.redPawns.size());
-        //System.out.println("length of bluePawns: " + this.bluePawns.size());
-        //System.out.println("length of greenPawns: " + this.greenPawns.size());
-        //System.out.println("length of yellowPawns: " + this.yellowPawns.size());
     }
 
     /**

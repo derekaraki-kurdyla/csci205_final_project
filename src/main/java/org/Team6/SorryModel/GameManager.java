@@ -21,9 +21,12 @@
 package org.Team6.SorryModel;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
+/**
+ * This class is used to create the necessary objects that will be used
+ * in our Sorry! game. This class creates a board, deck, and players, and it checks
+ * for a win condition
+ */
 public class GameManager {
 
     /**
@@ -75,22 +78,32 @@ public class GameManager {
      * Finally, create a new deck
      */
     public void initBoardAndDeck() {
+        // Create a Board
         this.gameBoard = new Board(this.pawnColors); //need to initialize the gameBoard first in order to create this.playerArrayList
 
+        // Create the players
         for (String pawnColor : this.pawnColors) {
             this.playerArrayList.add(new Player(pawnColor, this.gameBoard)); //this is just so that GameManager can access turnorder
         }
 
+        // Create the Deck
         this.gameDeck = new Deck();
 
     }
 
+    /**
+     * Check to see if the game is over. The game is over when all four pawns of
+     * one color are at home.
+     * @return true if all four pawns of a color are at home, false otherwise
+     */
     public boolean isGameOver() {
+        // Pawn count
         int countRed = 0;
         int countBlue = 0;
         int countYellow = 0;
         int countGreen = 0;
 
+        // Count each pawn of each color if it is at home
         for (Pawn pawn : this.gameBoard.getRedPawns()) {
             if (pawn.isAtEnd())
                 countRed++;
@@ -111,79 +124,6 @@ public class GameManager {
         return (countRed == 4 || countBlue == 4 || countYellow == 4 || countGreen == 4);
     }
 
-    /**
-     * Welcomes the players to Sorry, not used as we have set Text to do this in the UI
-     */
-    private void displayWelcome() {
-        System.out.println("Welcome to Sorry!");
-    }
-
-    /**
-     * Asks the users for the number of {@link Player} and updates {@link #numPlayers}
-     * Not used as we replaced this function with the RadioButtons in the UI
-     */
-    private void getNumPlayers() {
-        System.out.println("How many players are playing Sorry? [1-4]");
-        Scanner scan = new Scanner(System.in);
-        int userInput = 0;
-        boolean validInput = false;
-        while (!validInput) {
-            // Check if the input is an integer
-            if (scan.hasNextInt()) {
-                userInput = scan.nextInt();
-
-                // Check if the number is within the specified range
-                if (userInput >= 1 && userInput <= 4) {
-                    System.out.println("Valid input: " + userInput);
-                    validInput = true; // Set the flag to exit the loop
-                } else {
-                    System.out.println("Invalid input. Please enter a number between 1 and 4.");
-                }
-            } else {
-                System.out.println("Invalid input. Please enter a valid integer.");
-                scan.next(); // Consume the invalid input to avoid an infinite loop
-            }
-        }
-        this.numPlayers = userInput;
-    }
-
-    /**
-     * determines what {@link PawnColor} each of the{@link Player} objects
-     * will use for their {@link Pawn} objects
-     * Not used as we replaced this function with the RadioButtons in the UI
-     */
-    private void getColorPawns() {
-        ArrayList<String> chosenPawnColors = new ArrayList<>();
-        ArrayList<String> availablePawnColors = new ArrayList<>(Arrays.asList("red", "blue", "yellow", "green"));
-
-        for (int i = 1; i <= this.numPlayers; i++) {
-            System.out.println("What color does player " + i + " want to be? [red, blue, yellow, green]");
-            Scanner scan = new Scanner(System.in);
-            String userInput = " ";
-            boolean validInput = false;
-            while (!validInput) {
-                // Check if the input is a String
-                if (scan.hasNext()) {
-                    userInput = scan.next();
-                    if (!chosenPawnColors.contains(userInput)) {
-                        if (availablePawnColors.contains(userInput)) {
-                            System.out.println("Valid input: " + userInput);
-                            chosenPawnColors.add(userInput); //remove this color from possible pawn colors
-                            validInput = true; // Set the flag to exit the loop
-                        } else {
-                            System.out.println("TRY AGAIN. Invalid input. Please enter a color [red, blue, yellow, green]");
-                        }
-                    } else {
-                        System.out.println("TRY AGAIN. This color has already been chosen.");
-                    }
-                } else {
-                    System.out.println("TRY AGAIN. Invalid input. Please enter a string.");
-                    scan.next(); // Consume the invalid input to avoid an infinite loop
-                }
-            }
-            this.pawnColors.add(userInput);
-        }
-    }
 
     public ArrayList<Player> getPlayerArrayList() {
         return playerArrayList;
@@ -195,10 +135,6 @@ public class GameManager {
 
     public ArrayList<String> getPawnColors() {
         return pawnColors;
-    }
-
-    public void setPawnColors(ArrayList<String> pawnColors) {
-        this.pawnColors = pawnColors;
     }
 
     public Deck getGameDeck() {
