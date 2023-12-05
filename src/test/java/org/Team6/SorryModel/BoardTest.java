@@ -1,3 +1,23 @@
+/* *****************************************
+ * CSCI 205 - Software Engineering and Design
+ * Fall 2023
+ * Instructor: Prof. Brian King / Prof. Joshua Stough
+ *
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
+ * Section: 9am-10am
+ * Date: 11/9/23
+ * Time: 10:00 AM
+ *
+ * Project: csci205_final_project
+ * Package: org.Team6.SorryModel
+ * Class: Board
+ *
+ * Description: These are our tests for the Board class.
+ * This class represents the Sorry! Board. It keeps track of and creates
+ * all the pawns and spaces currently on the board.
+ *
+ * ****************************************
+ */
 package org.Team6.SorryModel;
 
 import org.junit.jupiter.api.AfterEach;
