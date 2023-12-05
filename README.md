@@ -6,12 +6,12 @@ Lewisburg, PA
 - Semester: Fall 2023
 ## Team Information
 
-- Group 6 (Team Tinsel)
+- Group 6
 #### Nathan Stamford (Developer)
 - Sophomore, CS Major
 - Worked on JavaFX and Scene Builder as well as combining front-end and backend components
-- Strength: JavaFx
-- Weakness: Asking for help
+- Strength: JavaFx and Scene Builder
+- Weakness: Git
 #### Leo McMenimen (Product Owner)
 - Sophomore, CS Major
 - Worked on backend development, Junit tests and UML diagrams as well as the user manual
