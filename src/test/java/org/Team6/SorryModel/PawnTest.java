@@ -1,3 +1,26 @@
+/* *****************************************
+ * CSCI 205 - Software Engineering and Design
+ * Fall 2023
+ * Instructor: Prof. Brian King / Prof. Joshua Stough
+ *
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
+ * Section: 9am-10am
+ * Date: 11/9/23
+ * Time: 10:01 AM
+ *
+ * Project: csci205_final_project
+ * Package: org.Team6.SorryModel
+ * Class: Pawn
+ *
+ * Description:
+ * This is a test clas for a pawn class
+ *
+ * The pawn class to represent a Pawn in the game Sorry! Pawns will keep track
+ * of where they are on the board.
+ *
+ * ****************************************
+ */
+
 package org.Team6.SorryModel;
 
 import org.junit.jupiter.api.BeforeEach;
