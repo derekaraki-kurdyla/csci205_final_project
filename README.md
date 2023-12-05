@@ -2,12 +2,11 @@
 Bucknell University
 Lewisburg, PA
 ### Course Info
-Instructor: Dr. King
-Semester: Fall 2023
+- Instructor: Dr. King
+- Semester: Fall 2023
 ## Team Information
-List team members
-List 1-2 relevant sentences about each member, including year and major
-Group 6 (Team Tinsel)
+
+- Group 6 (Team Tinsel)
 #### Nathan Stamford (Developer)
 - Sophomore, CS Major
 - Worked on JavaFX and Scene Builder as well as combining front-end and backend components
@@ -21,8 +20,6 @@ Group 6 (Team Tinsel)
 -  Sophomore, CS Major
 -  Worked on game logic and the design manual as well as CRC cards
 ## Project Information
-*Write a few sentences about your project. This can be done later, as you
-may not quite know all the details yet.*
 
 Our final project is an implementation of the popular board game Sorry! through the use of JavaFX and Scene Builder. Up to four players can play on one computer and enjoy the simple yet riveting and competitive game. The objective of the game is to get all of your pawns around the board and into your home base. The first player to do so wins the game. In order to replicate the relatively complex game logic of Sorry!, we initialize a "board" of spaces at the start of every turn depending on whose turn it is. The board is initialized differently depending on whose turn it is, as certain spaces or indexes on the board interact differently with pawns. For example, a green pawn cannot enter the red player's safety spaces or home area. To fix this problem, when it is the red player's turn, the other color's safety spaces do not even exist.
 
@@ -42,8 +39,6 @@ Javafx version: 22-ea+11
 Link to main page: https://docs.oracle.com/javase/8/javafx/api/toc.htm
 
 ## How to run it
-*IMPORTANT - Update this with information about how to build and run your
-project!
 
 - Make sure you are in csci205_final_project directory
 - Run ..gradlew run in the terminal
