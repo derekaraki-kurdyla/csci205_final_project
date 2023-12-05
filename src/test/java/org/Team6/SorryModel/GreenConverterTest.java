@@ -1,3 +1,26 @@
+/* *****************************************
+ * CSCI 205 - Software Engineering and Design
+ * Fall 2023
+ * Instructor: Prof. Brian King / Prof. Joshua Stough
+ *
+ * Name: Derek Araki-Kurdyla, Alex Araki-Kurdyla, Nathan Stamford, Leo McMenimen
+ * Section: 9am-10am
+ * Date: 11/19/23
+ * Time: 11:50 AM
+ *
+ * Project: csci205_final_project
+ * Package: org.Team6.SorryModel
+ * Class: GreenConverter
+ *
+ * Description:
+ * This is to test our GreenConverter class
+ *
+ * The GreenConverterTest class will be used to change how the individual color views the board
+ * and convert it to the way the board is created on scenebuilder
+ *
+ * ****************************************
+ */
+
 package org.Team6.SorryModel;
 
 import org.junit.jupiter.api.AfterEach;
