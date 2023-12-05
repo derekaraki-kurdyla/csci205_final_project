@@ -10,15 +10,23 @@ Lewisburg, PA
 #### Nathan Stamford (Developer)
 - Sophomore, CS Major
 - Worked on JavaFX and Scene Builder as well as combining front-end and backend components
+- Strength: JavaFx
+- Weakness: Asking for help
 #### Leo McMenimen (Product Owner)
 - Sophomore, CS Major
 - Worked on backend development, Junit tests and UML diagrams as well as the user manual
+- Strength: UML Diagrams
+- Weakness: JavaFx
 #### Derek Araki-Kurdyla (Scrum Master)
 - Sophomore, CS Major
 - Worked on backend development/game logic and combining front-end and backend components
+- Strength: Object oriented design
+- Weakness: Lambda Expressions
 #### Alex Araki-Kurdyla (Developer)
--  Sophomore, CS Major
--  Worked on game logic and the design manual as well as CRC cards
+- Sophomore, CS Major
+- Worked on game logic and the design manual as well as CRC cards
+- Strength: Lambda Expressions
+- Weakness: UML Diagrams
 ## Project Information
 
 Our final project is an implementation of the popular board game Sorry! through the use of JavaFX and Scene Builder. Up to four players can play on one computer and enjoy the simple yet riveting and competitive game. The objective of the game is to get all of your pawns around the board and into your home base. The first player to do so wins the game. In order to replicate the relatively complex game logic of Sorry!, we initialize a "board" of spaces at the start of every turn depending on whose turn it is. The board is initialized differently depending on whose turn it is, as certain spaces or indexes on the board interact differently with pawns. For example, a green pawn cannot enter the red player's safety spaces or home area. To fix this problem, when it is the red player's turn, the other color's safety spaces do not even exist.
