@@ -8,7 +8,7 @@ Semester: Fall 2023
 List team members
 List 1-2 relevant sentences about each member, including year and major
 Group 6 (Team Tinsel)
-Nathan Stamford (Developer)
+#### Nathan Stamford (Developer)
 - Sophomore, CS Major
 - Worked on JavaFX and Scene Builder as well as combining front-end and backend components
 Leo McMenimen (Product Owner)
