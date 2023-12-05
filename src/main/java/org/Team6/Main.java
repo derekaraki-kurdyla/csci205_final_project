@@ -58,7 +58,6 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-
         Parent root = this.theView.initializeView();
 
         Scene scene = new Scene(root);

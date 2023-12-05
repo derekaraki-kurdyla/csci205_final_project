@@ -45,7 +45,6 @@ public class SorryController {
      * while the rest of them are {@link Rectangle} objects.
      * Pawns are all {@link Circle} objects.
      */
-
     @FXML
     private Circle bluePawn1;
     @FXML
