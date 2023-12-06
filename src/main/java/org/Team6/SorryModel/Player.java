@@ -339,6 +339,7 @@ public class Player {
         pawnToRemove.sendStart();
         this.gameBoard.getMapOfSpaces().put(currBoardIndex, SpaceType.UNOCCUPIED);
         this.listOfPawnsToMoveToStart.add(pawnToRemove);
+        this.pawnToMove.setLandingIndex(landingBoardIndex);
     }
 
     /**
