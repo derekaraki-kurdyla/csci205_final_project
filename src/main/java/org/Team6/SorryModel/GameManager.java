@@ -64,13 +64,9 @@ public class GameManager {
      */
     private int currPlayerIndex;
 
-
-    /**
-     * constructor for {@link GameManager} class
-     */
+    /** constructor for {@link GameManager} class */
     public GameManager() {
     }
-
 
     /**
      * This method creates a new {@link Board} object.
