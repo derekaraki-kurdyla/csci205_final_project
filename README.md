@@ -53,5 +53,4 @@ Link to main page: https://docs.oracle.com/javase/8/javafx/api/toc.htm
 - Run main method
 
 ## Video
-Coming soon
-
+https://mediaspace.bucknell.edu/media/CSCI%20205%202023FA%20Team%2006%20Final%20Video/1_sydg7y0r
