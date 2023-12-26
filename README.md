@@ -49,7 +49,7 @@ Link to main page: https://docs.oracle.com/javase/8/javafx/api/toc.htm
 ## How to run it
 
 - Make sure you are in csci205_final_project directory
-- Run ..gradlew run in the terminal
+- Run ./gradlew run in the terminal
 - Run main method
 
 ## Video
